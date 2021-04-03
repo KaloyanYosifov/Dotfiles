@@ -20,6 +20,8 @@ brew install --cask rectangle iterm2
 
 # install vim configurations
 ./installing-vim.sh
+./installing-zsh-config.sh
+./installing-tmux-config.sh
 
 # Disable saving to icloud 
 defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
@@ -73,7 +75,7 @@ defaults write com.apple.screensaver askForPassword -int 1
 defaults write com.apple.screensaver askForPasswordDelay -int 0
 
 # Save screenshots to the desktop
-mkidr -p "${HOME}/Screenshots"
+mkdir -p "${HOME}/Screenshots"
 defaults write com.apple.screencapture location -string "${HOME}/Screenshots"
 defaults write com.apple.screencapture type -string "png"
 
