@@ -14,6 +14,12 @@ if [ $? != 0 ]; then
     echo "source \$HOME/.zsh/lead.sh" >> $HOME/.zshrc
 fi
 
+cat $HOME/.zshrc | grep "plugins=(vi-mode)"
+
+if [ $? == 0 ]; then
+    exit 0
+fi
+
 # Install vi mode for zsh
 mkdir -p $HOME/.oh-my-zsh/plugins/vi-mode
 curl -L https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/vi-mode/vi-mode.plugin.zsh > $HOME/.oh-my-zsh/plugins/vi-mode/vi-mode.plugin.zsh
