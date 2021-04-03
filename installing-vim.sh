@@ -1,3 +1,5 @@
+#! /usr/bin/env bash
+
 echo "Installing Vim Configuration"
 rm -rf $HOME/.vim
 git clone git@github.com:KaloyanYosifov/vim-configurations.git $HOME/.vim

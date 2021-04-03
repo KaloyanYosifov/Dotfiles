@@ -12,8 +12,14 @@ if [ $? != 0 ]; then
 	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
+echo "Installing programs from brew"
+./brew-updates.sh
+
 # install rectangle a new version of spectacles
-brew install --cask rectangle
+brew install --cask rectangle iterm2
+
+# install vim configurations
+./installing-vim.sh
 
 # Disable saving to icloud 
 defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
