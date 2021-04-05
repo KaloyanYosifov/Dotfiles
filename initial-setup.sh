@@ -13,10 +13,10 @@ if [ $? != 0 ]; then
 fi
 
 echo "Installing programs from brew"
-./brew-updates.sh
+#./brew-updates.sh
 
 # install rectangle a new version of spectacles
-brew install --cask rectangle iterm2
+brew install --cask rectangle
 
 # install vim configurations
 ./installing-vim.sh
@@ -53,7 +53,7 @@ defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
 # Set a blazingly fast keyboard repeat rate
 defaults write NSGlobalDomain KeyRepeat -int 1
-defaults write NSGlobalDomain InitialKeyRepeat -int 10
+defaults write NSGlobalDomain InitialKeyRepeat -int 15
 
 # Restart automatically if the computer freezes
 sudo systemsetup -setrestartfreeze on
