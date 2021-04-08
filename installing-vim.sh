@@ -26,7 +26,7 @@ then
   echo '{"dependencies":{}}'> package.json
 fi
 # Change extension names to the extensions you need
-npm install coc-json coc-tsserver coc-phpls --global-style --ignore-scripts --no-bin-links --no-package-lock --only=prod
+npm install coc-phpls coc-prettier coc-vetur coc-json coc-eslint coc-tsserver --global-style --ignore-scripts --no-bin-links --no-package-lock --only=prod
 
 cd $ROOT_PATH
 
