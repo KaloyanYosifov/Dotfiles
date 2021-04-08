@@ -16,7 +16,7 @@ echo "Installing programs from brew"
 #./brew-updates.sh
 
 # install rectangle a new version of spectacles
-brew install --cask rectangle iterm2
+brew install --cask rectangle iterm2 flycut
 
 # install vim configurations
 ./installing-vim.sh
