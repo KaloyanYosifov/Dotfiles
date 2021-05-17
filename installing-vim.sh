@@ -16,7 +16,7 @@ echo "source $HOME/.vim/lead.vim" > $HOME/.vimrc
 echo "source $HOME/.vim/ideavim.vim" > $HOME/.ideavimrc 
 
 # install 
-vim -c "PluginInstall" -c "q!"
+vim -c "PlugInstall" -c "q!"
 
 # Install coc extensions
 mkdir -p ~/.config/coc/extensions
