@@ -30,6 +30,6 @@ npm install coc-phpls coc-prettier coc-vetur coc-json coc-eslint coc-tsserver --
 
 # Install nerdfont
 git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git
-./install.sh JetBrainsMono
+./nerd-fonts/install.sh JetBrainsMono
 
 cd $ROOT_PATH
