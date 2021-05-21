@@ -28,8 +28,4 @@ fi
 # Change extension names to the extensions you need
 npm install coc-phpls coc-prettier coc-vetur coc-json coc-eslint coc-tsserver --global-style --ignore-scripts --no-bin-links --no-package-lock --only=prod
 
-# Install nerdfont
-git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git
-./nerd-fonts/install.sh JetBrainsMono
-
 cd $ROOT_PATH
