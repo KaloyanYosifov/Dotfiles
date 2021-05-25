@@ -32,3 +32,7 @@ cd $ROOT_PATH
 
 mkdir -p $HOME/.config/nvim/
 ln -s $HOME/.vim/coc-settings.json $HOME/.config/nvim/coc-settings.json
+
+if [ ! -f $HOME/.config/nvim/init.vim ]; then
+    echo "source ~/.vimrc" > $HOME/.config/nvim/init.vim
+fi
