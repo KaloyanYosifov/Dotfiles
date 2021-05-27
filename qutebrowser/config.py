@@ -1,33 +1,9 @@
-import setproctitle
-setproctitle.setproctitle("qutebrowser")
+config.load_autoconfig()
 
 # Bindings
 config.bind("gi", "hint inputs")
-config.bind("<f12>", "inspector")
 
-config.unbind("+")
-config.unbind("-")
-config.unbind("=")
-config.bind("z+", "zoom-in")
-config.bind("z-", "zoom-out")
-config.bind("zz", "zoom")
-
-config.unbind("O")
-config.unbind("T")
-config.unbind("th")
-config.unbind("tl")
-config.bind("O", "set-cmd-text :open {url:pretty}")
-config.bind("T", "set-cmd-text :open -t {url:pretty}")
 config.bind("t", "set-cmd-text -s :open -t")
-
-config.unbind("<ctrl+tab>")
-config.bind("<ctrl+tab>", "tab-next")
-config.bind("<ctrl+shift+tab>", "tab-prev")
-
-config.unbind("ZQ")
-config.unbind("ZZ")
-config.unbind("<ctrl+q>")
-config.bind("<ctrl+q>", "wq")
 
 # Aliases for commands. The keys of the given dictionary are the
 # aliases, while the values are the commands they map to.
@@ -41,18 +17,6 @@ c.aliases = {
 
 # Always restore open sites when qutebrowser is reopened.
 c.auto_save.session = True
-
-# Foreground color of the URL in the statusbar on successful load
-# (https).
-c.colors.statusbar.url.success.https.fg = "white"
-
-# Background color of unselected tabs.
-c.colors.tabs.even.bg = "silver"
-c.colors.tabs.odd.bg = "gainsboro"
-
-# Foreground color of unselected tabs.
-c.colors.tabs.even.fg = "#666666"
-c.colors.tabs.odd.fg = c.colors.tabs.even.fg
 
 # The height of the completion, in px or as percentage of the window.
 c.completion.height = "20%"
@@ -86,29 +50,11 @@ c.content.headers.accept_language = "en-US,en;q=0.8,fi;q=0.6"
 #   - none: Don"t use any proxy
 c.content.proxy = "none"
 
-# Validate SSL handshakes.
-# Valid values:
-#   - true
-#   - false
-#   - ask
-c.content.ssl_strict = True
-
-# A list of user stylesheet filenames to use.
-c.content.user_stylesheets = "user.css"
-
-# The directory to save downloads to. If unset, a sensible os-specific
-# default is used.
-c.downloads.location.directory = "/tmp/ape"
-
-# Prompt the user for the download location. If set to false,
-# `downloads.location.directory` will be used.
-c.downloads.location.prompt = False
-
 # The editor (and arguments) to use for the `open-editor` command. `{}`
 # gets replaced by the filename of the file to be edited.
-c.editor.command = ["termite", "-e", "vim '{}'"]
+c.editor.command = ["nvim {}"]
 
-monospace = "8px 'Bok MonteCarlo'"
+monospace = "13px 'Bok MonteCarlo'"
 
 # Font used in the completion categories.
 c.fonts.completion.category = f"bold {monospace}"
@@ -140,9 +86,6 @@ c.fonts.prompts = monospace
 # Font used in the statusbar.
 c.fonts.statusbar = monospace
 
-# Font used in the tab bar.
-c.fonts.tabs = monospace
-
 # Font used for the hints.
 c.fonts.hints = "bold 13px 'DejaVu Sans Mono'"
 
@@ -155,9 +98,6 @@ c.input.insert_mode.auto_leave = True
 # Automatically enter insert mode if an editable element is focused
 # after loading the page.
 c.input.insert_mode.auto_load = True
-
-# Show a scrollbar.
-c.scrolling.bar = True
 
 # Enable smooth scrolling for web pages. Note smooth scrolling does not
 # work with the `:scroll-px` command.
@@ -173,29 +113,18 @@ c.tabs.background = True
 #   - startpage: Load the start page.
 #   - default-page: Load the default page.
 #   - close: Close the window.
-c.tabs.last_close = "close"
-
-# Padding around text for tabs
-c.tabs.padding = {
-    "left": 5,
-    "right": 5,
-    "top": 0,
-    "bottom": 1,
-}
+c.tabs.last_close = "ignore"
 
 # Which tab to select when the focused tab is removed.
 # Valid values:
 #   - prev: Select the tab which came before the closed one (left in horizontal, above in vertical).
 #   - next: Select the tab which came after the closed one (right in horizontal, below in vertical).
 #   - last-used: Select the previously selected tab.
-c.tabs.select_on_remove = "prev"
-
-# Width of the progress indicator (0 to disable).
-c.tabs.width.indicator = 1
+c.tabs.select_on_remove = "last-used"
 
 # The page to open if :open -t/-b/-w is used without URL. Use
 # `about:blank` for a blank page.
-c.url.default_page = "about:blank"
+c.url.default_page = "https://google.com"
 
 # Definitions of search engines which can be used via the address bar.
 # Maps a searchengine name (such as `DEFAULT`, or `ddg`) to a URL with a
@@ -208,17 +137,4 @@ c.url.default_page = "about:blank"
 c.url.searchengines = {"DEFAULT": "https://www.google.com/search?q={}"}
 
 # The page(s) to open at the start.
-c.url.start_pages = "https://www.googele.com"
-
-# The format to use for the window title. The following placeholders are
-# defined:
-#   * `{perc}`: The percentage as a string like `[10%]`.
-#   * `{perc_raw}`: The raw percentage, e.g. `10`
-#   * `{title}`: The title of the current web page
-#   * `{title_sep}`: The string ` - ` if a title is set, empty otherwise.
-#   * `{id}`: The internal window ID of this window.
-#   * `{scroll_pos}`: The page scroll position.
-#   * `{host}`: The host of the current web page.
-#   * `{backend}`: Either ''webkit'' or ''webengine''
-#   * `{private}` : Indicates when private mode is enabled.
-c.window.title_format = "{private}{perc}{title}{title_sep}qutebrowser"
+c.url.start_pages = "https://www.google.com"
