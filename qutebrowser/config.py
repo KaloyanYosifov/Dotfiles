@@ -13,6 +13,11 @@ c.aliases.update({
     "pass": "spawn -d pass -c",
 })
 
+c.bindings.default["normal"].update({
+    "J": "tab-prev",
+    "K": "tab-next"
+})
+
 # Always restore open sites when qutebrowser is reopened.
 c.auto_save.session = True
 
@@ -34,9 +39,9 @@ c.content.headers.accept_language = "en-US,en;q=0.8,fi;q=0.6"
 #   - none: Don"t use any proxy
 c.content.proxy = "none"
 
-# The editor (and arguments) to use for the `open-editor` command. `{}`
+# The editor (and arguments) to use for the `open-editor` comman. `{}`
 # gets replaced by the filename of the file to be edited.
-c.editor.command = ["nvim {}"]
+c.editor.command = ["st", "-e", "nvim", "{}"]
 
 monospace = "12px 'JetBrains Mono'"
 
@@ -71,7 +76,7 @@ c.fonts.prompts = monospace
 c.fonts.statusbar = monospace
 
 # Font used for the hints.
-c.fonts.hints = "bold 13px 'DejaVu Sans Mono'"
+c.fonts.hints = "bold 14px 'JetBrains Mono'"
 
 # Chars used for hint strings.
 c.hints.chars = "asdfghjklie"
@@ -85,10 +90,9 @@ c.input.insert_mode.auto_load = True
 
 # Enable smooth scrolling for web pages. Note smooth scrolling does not
 # work with the `:scroll-px` command.
-c.scrolling.smooth = False
+c.scrolling.smooth = True
 
-# Open new tabs (middleclick/ctrl+click) in the background.
-c.tabs.background = True
+c.scrolling.bar = "always"
 
 # Behavior when the last tab is closed.
 # Valid values:
