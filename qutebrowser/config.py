@@ -3,34 +3,18 @@ config.load_autoconfig()
 # Bindings
 config.bind("gi", "hint inputs")
 
-config.bind("t", "set-cmd-text -s :open -t")
-
 # Aliases for commands. The keys of the given dictionary are the
 # aliases, while the values are the commands they map to.
-c.aliases = {
+c.aliases.update({
     "w": "session-save",
     "wq": "quit --save",
     "mpv": "spawn -d mpv --force-window=immediate {url}",
     "nicehash": "spawn --userscript nicehash",
     "pass": "spawn -d pass -c",
-}
+})
 
 # Always restore open sites when qutebrowser is reopened.
 c.auto_save.session = True
-
-# The height of the completion, in px or as percentage of the window.
-c.completion.height = "20%"
-
-# Move on to the next part when there's only one possible completion
-# left.
-c.completion.quick = False
-
-# When to show the autocompletion window.
-# Valid values:
-#   - always: Whenever a completion is available.
-#   - auto: Whenever a completion is requested.
-#   - never: Never.
-c.completion.show = "auto"
 
 # Whether quitting the application requires a confirmation.
 # Valid values:
@@ -54,7 +38,7 @@ c.content.proxy = "none"
 # gets replaced by the filename of the file to be edited.
 c.editor.command = ["nvim {}"]
 
-monospace = "13px 'Bok MonteCarlo'"
+monospace = "12px 'JetBrains Mono'"
 
 # Font used in the completion categories.
 c.fonts.completion.category = f"bold {monospace}"
