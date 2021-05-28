@@ -1,3 +1,7 @@
+import os
+os.environ['PATH'] = os.pathsep + '/usr/local/bin'
+os.environ['NODE_PATH'] = os.pathsep + '/usr/local/lib/node_modules'
+
 config.load_autoconfig()
 
 # Bindings
@@ -16,6 +20,14 @@ c.aliases.update({
 c.bindings.default["normal"].update({
     "J": "tab-prev",
     "K": "tab-next"
+})
+
+c.bindings.default["command"].update({
+    "<Ctrl-k>": "completion-item-focus prev"
+})
+
+c.bindings.key_mappings.update({
+    "<Ctrl-j>": "<Tab>",
 })
 
 # Always restore open sites when qutebrowser is reopened.
@@ -41,7 +53,7 @@ c.content.proxy = "none"
 
 # The editor (and arguments) to use for the `open-editor` comman. `{}`
 # gets replaced by the filename of the file to be edited.
-c.editor.command = ["st", "-e", "nvim", "{}"]
+c.editor.command = ["nvim" , "{}"]
 
 monospace = "12px 'JetBrains Mono'"
 
@@ -87,10 +99,6 @@ c.input.insert_mode.auto_leave = True
 # Automatically enter insert mode if an editable element is focused
 # after loading the page.
 c.input.insert_mode.auto_load = True
-
-# Enable smooth scrolling for web pages. Note smooth scrolling does not
-# work with the `:scroll-px` command.
-c.scrolling.smooth = True
 
 c.scrolling.bar = "always"
 
