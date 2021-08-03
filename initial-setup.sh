@@ -361,6 +361,9 @@ defaults write com.apple.ActivityMonitor ShowCategory -int 0
 defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
 defaults write com.apple.ActivityMonitor SortDirection -int 0
 
+# fix tmux in iterm
+osascript -e 'tell application "System Events" to keystroke "r" using command down'
+
 ###############################################################################
 # Kill affected applications                                                  #
 ###############################################################################
