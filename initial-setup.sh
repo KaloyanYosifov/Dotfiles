@@ -12,6 +12,9 @@ if [ $? != 0 ]; then
 	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
+# Install rosetta for m1 chips
+sudo softwareupdate --install-rosetta
+
 echo "Installing programs from brew"
 #./brew-updates.sh
 
