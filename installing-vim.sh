@@ -12,10 +12,10 @@ cd $HOME/.vim
 git submodule update --init
 
 # set config for vim
-echo "source $HOME/.vim/lead.vim" > $HOME/.vimrc 
-echo "source $HOME/.vim/ideavim.vim" > $HOME/.ideavimrc 
+echo "source $HOME/.vim/lead.vim" > $HOME/.vimrc
+echo "source $HOME/.vim/ideavim.vim" > $HOME/.ideavimrc
 
-# install 
+# install
 vim -c "PlugInstall" -c "q!"
 
 # Install coc extensions
@@ -34,5 +34,6 @@ mkdir -p $HOME/.config/nvim/
 ln -s $HOME/.vim/coc-settings.json $HOME/.config/nvim/coc-settings.json
 
 if [ ! -f $HOME/.config/nvim/init.vim ]; then
-    echo "source ~/.vimrc" > $HOME/.config/nvim/init.vim
+    ln -s $HOME/.vim/init.vim $HOME/.config/nvim/init.vim
+    ln -s $HOME/.vim/lua $HOME/.config/nvim/lua
 fi
