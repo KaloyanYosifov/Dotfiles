@@ -87,6 +87,8 @@ brew install ssh-copy-id
 brew install tree
 brew install vbindiff
 brew install zopfli
+brew install notion
+brew install volta
 
 brew install expressvpn karabiner-elements flycut act aom apr apr-util argon2 aspell augeas autoconf automake aws-elasticbeanstalk awscli bash-completion brotli c-ares cairo certbot composer curl-openssl dialog dnsmasq ffmpeg flac fontconfig freetds freetype frei0r fribidi gdbm gettext giflib git git-flow-avh glib gmp gnu-getopt gnutls gradle graphite2 harfbuzz htop icu4c jansson jemalloc jpeg krb5 lame leptonica libass libbluray libev libevent libffi libidn libidn2 libmetalink libogg libpng libpq libsamplerate libsndfile libsodium libsoxr libssh2 libtasn1 libtiff libtool libunistring libvidstab libvorbis libvpx libzip little-cms2 lz4 lzo mmv mysql nasm ncurses nettle nghttp2 nginx node node@10 oniguruma opencore-amr openjdk openjpeg openldap openssl@1.1 opus p11-kit p7zip pcre pcre2 perl php php@7.3 pigz pixman pkg-config protobuf python python@3.8 qt readline redis rtmpdump rubberband sdl2 snappy speex sqlite sqlmap srt subversion telnet tesseract the_silver_searcher theora tidy-html5 tmux unbound unixodbc utf8proc watch webp wget wimlib wp-cli x264 x265 xvid xz yarn
 
