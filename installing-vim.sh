@@ -30,10 +30,11 @@ npm install coc-phpls coc-prettier coc-vetur coc-json coc-eslint coc-tsserver --
 
 cd $ROOT_PATH
 
+if [ -d $HOME/.config/nvim ]; then
+    rm -rf $HOME/.config/nvim/
+fi
+
 mkdir -p $HOME/.config/nvim/
 ln -s $HOME/.vim/coc-settings.json $HOME/.config/nvim/coc-settings.json
-
-if [ ! -f $HOME/.config/nvim/init.vim ]; then
-    ln -s $HOME/.vim/init.vim $HOME/.config/nvim/init.vim
-    ln -s $HOME/.vim/lua $HOME/.config/nvim/lua
-fi
+ln -s $HOME/.vim/init.vim $HOME/.config/nvim/init.vim
+ln -s $HOME/.vim/lua $HOME/.config/nvim/lua
