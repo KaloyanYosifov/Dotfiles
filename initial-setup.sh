@@ -16,17 +16,14 @@ fi
 sudo softwareupdate --install-rosetta
 
 echo "Installing programs from brew"
-#./brew-updates.sh
-
-# install rectangle a new version of spectacles
-brew install --cask rectangle iterm2 flycut
+./brew-updates.sh
 
 # install vim configurations
 ./installing-vim.sh
 ./installing-zsh-config.sh
 ./installing-tmux-config.sh
 
-# Disable saving to icloud 
+# Disable saving to icloud
 defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
 
 # Disable automatic capitalization as it’s annoying when typing code

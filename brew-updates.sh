@@ -11,6 +11,9 @@ brew upgrade
 # Save Homebrew’s installed location.
 BREW_PREFIX=$(brew --prefix)
 
+# do not update on installing
+export HOMEBREW_NO_AUTO_UPDATE=1
+
 # Install GNU core utilities (those that come with macOS are outdated).
 # Don’t forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`.
 brew install coreutils
@@ -31,6 +34,7 @@ brew install gnupg
 
 # Install more recent versions of some macOS tools.
 brew install vim --with-override-system-vi
+brew install nvim
 brew install grep
 brew install openssh
 brew install screen
@@ -75,6 +79,7 @@ brew install ack
 brew install git
 brew install git-lfs
 brew install gs
+brew install git-crypt
 brew install imagemagick --with-webp
 brew install lua
 brew install lynx
@@ -87,10 +92,22 @@ brew install ssh-copy-id
 brew install tree
 brew install vbindiff
 brew install zopfli
-brew install notion
 brew install volta
 
-brew install expressvpn karabiner-elements flycut act aom apr apr-util argon2 aspell augeas autoconf automake aws-elasticbeanstalk awscli bash-completion brotli c-ares cairo certbot composer curl-openssl dialog dnsmasq ffmpeg flac fontconfig freetds freetype frei0r fribidi gdbm gettext giflib git git-flow-avh glib gmp gnu-getopt gnutls gradle graphite2 harfbuzz htop icu4c jansson jemalloc jpeg krb5 lame leptonica libass libbluray libev libevent libffi libidn libidn2 libmetalink libogg libpng libpq libsamplerate libsndfile libsodium libsoxr libssh2 libtasn1 libtiff libtool libunistring libvidstab libvorbis libvpx libzip little-cms2 lz4 lzo mmv mysql nasm ncurses nettle nghttp2 nginx node node@10 oniguruma opencore-amr openjdk openjpeg openldap openssl@1.1 opus p11-kit p7zip pcre pcre2 perl php php@7.3 pigz pixman pkg-config protobuf python python@3.8 qt readline redis rtmpdump rubberband sdl2 snappy speex sqlite sqlmap srt subversion telnet tesseract the_silver_searcher theora tidy-html5 tmux unbound unixodbc utf8proc watch webp wget wimlib wp-cli x264 x265 xvid xz yarn
+# install rectangle a new version of spectacles
+brew install --cask \
+    rectangle \
+    iterm2 \
+    flycut \
+    notion \
+    slack \
+    microsoft-edge \
+    docker \
+    expressvpn \
+    karabiner-elements
+
+
+brew install ngrok act aom apr apr-util argon2 aspell augeas autoconf automake awscli bash-completion brotli c-ares cairo certbot curl-openssl dialog dnsmasq ffmpeg flac fontconfig freetds freetype frei0r fribidi gdbm gettext giflib glib gmp gnu-getopt gnutls gradle graphite2 harfbuzz htop icu4c jansson jemalloc jpeg krb5 lame leptonica libass libbluray libev libevent libffi libidn libidn2 libmetalink libogg libpng libpq libsamplerate libsndfile libsodium libsoxr libssh2 libtasn1 libtiff libtool libunistring libvidstab libvorbis libvpx php libzip little-cms2 lz4 lzo mmv mysql nasm ncurses nettle nghttp2 nginx oniguruma opencore-amr openjdk openjpeg openldap openssl@1.1 opus p11-kit p7zip pcre pcre2 perl pigz pixman pkg-config protobuf python python@3.8 qt readline redis rtmpdump rubberband sdl2 snappy speex sqlite sqlmap srt subversion telnet tesseract the_silver_searcher theora tidy-html5 tmux unbound unixodbc utf8proc watch webp wimlib x264 x265 xvid xz
 
 
 
