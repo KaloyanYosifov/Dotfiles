@@ -20,6 +20,8 @@ echo "Installing programs from brew"
 
 # install vim configurations
 ./installing-vim.sh
+
+./install-fonts.sh
 ./installing-zsh-config.sh
 ./installing-tmux-config.sh
 
