@@ -24,6 +24,7 @@ echo "Installing programs from brew"
 ./install-fonts.sh
 ./installing-zsh-config.sh
 ./installing-tmux-config.sh
+./install-haskell-related.sh
 
 # Disable saving to icloud
 defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
