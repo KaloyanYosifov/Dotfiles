@@ -74,7 +74,7 @@ brew install xpdf
 brew install xz
 
 # Install other useful binaries.
-brew install ack
+brew install ag
 #brew install exiv2
 brew install git
 brew install git-lfs
@@ -93,6 +93,8 @@ brew install tree
 brew install vbindiff
 brew install zopfli
 brew install volta
+brew install minikube
+brew install kubernetes
 
 # install rectangle a new version of spectacles
 brew install --cask \
