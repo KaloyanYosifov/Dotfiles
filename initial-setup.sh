@@ -26,6 +26,12 @@ echo "Installing programs from brew"
 ./installing-tmux-config.sh
 ./install-haskell-related.sh
 
+# copy .gitconfig file
+
+if ! [[ -f $HOME/.gitconfig ]] then
+    cp ./.gitconfig $HOME
+fi
+
 # Disable saving to icloud
 defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
 
