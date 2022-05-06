@@ -38,3 +38,6 @@ mkdir -p $HOME/.config/nvim/
 ln -s $HOME/.vim/coc-settings.json $HOME/.config/nvim/coc-settings.json
 ln -s $HOME/.vim/init.vim $HOME/.config/nvim/init.vim
 ln -s $HOME/.vim/lua $HOME/.config/nvim/lua
+
+# Install coc vim dependencies
+cd $HOME/.vim/plugged/coc.nvim && yarn
