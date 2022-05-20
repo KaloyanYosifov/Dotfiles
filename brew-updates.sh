@@ -95,6 +95,7 @@ brew install zopfli
 brew install volta
 brew install minikube
 brew install kubernetes
+brew install tldr
 
 # install rectangle a new version of spectacles
 brew install --cask \
