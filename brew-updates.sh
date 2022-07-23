@@ -96,6 +96,7 @@ brew install volta
 brew install minikube
 brew install kubernetes
 brew install tldr
+brew install arduino-cli
 
 # install rectangle a new version of spectacles
 brew install --cask \
