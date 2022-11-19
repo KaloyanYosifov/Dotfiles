@@ -34,69 +34,12 @@ brew install gnupg
 
 # Install more recent versions of some macOS tools.
 brew install vim --with-override-system-vi
-brew install nvim
-brew install grep
-brew install openssh
-brew install screen
-brew install php
-brew install gmp
 
 # Install font tools.
 brew tap bramstein/webfonttools
-brew install sfnt2woff
-brew install sfnt2woff-zopfli
-brew install woff2
-
-# Install some CTF tools; see https://github.com/ctfs/write-ups.
-brew install aircrack-ng
-brew install bfg
-brew install binutils
-brew install binwalk
-brew install cifer
-brew install dex2jar
-brew install dns2tcp
-brew install fcrackzip
-brew install foremost
-brew install hashpump
-brew install hydra
-brew install john
-brew install knock
-brew install netpbm
-brew install nmap
-brew install pngcheck
-brew install socat
-brew install sqlmap
-brew install tcpflow
-brew install tcpreplay
-brew install tcptrace
-brew install ucspi-tcp # `tcpserver` etc.
-brew install xpdf
-brew install xz
 
 # Install other useful binaries.
-brew install ag
-#brew install exiv2
-brew install git
-brew install git-lfs
-brew install gs
-brew install git-crypt
 brew install imagemagick --with-webp
-brew install lua
-brew install lynx
-brew install p7zip
-brew install pigz
-brew install pv
-brew install rename
-brew install rlwrap
-brew install ssh-copy-id
-brew install tree
-brew install vbindiff
-brew install zopfli
-brew install volta
-brew install minikube
-brew install kubernetes
-brew install tldr
-brew install arduino-cli
 
 # install rectangle a new version of spectacles
 brew install --cask \
@@ -112,9 +55,7 @@ brew install --cask \
     bitwarden
 
 
-brew install ngrok act aom apr apr-util argon2 aspell augeas autoconf automake awscli bash-completion brotli c-ares cairo certbot curl-openssl dialog dnsmasq ffmpeg flac fontconfig freetds freetype frei0r fribidi gdbm gettext giflib glib gnu-getopt gnutls gradle graphite2 harfbuzz htop icu4c jansson jemalloc jpeg krb5 lame leptonica libass libbluray libev libevent libffi libidn libidn2 libmetalink libogg libpng libpq libsamplerate libsndfile libsodium libsoxr libssh2 libtasn1 libtiff libtool libunistring libvidstab libvorbis libvpx libzip little-cms2 lz4 lzo mmv mysql nasm ncurses nettle nghttp2 nginx oniguruma opencore-amr openjdk openjpeg openldap openssl@1.1 opus p11-kit pcre pcre2 perl pixman pkg-config protobuf python python@3.8 qt readline redis rtmpdump rubberband sdl2 snappy speex sqlite sqlmap srt subversion telnet tesseract theora tidy-html5 tmux unbound unixodbc utf8proc watch webp wimlib x264 x265 xvid
-
-
+brew install abseil ag act adns aom apr apr-util arduino-cli argon2 aspell assimp augeas autoconf automake aws-elasticbeanstalk awscli bash-completion bdw-gc berkeley-db bfg binutils blueutil boost brotli c-ares ca-certificates cairo ccls certbot choose-gui cjson cmake cmocka composer coreutils cscope curl dav1d dbus dex2jar dialog dns2tcp dnsmasq docutils dos2unix double-conversion edencommon fb303 fbthrift ffmpeg findutils fizz flac fmt folly fontconfig freetds freetype frei0r fribidi gcc gd gdbm gettext gflags ghostscript giflib git git-crypt git-flow-avh git-lfs glfw glib glog gmp gnu-getopt gnupg gnutls go gobject-introspection gradle graphite2 grep grpc guile harfbuzz hexedit highway htop hunspell hwloc icu4c imath isl jansson jasper jbig2dec jemalloc jpeg jpeg-turbo jpeg-xl jq krb5 kubernetes-cli lame ldns leptonica libarchive libass libassuan libavif libb2 libbluray libcbor libdnet libev libevent libffi libfido2 libgcrypt libgpg-error libiconv libidn libidn2 libimagequant libksba libmaxminddb libmetalink libmpc libnghttp2 libogg libpng libpq libproxy libpthread-stubs libraqm librist libsamplerate libslirp libsmi libsndfile libsodium libsoxr libssh libssh2 libtasn1 libtermkey libtiff libtool libunistring libusb libuv libvidstab libvmaf libvorbis libvpx libvterm libx11 libxau libxcb libxdmcp libxext libxrender libyaml libzip little-cms2 llvm lotus lua luajit-openresty luv lynx lz4 lzo m4 macvim mailhog mbedtls md4c minikube mmv moreutils mpdecimal mpfr msgpack mysql mysql-client nasm ncurses neovim nettle nghttp2 nginx npth numpy oniguruma openblas opencore-amr openexr openjdk openjpeg openldap openssh openssl@1.1 openssl@3 opus p11-kit p7zip pcre pcre2 perl php php@7.4 pigz pillow pinentry pixman pkg-config protobuf pv pygments python@3.10 python@3.11 python@3.8 python@3.9 qt qt@5 rav1e re2 readline redis rename rtmpdump rubberband ruby sdl2 sfml sfnt2woff sfnt2woff-zopfli six snappy speex sphinx-doc sqlite sqlmap srt ssdeep subversion tcl-tk telnet tesseract the_silver_searcher theora tidy-html5 tmux tree tree-sitter unbound unibilium unixodbc utf8proc vde volta wangle watch watchman webp wget wimlib wireshark woff2 wp-cli x264 x265 xorgproto xpdf xvid z3 zeromq zimg zlib zookeeper zopfli zstd
 
 # Remove outdated versions from the cellar.
 brew cleanup
