@@ -24,7 +24,10 @@ echo "Installing programs from brew"
 ./install-fonts.sh
 ./installing-zsh-config.sh
 ./installing-tmux-config.sh
-./install-haskell-related.sh
+./install-rust.sh
+
+# Not so into Haskell for now
+# ./install-haskell-related.sh
 
 # copy .gitconfig file
 
