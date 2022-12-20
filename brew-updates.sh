@@ -38,6 +38,10 @@ brew install vim --with-override-system-vi
 # Install font tools.
 brew tap bramstein/webfonttools
 
+# install for arduino
+brew tap osx-cross/avr
+brew install avr-binutils avr-gcc avrdude
+
 # Install other useful binaries.
 brew install imagemagick --with-webp
 
