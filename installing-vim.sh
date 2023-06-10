@@ -1,43 +1,24 @@
 #! /usr/bin/env bash
 
-echo "Installing Vim Configuration"
-rm -rf $HOME/.vim
-git clone https://github.com/KaloyanYosifov/vim-configurations.git $HOME/.vim
+NVIM_DIR=$HOME/.config/nvim
 
-ROOT_PATH=$(pwd)
+echo "Installing NVim Configuration"
+rm -rf $HOME/.vim || true
 
-cd $HOME/.vim
+if [ -d $NVIM_DIR ]; then
+    rm -rf $NVIM_DIR
+fi
+mkdir -p $NVIM_DIR
 
-# install submodules
-git submodule update --init
+git clone https://github.com/KaloyanYosifov/neovim-config $NVIM_DIR
+
+echo "Installing Packer for NVIM"
+git clone --depth 1 https://github.com/wbthomason/packer.nvim $HOME/.local/share/nvim/site/pack/packer/start/packer.nvim || true
 
 # set config for vim
-echo "source $HOME/.vim/lead.vim" > $HOME/.vimrc
-echo "source $HOME/.vim/ideavim.vim" > $HOME/.ideavimrc
+# echo "source $HOME/.vim/ideavim.vim" > $HOME/.ideavimrc
 
 # install
-vim -c "PlugInstall" -c "q!"
+vim -c "PackerInstall" -c "q!"
 
-# Install coc extensions
-mkdir -p ~/.config/coc/extensions
-cd ~/.config/coc/extensions
-if [ ! -f package.json ]
-then
-  echo '{"dependencies":{}}'> package.json
-fi
-# Change extension names to the extensions you need
-npm install coc-phpls coc-prettier coc-vetur coc-json coc-eslint coc-tsserver --global-style --ignore-scripts --no-bin-links --no-package-lock --only=prod
-
-cd $ROOT_PATH
-
-if [ -d $HOME/.config/nvim ]; then
-    rm -rf $HOME/.config/nvim/
-fi
-
-mkdir -p $HOME/.config/nvim/
-ln -s $HOME/.vim/coc-settings.json $HOME/.config/nvim/coc-settings.json
-ln -s $HOME/.vim/init.vim $HOME/.config/nvim/init.vim
-ln -s $HOME/.vim/lua $HOME/.config/nvim/lua
-
-# Install coc vim dependencies
-cd $HOME/.vim/plugged/coc.nvim && yarn
+echo "Successfully installed NVim"
