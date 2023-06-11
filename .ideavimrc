@@ -1,0 +1,96 @@
+" --------------------- Settings ----------------------------------------------"
+
+"Activate numbers live by default for vim
+set relativenumber
+set nu
+
+" Use case insensitive search, except when using capital letters
+set ignorecase
+set smartcase
+
+" set incremental search, so we are not required to press enter when searching
+set hlsearch
+set incsearch
+
+let mapleader = ","
+
+" --------------------- Mappings ----------------------------------------------"
+
+nnoremap <Leader>ev :e ~/.ideavimrc<cr>
+nnoremap <Leader>re :registers<cr>
+nnoremap <Leader><space> :nohlsearch<cr>
+
+" split screen vertically
+nnoremap <Leader>vs :vs <cr>
+nnoremap <Leader>w <C-w><C-w>
+
+" move to top line using relative numbers
+nnoremap <Leader>t :-
+
+" move to bottom line using relative numbers
+nnoremap <Leader>b :+
+
+noremap <Leader>sv :source ~/.ideavimrc<cr>
+
+noremap <Leader>co :%bd\|e#<cr>
+
+inoremap jk <Esc>
+
+if  has('macunix')
+	" this is mac specific mapping for <A-j>
+	nnoremap ∆ :m +1<cr>
+
+	" this is mac specific mapping for <A-k>
+	nnoremap ˚ :m -2<cr>
+
+	inoremap ∆ <Esc>:m .+1<CR>==gi
+	inoremap ˚ <Esc>:m .-2<CR>==gi
+
+	vnoremap ∆ :m '>+1<CR>gv=gv
+	vnoremap ˚ :m '<-2<CR>gv=gv
+else
+	" this is mac specific mapping for <A-j>
+	nnoremap <A-j> :m +1<cr>
+
+	" this is mac specific mapping for <A-k>
+	nnoremap <A-k> :m -2<cr>
+
+	inoremap <A-j> <Esc>:m .+1<CR>==gi
+	inoremap <A-k> <Esc>:m .-2<CR>==gi
+
+	vnoremap <A-j> :m '>+1<CR>gv=gv
+	vnoremap <A-k> :m '<-2<CR>gv=gv
+endif
+
+" Copy to main clipboard
+nnoremap <leader>y "+y 
+vnoremap <leader>y "+y 
+nnoremap <leader>Y "+Y 
+
+" --------------------- IDEAVIM Specific ----------------------------------------------"
+
+set surround
+set multiple-cursors
+set commentary
+set highlightedyank
+set ReplaceWithRegister
+
+let g:highlightedyank_highlight_color = "rgba(160, 160, 160, 155)"
+
+" multiple cursor plugin remap
+noremap <C-n> <A-n>
+noremap <C-x> <A-x>
+noremap <C-p> <A-p>
+
+nnoremap <leader>f :action FindInPath<CR>
+nnoremap <leader>vrf :action RenameFile<CR>
+nnoremap <leader>vre :action RenameElement<CR>
+nnoremap <leader>cac :action ShowIntentionActions<CR>
+nnoremap <leader>gd :action GotoDeclaration<CR>
+nnoremap <leader>rt :action RunClass<CR>
+nnoremap <leader>rb :action ToggleLineBreakpoint<CR>
+nnoremap <leader>nd :action ActivateProjectToolWindow<CR>
+
+" Window switching
+nnoremap <S-j> :action NextTab<cr>
+nnoremap <S-k> :action PreviousTab<cr>
