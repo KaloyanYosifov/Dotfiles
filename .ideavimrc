@@ -74,6 +74,7 @@ set multiple-cursors
 set commentary
 set highlightedyank
 set ReplaceWithRegister
+set ideamarks
 
 let g:highlightedyank_highlight_color = "rgba(160, 160, 160, 155)"
 
@@ -87,11 +88,14 @@ nnoremap <leader>vrf :action RenameFile<CR>
 nnoremap <leader>vre :action RenameElement<CR>
 nnoremap <leader>vrr :action FindUsages<CR>
 nnoremap <leader>cac :action ShowIntentionActions<CR>
-nnoremap <leader>gd :action GotoImplementation<CR>
-nnoremap <leader>gD :action GotoDeclaration<CR>
+nnoremap <leader>gd :action GotoDeclaration<CR>
+nnoremap <leader>gi :action GotoImplementation<CR>
 nnoremap <leader>rt :action RunClass<CR>
 nnoremap <leader>rb :action ToggleLineBreakpoint<CR>
 nnoremap <leader>nd :action ActivateProjectToolWindow<CR>
+nnoremap <leader>u :action LocalHistory.ShowHistory<CR>
+nnoremap <leader>hh :action ShowBookmarks<CR>
+nnoremap <leader>ha :action ToggleBookmark<CR>
 
 " Window switching
 nnoremap <S-j> :action NextTab<cr>
