@@ -83,13 +83,13 @@ noremap <C-n> <A-n>
 noremap <C-x> <A-x>
 noremap <C-p> <A-p>
 
+nnoremap gd :action GotoDeclaration<CR>
+nnoremap gi :action GotoImplementation<CR>
 nnoremap <leader>f :action FindInPath<CR>
 nnoremap <leader>vrf :action RenameFile<CR>
 nnoremap <leader>vre :action RenameElement<CR>
 nnoremap <leader>vrr :action FindUsages<CR>
 nnoremap <leader>cac :action ShowIntentionActions<CR>
-nnoremap <leader>gd :action GotoDeclaration<CR>
-nnoremap <leader>gi :action GotoImplementation<CR>
 nnoremap <leader>rt :action RunClass<CR>
 nnoremap <leader>rb :action ToggleLineBreakpoint<CR>
 nnoremap <leader>nd :action ActivateProjectToolWindow<CR>
