@@ -99,5 +99,5 @@ nnoremap <leader>ha :action ToggleBookmark<CR>
 nnoremap <leader>o :action OptimizeImports<CR>
 
 " Window switching
-nnoremap <S-j> :action NextTab<cr>
-nnoremap <S-k> :action PreviousTab<cr>
+nnoremap <S-k> :action NextTab<cr>
+nnoremap <S-j> :action PreviousTab<cr>
