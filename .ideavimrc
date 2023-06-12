@@ -63,9 +63,9 @@ else
 endif
 
 " Copy to main clipboard
-nnoremap <leader>y "+y 
-vnoremap <leader>y "+y 
-nnoremap <leader>Y "+Y 
+nnoremap <leader>y "*y
+vnoremap <leader>y "*y
+nnoremap <leader>Y "*Y 
 
 " --------------------- IDEAVIM Specific ----------------------------------------------"
 
