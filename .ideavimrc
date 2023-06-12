@@ -101,6 +101,7 @@ nnoremap <leader>u :action LocalHistory.ShowHistory<CR>
 nnoremap <leader>hh :action ShowBookmarks<CR>
 nnoremap <leader>ha :action ToggleBookmark<CR>
 nnoremap <leader>o :action OptimizeImports<CR>
+nnoremap <leader>pm :action ManageRecentProjects<CR>
 
 " Window switching
 nnoremap <S-k> :action NextTab<cr>
