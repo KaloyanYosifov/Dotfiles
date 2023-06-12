@@ -67,6 +67,10 @@ nnoremap <leader>y "*y
 vnoremap <leader>y "*y
 nnoremap <leader>Y "*Y 
 
+nnoremap <leader>pa "*p
+nnoremap <leader>pa "*p
+nnoremap <leader>Pa "*P
+
 " --------------------- IDEAVIM Specific ----------------------------------------------"
 
 set surround
