@@ -28,7 +28,7 @@ echo "Installing programs from brew"
 ./install-rust.sh
 
 mkdir -p $HOME/.user_bin
-rsync -avP ./bin/* $HOME/.user_bin
+ln -s $(pwd)/bin/* $HOME/.user_bin
 
 # Not so into Haskell for now
 # ./install-haskell-related.sh
