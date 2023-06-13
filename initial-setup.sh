@@ -27,6 +27,9 @@ echo "Installing programs from brew"
 ./installing-tmux-config.sh
 ./install-rust.sh
 
+mkdir -p $HOME/.user_bin
+rsync -avP ./bin/* $HOME/.user_bin
+
 # Not so into Haskell for now
 # ./install-haskell-related.sh
 
