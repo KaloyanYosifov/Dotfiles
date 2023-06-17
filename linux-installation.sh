@@ -12,4 +12,7 @@ function install_brave() {
     sudo dnf install -y brave-browser brave-keyring
 }
 
-install();
+install()
+
+# configure global editor for vim
+git config --global core.editor "vim"
