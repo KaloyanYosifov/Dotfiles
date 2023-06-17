@@ -2,7 +2,7 @@
 
 sudo dnf update -y
 sudo dnf groupinstall -y "Development Tools"
-sudo dnf install -y neovim zsh g++ fzf apfs-fuse xclip
+sudo dnf install -y neovim zsh g++ fzf apfs-fuse xclip ripgrep
 
 function install_brave() {
     echo "Installing brave"
@@ -12,7 +12,15 @@ function install_brave() {
     sudo dnf install -y brave-browser brave-keyring
 }
 
-install_brave()
+function install_volta() {
+    echo "Installing volta"
+    curl https://get.volta.sh | bash
+
+    volta install node@16
+}
+
+install_volta
+install_brave
 
 # configure global editor for vim
 git config --global core.editor "vim"
