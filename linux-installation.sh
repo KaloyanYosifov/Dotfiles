@@ -2,7 +2,7 @@
 
 sudo dnf update -y
 sudo dnf groupinstall -y "Development Tools"
-sudo dnf install -y neovim zsh g++ fzf apfs-fuse xclip ripgrep
+sudo dnf install -y neovim zsh g++ fzf apfs-fuse xclip ripgrep irssi
 
 function install_brave() {
     echo "Installing brave"
