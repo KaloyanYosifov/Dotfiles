@@ -25,3 +25,4 @@ install_brave
 # configure global editor for vim
 git config --global core.editor "vim"
 
+./link-custom-binaries.sh

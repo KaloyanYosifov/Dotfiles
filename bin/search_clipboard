@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+command -v copyq > /dev/null
+if [[ $? -eq 1 ]]; then
+    echo "Copyq not installed"
+fi
+
+copyq read {0..40} | awk -F '' '$1~/\w/' | fzf | pbcopy
