@@ -61,6 +61,11 @@ input "1133:45108:MX_Master_3S" {
   natural_scroll enabled
 }
 
+input "1133:45108:Logitech_MX_Master_3S" {
+  pointer_accel 0.8
+  natural_scroll enabled
+}
+
 input "type:keyboard" {
   repeat_delay 150
   repeat_rate 50
