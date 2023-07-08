@@ -48,14 +48,11 @@ brew install imagemagick --with-webp
 # install rectangle a new version of spectacles
 brew install --cask \
     rectangle \
-    iterm2 \
-    flycut \
+    alacritty \
     notion \
     slack \
-    microsoft-edge \
     docker \
-    expressvpn \
-    karabiner-elements \
+    mullvad \
     bitwarden
 
 
