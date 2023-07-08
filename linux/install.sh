@@ -1,6 +1,7 @@
 #! /usr/bin/env bash
 
 SCRIPT_DIR=$( cd -- $( dirname -- ${BASH_SOURCE[0]} ) &> /dev/null && pwd )
+PARENT_DIR=$SCRIPT_DIR/..
 
 sudo dnf update -y
 sudo dnf groupinstall -y "Development Tools"
@@ -30,3 +31,4 @@ git config --global core.editor "vim"
 
 echo "Installing linux configuration!"
 $SCRIPT_DIR/config/install.sh
+$PARENT_DIR/common/config/install.sh

@@ -23,7 +23,7 @@ sudo softwareupdate --install-rosetta
 echo "Installing programs from brew"
 $SCRIPT_DIR/brew-updates.sh
 
-# install vim configurations
+# Install common configurations
 $PARENT_DIR/common/install-vim.sh
 $PARENT_DIR/common/install-ideavim.sh
 $PARENT_DIR/common/install-fonts.sh
@@ -31,6 +31,7 @@ $PARENT_DIR/common/install-zsh-config.sh
 $PARENT_DIR/common/install-tmux-config.sh
 $PARENT_DIR/common/install-rust.sh
 $PARENT_DIR/common/link-custom-binaries.sh
+$PARENT_DIR/common/config/install.sh
 
 # Not so into Haskell for now
 # $PARENT_DIR/common/install-haskell.sh
