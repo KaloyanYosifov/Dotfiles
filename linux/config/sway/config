@@ -12,7 +12,7 @@ set $up k
 set $right l
 
 # Preferred terminal emulator
-set $term foot
+set $term alacritty
 
 # Preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
@@ -38,6 +38,10 @@ exec swayidle -w \
          timeout 300 'swaylock -f -c 000000' \
          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
          before-sleep 'swaylock -f -c 000000'
+
+# Set night light always
+exec wlsunset -t 4999 -T 5000
+
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when

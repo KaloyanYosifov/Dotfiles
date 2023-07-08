@@ -4,7 +4,8 @@ SCRIPT_DIR=$( cd -- $( dirname -- ${BASH_SOURCE[0]} ) &> /dev/null && pwd )
 
 sudo dnf update -y
 sudo dnf groupinstall -y "Development Tools"
-sudo dnf install -y neovim zsh g++ fzf apfs-fuse xclip ripgrep irssi copyq sway
+sudo dnf install -y neovim zsh g++ fzf apfs-fuse xclip ripgrep irssi copyq sway alacritty \ 
+    jetbrains-mono-fonts-all wlsunset
 
 function install_brave() {
     echo "Installing brave"
