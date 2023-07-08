@@ -1,5 +1,7 @@
 #! /bin/bash
 
+SCRIPT_DIR=$( cd -- $( dirname -- ${BASH_SOURCE[0]} ) &> /dev/null && pwd )
+
 sudo dnf update -y
 sudo dnf groupinstall -y "Development Tools"
 sudo dnf install -y neovim zsh g++ fzf apfs-fuse xclip ripgrep irssi
@@ -25,4 +27,6 @@ install_brave
 # configure global editor for vim
 git config --global core.editor "vim"
 
-./link-custom-binaries.sh
+$SCRIPT_DIR/link-custom-binaries.sh
+$SCRIPT_DIR/linux/install.sh
+
