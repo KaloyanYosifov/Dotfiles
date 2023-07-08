@@ -2,8 +2,8 @@
 
 ### Variables
 
-# Logo key. Use Mod1 for Alt.
-set $mod Mod1
+# Logo key. Option key
+set $mod Mod4
 
 # Home row direction keys, like vim
 set $left h
@@ -214,4 +214,5 @@ bar {
     }
 }
 
+include $HOME/.config/sway-custom/*
 include /etc/sway/config.d/*
