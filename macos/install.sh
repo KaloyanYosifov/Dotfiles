@@ -1,5 +1,10 @@
 #! /usr/bin/env bash
 
+SCRIPT_DIR=$( cd -- $( dirname -- ${BASH_SOURCE[0]} ) &> /dev/null && pwd )
+PARENT_DIR=$SCRIPT_DIR/..
+
+echo "Installing MACOS configurations"
+
 if [ -z $ZSH ]; then
 	curl -L https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh > install.sh
 	sh install.sh
@@ -16,25 +21,24 @@ fi
 sudo softwareupdate --install-rosetta
 
 echo "Installing programs from brew"
-./brew-updates.sh
+$SCRIPT_DIR/brew-updates.sh
 
 # install vim configurations
-./installing-vim.sh
-./installing-ideavim.sh
-
-./install-fonts.sh
-./installing-zsh-config.sh
-./installing-tmux-config.sh
-./install-rust.sh
-./link-custom-binaries.sh
+$PARENT_DIR/common/install-vim.sh
+$PARENT_DIR/common/install-ideavim.sh
+$PARENT_DIR/common/install-fonts.sh
+$PARENT_DIR/common/install-zsh-config.sh
+$PARENT_DIR/common/install-tmux-config.sh
+$PARENT_DIR/common/install-rust.sh
+$PARENT_DIR/common/link-custom-binaries.sh
 
 # Not so into Haskell for now
-# ./install-haskell-related.sh
+# $PARENT_DIR/common/install-haskell.sh
 
 # copy .gitconfig file
 
 if ! [[ -f $HOME/.gitconfig ]] then
-    cp ./.gitconfig $HOME
+    cp $PARENT_DIR/.gitconfig $HOME
 fi
 
 # Disable saving to icloud
