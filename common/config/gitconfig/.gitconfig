@@ -1,0 +1,12 @@
+[alias]
+	co = checkout
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	log = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+[user]
+	name = KaloyanYosifov
+	email = kaloqn665@gmail.com
+[core]
+	editor = nvim
+
+[include]
+    path = ~/.config/gitconfig/init

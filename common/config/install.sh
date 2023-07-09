@@ -2,11 +2,42 @@
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
-ALACRITTY_PATH=$HOME/.config/alacritty 
+function install_alacritty {
+    ALACRITTY_PATH=$HOME/.config/alacritty 
 
-if [[ -d $ALACRITTY_PATH ]]; then
-    rm -rf $ALACRITTY_PATH
-fi
+    if [[ -d $ALACRITTY_PATH ]]; then
+        rm -rf $ALACRITTY_PATH
+    fi
 
-ln -s $SCRIPT_DIR/alacritty $ALACRITTY_PATH
-echo "Alacritty config installed"
+    ln -s $SCRIPT_DIR/alacritty $ALACRITTY_PATH
+    echo "Alacritty config installed"
+}
+
+function install_gitconfig {
+    GITCONFIG_PATH=$HOME/.config/gitconfig 
+    GITCONFIG_FILE=$HOME/.gitconfig 
+
+    mkdir -p $GITCONFIG_PATH
+    
+    for file in $(ls -a $SCRIPT_DIR/gitconfig); do
+        # do not use . and .. and .gitconfig is not part of gitconfig folder
+        if [[ $file == "." ]] || [[ $file == ".." ]] || [[ $file == ".gitconfig" ]]; then
+            continue
+        fi
+
+        # We only copy instead of symlinking as we might need to add other gitconfigs in init
+        echo "Installing file: $file"
+        cp $SCRIPT_DIR/gitconfig/$file $GITCONFIG_PATH/$file
+    done
+
+    echo "Installing file: .gitconfig"
+
+    # on the otherhand we want gitconfig to be symlinked
+    rm $HOME/.gitconfig
+    ln -s $SCRIPT_DIR/gitconfig/.gitconfig $HOME/.gitconfig
+
+    echo "Gitconfig installed"
+}
+
+install_alacritty
+install_gitconfig

@@ -1,0 +1,6 @@
+[user]
+email = kaloqn665@gmail.com
+signingkey = 7F4F71224E2E93A7
+
+[commit]
+gpgsign = true

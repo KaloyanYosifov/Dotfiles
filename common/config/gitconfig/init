@@ -1,0 +1,5 @@
+[includeIf "hasconfig:remote.*.url:git@KaloyanYosifov.github.com:*/**"]
+    path = ~/.config/gitconfig/.gitconfig-koko
+
+[includeIf "hasconfig:remote.*.url:git@github.com:*/**"]
+    path = ~/.config/gitconfig/.gitconfig-koko
