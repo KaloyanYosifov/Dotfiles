@@ -32,3 +32,20 @@ git config --global core.editor "vim"
 echo "Installing linux configuration!"
 $SCRIPT_DIR/config/install.sh
 $PARENT_DIR/common/config/install.sh
+$PARENT_DIR/common/link-custom-binaries.sh
+
+echo "Do you want to install additional configuration? y/n"
+read $install_additional
+
+if [[ $install_additional == "y" ]] || [[ $install_additional == "yes" ]]; then
+    echo "Installing additional configuration"
+    $PARENT_DIR/common/install-vim.sh
+    $PARENT_DIR/common/install-ideavim.sh
+    $PARENT_DIR/common/install-fonts.sh
+    $PARENT_DIR/common/install-zsh-config.sh
+    $PARENT_DIR/common/install-tmux-config.sh
+    $PARENT_DIR/common/install-rust.sh
+
+    # Not so into Haskell for now
+    # $PARENT_DIR/common/install-haskell.sh
+fi

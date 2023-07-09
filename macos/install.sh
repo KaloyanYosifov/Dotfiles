@@ -24,22 +24,23 @@ echo "Installing programs from brew"
 $SCRIPT_DIR/brew-updates.sh
 
 # Install common configurations
-$PARENT_DIR/common/install-vim.sh
-$PARENT_DIR/common/install-ideavim.sh
-$PARENT_DIR/common/install-fonts.sh
-$PARENT_DIR/common/install-zsh-config.sh
-$PARENT_DIR/common/install-tmux-config.sh
-$PARENT_DIR/common/install-rust.sh
-$PARENT_DIR/common/link-custom-binaries.sh
 $PARENT_DIR/common/config/install.sh
+$PARENT_DIR/common/link-custom-binaries.sh
 
-# Not so into Haskell for now
-# $PARENT_DIR/common/install-haskell.sh
+echo "Do you want to install additional configuration? y/n"
+read install_additional
 
-# copy .gitconfig file
+if [[ $install_additional == "y" ]] || [[ $install_additional == "yes" ]]; then
+    echo "Installing additional configuration"
+    $PARENT_DIR/common/install-vim.sh
+    $PARENT_DIR/common/install-ideavim.sh
+    $PARENT_DIR/common/install-fonts.sh
+    $PARENT_DIR/common/install-zsh-config.sh
+    $PARENT_DIR/common/install-tmux-config.sh
+    $PARENT_DIR/common/install-rust.sh
 
-if ! [[ -f $HOME/.gitconfig ]] then
-    cp $PARENT_DIR/.gitconfig $HOME
+    # Not so into Haskell for now
+    # $PARENT_DIR/common/install-haskell.sh
 fi
 
 # Disable saving to icloud
