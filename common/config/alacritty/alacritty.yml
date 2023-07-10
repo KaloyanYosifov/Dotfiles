@@ -127,3 +127,6 @@ colors: *AtomOneLight
 
 # Live config reload (changes require restart)
 live_config_reload: true
+
+key_bindings:
+  - { key: Return, mods: Control, action: CreateNewWindow }
