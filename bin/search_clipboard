@@ -5,4 +5,4 @@ if [[ $? -eq 1 ]]; then
     echo "Copyq not installed"
 fi
 
-copyq read {0..40} | awk -F '' '$1~/\w/' | fzf | xargs -I '{}' sh -c "copyq add -- '{}' > /dev/null && copyq copy '{}' > /dev/null"
+copyq read {0..40} | awk -F '' '$1~/\w/' | fzf | tee >( copyq add - ) | copyq copy -
