@@ -8,6 +8,10 @@ brew update
 # Upgrade any already-installed formulae.
 brew upgrade
 
+# Add font repo
+brew tap homebrew/cask-fonts
+brew install font-jetbrains-mono
+
 # Save Homebrew’s installed location.
 BREW_PREFIX=$(brew --prefix)
 
@@ -27,7 +31,7 @@ brew install findutils
 brew install gnu-sed --with-default-names
 
 # Install `wget` with IRI support.
-brew install wget --with-iri
+brew install wget
 
 # Install GnuPG to enable PGP-signing commits.
 brew install gnupg
@@ -46,7 +50,7 @@ brew install avr-binutils avr-gcc avrdude
 brew install imagemagick --with-webp
 
 # install rectangle a new version of spectacles
-brew install --cask \
+brew install insomnia \
     rectangle \
     alacritty \
     notion \
@@ -56,7 +60,7 @@ brew install --cask \
     bitwarden
 
 
-brew install rg copyq irssi fzf abseil ripgrep act adns aom apr apr-util argon2 aspell assimp augeas autoconf automake aws-elasticbeanstalk awscli bdw-gc berkeley-db bfg binutils blueutil boost c-ares ca-certificates cairo cjson cmake cmocka composer coreutils cscope curl dbus dex2jar dialog dns2tcp dnsmasq docutils dos2unix double-conversion edencommon fb303 fbthrift ffmpeg findutils fizz flac fmt folly fontconfig freetds freetype frei0r fribidi gcc gd gdbm gettext gflags ghostscript giflib git git-crypt git-flow-avh git-lfs glfw glib glog gmp gnu-getopt gnupg gnutls gobject-introspection gradle graphite2 grpc guile harfbuzz hexedit highway htop hunspell hwloc icu4c imath isl jansson jasper jbig2dec jemalloc jpeg jpeg-turbo jpeg-xl jq krb5 kubernetes-cli lame ldns leptonica libarchive libass libassuan libavif libb2 libbluray libcbor libdnet libev libevent libffi libfido2 libgcrypt libgpg-error libiconv libidn libidn2 libimagequant libksba libmaxminddb libmetalink libmpc libnghttp2 libogg libpng libpq libproxy libpthread-stubs libraqm librist libsamplerate libslirp libsmi libsndfile libsodium libsoxr libssh libssh2 libtasn1 libtermkey libtiff libtool libunistring libusb libuv libvidstab libvmaf libvorbis libvpx libvterm libx11 libxau libxcb libxdmcp libxext libxrender libyaml libzip little-cms2 llvm lotus lua luajit-openresty luv lynx lz4 lzo m4 macvim mailhog mbedtls md4c minikube mmv moreutils mpdecimal mpfr msgpack mysql-client nasm ncurses neovim nettle nghttp2 nginx npth numpy oniguruma openblas opencore-amr openexr openjdk openjpeg openldap openssh openssl@1.1 opus p11-kit p7zip pcre pcre2 perl php pigz pillow pinentry pixman pkg-config protobuf pv python@3.11 qt rav1e re2 readline redis rename rtmpdump rubberband ruby sdl2 sfnt2woff sfnt2woff-zopfli six snappy speex sphinx-doc sqlite sqlmap srt ssdeep tcl-tk tesseract theora tmux tree tree-sitter unbound unibilium unixodbc utf8proc vde volta wangle watch watchman webp wget wimlib wireshark woff2 x264 x265 xorgproto xpdf xvid zeromq zimg zlib zopfli zstd
+brew install pidof lua rg copyq irssi fzf abseil act adns aom apr apr-util argon2 aspell assimp augeas autoconf automake aws-elasticbeanstalk awscli bdw-gc berkeley-db bfg binutils blueutil boost c-ares ca-certificates cairo cjson cmake cmocka composer coreutils cscope curl dbus dex2jar dialog dns2tcp dnsmasq docutils dos2unix double-conversion edencommon fb303 fbthrift ffmpeg findutils fizz flac fmt folly fontconfig freetds freetype frei0r fribidi gcc gd gdbm gettext gflags ghostscript giflib git git-crypt git-flow-avh git-lfs glib glog gmp gnu-getopt gnupg gnutls graphite2 harfbuzz hexedit htop hwloc icu4c imath jemalloc jpeg jpeg-turbo jpeg-xl jq kubernetes-cli lame libarchive libassuan libavif libb2 libdnet libev libevent libffi libfido2 libgcrypt libgpg-error libiconv libidn libidn2 libimagequant libksba libmaxminddb libmetalink libmpc libnghttp2 libogg libpng libpq libproxy libpthread-stubs libraqm librist libsamplerate libslirp libsmi libsndfile libsodium libsoxr libssh2 libtasn1 libtiff libtool libunistring libusb libuv libvidstab libvmaf libvorbis libvpx libvterm libyaml libzip llvm luv lz4 macvim md4c minikube mpfr msgpack mysql-client nasm neovim nginx npth openblas openexr openjdk openjpeg openldap openssh openssl php pigz pinentry pkg-config pv qt rav1e re2 readline redis six sqlite sqlmap srt theora tmux tree tree-sitter unixodbc utf8proc volta wangle watch watchman webp wget wimlib wireshark woff2 x264 x265 
 
 # Remove outdated versions from the cellar.
 brew cleanup
