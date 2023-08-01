@@ -1,13 +1,15 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
 INFO=""
 
 command -v $1 2>&1 > /dev/null
-if [[ $? -eq 0 ]]; then
+if [ $? = 0 ]; then
     INFO="VPN: $(mullvad status) ---"
 fi
 
-INFO+=" $(upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep 'percentage' | xargs | cut -d ' ' -f 2)"
+BATTERY=$(upower -i /org/freedesktop/UPower/devices/battery_BAT0)
+INFO+=" $(echo "$BATTERY" | grep 'percentage' | xargs | cut -d ' ' -f 2)"
+INFO+=" $(echo "$BATTERY" | grep 'state' | xargs | cut -d ' ' -f 2)"
 INFO+=" $(date +'%d-%m-%Y %H:%M:%S')"
 
 echo "$INFO" 
