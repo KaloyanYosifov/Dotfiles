@@ -50,6 +50,7 @@ brew install avr-binutils avr-gcc avrdude
 brew install imagemagick --with-webp
 
 # install rectangle a new version of spectacles
+brew install --cask docker
 brew install insomnia \
     rectangle \
     alacritty \
