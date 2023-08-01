@@ -6,7 +6,7 @@ PARENT_DIR=$SCRIPT_DIR/..
 sudo dnf update -y
 sudo dnf groupinstall -y "Development Tools"
 sudo dnf install -y neovim zsh g++ fzf apfs-fuse xclip ripgrep irssi copyq sway alacritty \ 
-    jetbrains-mono-fonts-all wlsunset bemenu
+    jetbrains-mono-fonts-all wlsunset bemenu mako
 
 function install_brave() {
     echo "Installing brave"
