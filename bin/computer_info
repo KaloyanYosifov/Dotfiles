@@ -9,9 +9,9 @@ fi
 
 battery_info=$(upower -i /org/freedesktop/UPower/devices/battery_BAT0)
 battery_state=$(echo "$battery_info" | grep 'state' | xargs | cut -d ' ' -f 2)
-battery_percentage=$(echo "$battery_info" | grep 'percentage' | xargs | cut -d ' ' -f 2)
+battery_percentage=$(echo "$battery_info" | grep 'percentage' | xargs | cut -d ' ' -f 2 | cut -d '%' -f 1)
 
-INFO+=" $battery_percentage"
+INFO+=" $battery_percentage%"
 
 case $battery_state in
     charging)
