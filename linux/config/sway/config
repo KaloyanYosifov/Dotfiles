@@ -14,6 +14,9 @@ set $right l
 # Preferred terminal emulator
 set $term alacritty
 
+# Preferred clipboard manage
+set $clipboard copyq show
+
 # Preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
@@ -90,6 +93,9 @@ input "type:keyboard" {
 
     # Start your launcher
     bindsym $mod+Space exec $menu
+
+    # Open clipboard manager
+    bindsym $mod+Shift+v exec $clipboard
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
