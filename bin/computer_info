@@ -18,7 +18,8 @@ case $battery_state in
         INFO+="⚡"
         ;;
     discharging)
-        if [ $battery_percentage < 20 ]; then
+        echo $battery_percentage
+        if [ $battery_percentage -lt 20 ]; then
             INFO+="🪫"
         else
             INFO+="🔋"
