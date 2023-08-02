@@ -7,9 +7,31 @@ if [ $? = 0 ]; then
     INFO="VPN: $(mullvad status) ---"
 fi
 
-BATTERY=$(upower -i /org/freedesktop/UPower/devices/battery_BAT0)
-INFO+=" $(echo "$BATTERY" | grep 'percentage' | xargs | cut -d ' ' -f 2)"
-INFO+=" $(echo "$BATTERY" | grep 'state' | xargs | cut -d ' ' -f 2)"
+battery_info=$(upower -i /org/freedesktop/UPower/devices/battery_BAT0)
+battery_state=$(echo "$battery_info" | grep 'state' | xargs | cut -d ' ' -f 2)
+battery_percentage=$(echo "$battery_info" | grep 'percentage' | xargs | cut -d ' ' -f 2)
+
+INFO+=" $battery_percentage"
+
+case $battery_state in
+    charging)
+        INFO+="⚡"
+        ;;
+    discharging)
+        if [ $battery_percentage < 20 ]; then
+            INFO+="🪫"
+        else
+            INFO+="🔋"
+        fi
+
+        ;;
+    fully-charged)
+        INFO+="🔌"
+        ;;
+    *)
+        INFO+=" unknown"
+esac
+
 INFO+=" $(date +'%d-%m-%Y %H:%M:%S')"
 
 echo "$INFO" 
