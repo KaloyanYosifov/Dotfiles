@@ -5,12 +5,6 @@ PARENT_DIR=$SCRIPT_DIR/..
 
 echo "Installing MACOS configurations"
 
-if [ -z $ZSH ]; then
-	curl -L https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh > install.sh
-	sh install.sh
-	rm install.sh
-fi
-
 which bash
 
 if [ $? != 0 ]; then
