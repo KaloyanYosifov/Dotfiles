@@ -7,7 +7,7 @@ sudo dnf update -y
 sudo dnf groupinstall -y "Development Tools"
 sudo dnf config-manager --add-repo https://rpm.librewolf.net/librewolf-repo.repo # Add librewolf repo
 sudo dnf install -y neovim zsh g++ fzf apfs-fuse xclip ripgrep irssi copyq sway alacritty \
-    jetbrains-mono-fonts-all wlsunset bemenu mako htop librewolf
+    jetbrains-mono-fonts-all wlsunset bemenu mako htop librewolf feh qrencode
 
 function install_brave() {
     echo "Installing brave"
