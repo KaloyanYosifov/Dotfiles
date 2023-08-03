@@ -32,9 +32,9 @@ read install_additional
 
 if [[ $install_additional == "y" ]] || [[ $install_additional == "yes" ]]; then
     echo "Installing additional configuration"
+    $SCRIPT_DIR/install-fonts.sh
     $PARENT_DIR/common/install-vim.sh
     $PARENT_DIR/common/install-ideavim.sh
-    $PARENT_DIR/common/install-fonts.sh
     $PARENT_DIR/common/install-zsh.sh
     $PARENT_DIR/common/install-tmux-config.sh
     $PARENT_DIR/common/install-rust.sh

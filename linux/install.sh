@@ -5,8 +5,9 @@ PARENT_DIR=$SCRIPT_DIR/..
 
 sudo dnf update -y
 sudo dnf groupinstall -y "Development Tools"
-sudo dnf install -y neovim zsh g++ fzf apfs-fuse xclip ripgrep irssi copyq sway alacritty \ 
-    jetbrains-mono-fonts-all wlsunset bemenu mako
+sudo dnf config-manager --add-repo https://rpm.librewolf.net/librewolf-repo.repo # Add librewolf repo
+sudo dnf install -y neovim zsh g++ fzf apfs-fuse xclip ripgrep irssi copyq sway alacritty \
+    jetbrains-mono-fonts-all wlsunset bemenu mako htop librewolf
 
 function install_brave() {
     echo "Installing brave"
@@ -35,13 +36,12 @@ $PARENT_DIR/common/config/install.sh
 $PARENT_DIR/common/link-custom-binaries.sh
 
 echo "Do you want to install additional configuration? y/n"
-read $install_additional
+read install_additional
 
 if [[ $install_additional == "y" ]] || [[ $install_additional == "yes" ]]; then
     echo "Installing additional configuration"
     $PARENT_DIR/common/install-vim.sh
     $PARENT_DIR/common/install-ideavim.sh
-    $PARENT_DIR/common/install-fonts.sh
     $PARENT_DIR/common/install-zsh-config.sh
     $PARENT_DIR/common/install-tmux-config.sh
     $PARENT_DIR/common/install-rust.sh

@@ -2,6 +2,8 @@
 
 echo "Installing zsh configuration"
 
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
 sed -i -e 's/ZSH_THEME=".*"/ZSH_THEME="gentoo"/' $HOME/.zshrc
 
 rm -rf $HOME/.zsh
