@@ -6,9 +6,10 @@ PARENT_DIR=$SCRIPT_DIR/..
 sudo dnf update -y
 sudo dnf groupinstall -y "Development Tools"
 sudo dnf config-manager --add-repo https://rpm.librewolf.net/librewolf-repo.repo # Add librewolf repo
+sudo dnf config-manager --add-repo https://download.opensuse.org/repositories/network:im:signal/Fedora_38/network:im:signal.repo # add signal repo from opensuse 
 sudo dnf install -y neovim zsh g++ fzf apfs-fuse xclip ripgrep irssi copyq sway alacritty \
     jetbrains-mono-fonts-all wlsunset bemenu mako htop librewolf feh qrencode ansible helm kubernetes-client \
-    keepassxc
+    keepassxc signal-desktop
 
 # Install bitwarden
 sudo dnf install -y <<< curl https://github.com/bitwarden/clients/releases/download/desktop-v2023.7.1/Bitwarden-2023.7.1-x86_64.rpm
