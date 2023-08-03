@@ -7,7 +7,11 @@ sudo dnf update -y
 sudo dnf groupinstall -y "Development Tools"
 sudo dnf config-manager --add-repo https://rpm.librewolf.net/librewolf-repo.repo # Add librewolf repo
 sudo dnf install -y neovim zsh g++ fzf apfs-fuse xclip ripgrep irssi copyq sway alacritty \
-    jetbrains-mono-fonts-all wlsunset bemenu mako htop librewolf feh qrencode ansible helm kubernetes-client
+    jetbrains-mono-fonts-all wlsunset bemenu mako htop librewolf feh qrencode ansible helm kubernetes-client \
+    keepassxc
+
+# Install bitwarden
+sudo dnf install -y <<< curl https://github.com/bitwarden/clients/releases/download/desktop-v2023.7.1/Bitwarden-2023.7.1-x86_64.rpm
 
 function install_brave() {
     echo "Installing brave"
@@ -24,8 +28,18 @@ function install_volta() {
     volta install node@16
 }
 
+function install_syncthing() {
+    echo "Do you want to install syncthing? y/n"
+    read should_install_syncthing
+
+    if [[ $install_additional == "y" ]] || [[ $install_additional == "yes" ]]; then
+        $SCRIPT_DIR/install-syncthing.sh
+    fi
+}
+
 install_volta
 install_brave
+install_syncthing
 
 # configure global editor for vim
 git config --global core.editor "vim"
