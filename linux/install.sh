@@ -13,6 +13,9 @@ sudo dnf install -y neovim zsh g++ fzf apfs-fuse xclip ripgrep irssi copyq sway 
 # Install bitwarden
 sudo dnf install -y <<< curl https://github.com/bitwarden/clients/releases/download/desktop-v2023.7.1/Bitwarden-2023.7.1-x86_64.rpm
 
+# install mullvad
+sudo dnf install -y <<< https://mullvad.net/media/app/MullvadVPN-2023.4_x86_64.rpm
+
 function install_brave() {
     echo "Installing brave"
     sudo dnf install -y dnf-plugins-core
