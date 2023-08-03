@@ -1,29 +1,33 @@
 #! /usr/bin/env bash
 
+set -eu
+
 SCRIPT_DIR=$( cd -- $( dirname -- ${BASH_SOURCE[0]} ) &> /dev/null && pwd )
 PARENT_DIR=$SCRIPT_DIR/..
 
+function add_repos() {
+    repos="https://rpm.librewolf.net/librewolf-repo.repo"
+    repos+=" https://download.opensuse.org/repositories/network:im:signal/Fedora_38/network:im:signal.repo"
+    repos+=" https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo"
+
+    for repo in $repos; do
+        sudo dnf config-manager --add-repo $repo
+    done
+}
+
+sudo rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
+
 sudo dnf update -y
 sudo dnf groupinstall -y "Development Tools"
-sudo dnf config-manager --add-repo https://rpm.librewolf.net/librewolf-repo.repo # Add librewolf repo
-sudo dnf config-manager --add-repo https://download.opensuse.org/repositories/network:im:signal/Fedora_38/network:im:signal.repo # add signal repo from opensuse 
-sudo dnf install -y neovim zsh g++ fzf apfs-fuse xclip ripgrep irssi copyq sway alacritty \
+sudo dnf install -y dnf-plugins-core neovim zsh g++ fzf apfs-fuse xclip ripgrep irssi copyq sway alacritty \
     jetbrains-mono-fonts-all wlsunset bemenu mako htop librewolf feh qrencode ansible helm kubernetes-client \
-    keepassxc signal-desktop
+    keepassxc signal-desktop brave-browser brave-keyring
 
 # Install bitwarden
 sudo dnf install -y <<< curl https://github.com/bitwarden/clients/releases/download/desktop-v2023.7.1/Bitwarden-2023.7.1-x86_64.rpm
 
 # install mullvad
 sudo dnf install -y <<< https://mullvad.net/media/app/MullvadVPN-2023.4_x86_64.rpm
-
-function install_brave() {
-    echo "Installing brave"
-    sudo dnf install -y dnf-plugins-core
-    sudo dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
-    sudo rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
-    sudo dnf install -y brave-browser brave-keyring
-}
 
 function install_volta() {
     echo "Installing volta"
@@ -42,7 +46,6 @@ function install_syncthing() {
 }
 
 install_volta
-install_brave
 install_syncthing
 
 # configure global editor for vim
