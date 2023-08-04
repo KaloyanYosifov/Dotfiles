@@ -22,6 +22,9 @@ set $clipboard copyq show
 # on the original workspace that the command was run on.
 set $menu ls /usr/share/applications | bemenu | xargs swaymsg exec gtk-launch --
 
+# Preffered QREcnode creator
+set $qrencode_menu copyq read 0 | qrencode -o /tmp/__temporary_qrcode.png && feh /tmp/__temporary_qrcode.png && rm /tmp/__temporary_qrcode.png
+
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
@@ -96,6 +99,9 @@ input "type:keyboard" {
 
     # Open clipboard manager
     bindsym $mod+Shift+v exec $clipboard
+
+    # Open QR encoder
+    bindsym $mod+Shift+q exec $qrencode_menu
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
