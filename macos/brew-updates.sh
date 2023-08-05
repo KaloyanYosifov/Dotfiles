@@ -10,7 +10,7 @@ brew upgrade
 
 # Add font repo
 brew tap homebrew/cask-fonts
-brew install font-jetbrains-mono
+brew install font-jetbrains-mono font-jetbrains-mono-nerd-font
 
 # Save Homebrew’s installed location.
 BREW_PREFIX=$(brew --prefix)

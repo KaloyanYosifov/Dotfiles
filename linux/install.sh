@@ -53,9 +53,14 @@ function install_lf {
     cd -
 }
 
+function install_fonts {
+    $SCRIPT_DIR/install-fonts.sh
+}
+
 install_volta
 install_syncthing
 install_lf
+install_fonts
 
 # configure global editor for vim
 git config --global core.editor "vim"
