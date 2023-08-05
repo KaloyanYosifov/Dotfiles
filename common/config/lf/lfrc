@@ -15,13 +15,7 @@ cmd open ${{
         text/*|application/json|inode/x-empty|application/x-subrip) nvim $fx;;
 	image/x-xcf) setsid -f gimp $f >/dev/null 2>&1 ;;
 	image/svg+xml) display -- $f ;;
-	image/*) rotdir $f | grep -i "\.\(png\|jpg\|jpeg\|gif\|webp\|avif\|tif\|ico\)\(_large\)*$" |
-		setsid -f nsxiv -aio 2>/dev/null | while read -r file; do
-			[ -z "$file" ] && continue
-			lf -remote "send select \"$file\""
-			lf -remote "send toggle"
-		done &
-		;;
+	image/*) feh $fx ;;
 	audio/*|video/x-ms-asf) mpv --audio-display=no $f ;;
 	video/*) setsid -f mpv $f -quiet >/dev/null 2>&1 ;;
 	application/pdf|application/vnd.djvu|application/epub*) setsid -f zathura $fx >/dev/null 2>&1 ;;
@@ -34,7 +28,7 @@ cmd open ${{
 cmd mkdir $mkdir -p "$(echo $* | tr ' ' '\ ')"
 
 cmd extract ${{
-	clear; tput cup $(($(tput lines)/3)); tput bold
+	clear
 	set -f
 	printf "%s\n\t" "$fx"
 	printf "extract?[y/N]"
@@ -43,7 +37,7 @@ cmd extract ${{
 }}
 
 cmd delete ${{
-	clear; tput cup $(($(tput lines)/3)); tput bold
+	clear
 	set -f
 	printf "%s\n\t" "$fx"
 	printf "delete?[y/N]"
