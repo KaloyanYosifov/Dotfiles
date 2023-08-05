@@ -21,7 +21,7 @@ sudo dnf update -y
 sudo dnf groupinstall -y "Development Tools"
 sudo dnf install -y dnf-plugins-core neovim zsh g++ fzf apfs-fuse xclip ripgrep irssi copyq sway alacritty \
     jetbrains-mono-fonts-all wlsunset bemenu mako htop librewolf feh qrencode ansible helm kubernetes-client \
-    keepassxc signal-desktop brave-browser brave-keyring zathura mpv
+    keepassxc signal-desktop brave-browser brave-keyring zathura mpv git-crypt
 
 # Install bitwarden
 sudo dnf install -y <<< curl https://github.com/bitwarden/clients/releases/download/desktop-v2023.7.1/Bitwarden-2023.7.1-x86_64.rpm
