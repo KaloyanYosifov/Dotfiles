@@ -39,5 +39,20 @@ function install_gitconfig {
     echo "Gitconfig installed"
 }
 
+function install_lf {
+    echo "Installing lf configs"
+
+    LF_PATH=$HOME/.config/lf
+
+    if [[ -d $LF_PATH ]]; then
+        rm -rf $LF_PATH
+    fi
+
+    ln -s $SCRIPT_DIR/lf $LF_PATH
+
+    echo "LF config installed"
+}
+
 install_alacritty
 install_gitconfig
+install_lf
