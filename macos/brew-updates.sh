@@ -8,9 +8,9 @@ brew update
 # Upgrade any already-installed formulae.
 brew upgrade
 
-# Add font repo
+# Add repos
 brew tap homebrew/cask-fonts
-brew install font-jetbrains-mono font-jetbrains-mono-nerd-font
+brew tap zegervdv/zathura
 
 # Save Homebrew’s installed location.
 BREW_PREFIX=$(brew --prefix)
@@ -79,7 +79,9 @@ brew install pidof lua rg copyq irssi fzf abseil act adns \
     openblas openexr openjdk openjpeg openldap openssh openssl php pigz pinentry \
     pkg-config pv qt rav1e re2 readline redis six sqlite sqlmap \
     srt theora tmux tree tree-sitter unixodbc utf8proc volta wangle watch \
-    watchman webp wget wimlib wireshark woff2 x264 x265 lf
+    watchman webp wget wimlib wireshark woff2 x264 x265 lf font-jetbrains-mono font-jetbrains-mono-nerd-font \
+    zathura mpv
+
 
 # Remove outdated versions from the cellar.
 brew cleanup
