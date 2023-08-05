@@ -29,14 +29,14 @@ sudo dnf install -y <<< curl https://github.com/bitwarden/clients/releases/downl
 # install mullvad
 sudo dnf install -y <<< https://mullvad.net/media/app/MullvadVPN-2023.4_x86_64.rpm
 
-function install_volta() {
+function install_volta {
     echo "Installing volta"
     curl https://get.volta.sh | bash
 
     volta install node@16
 }
 
-function install_syncthing() {
+function install_syncthing {
     echo "Do you want to install syncthing? y/n"
     read should_install_syncthing
 
@@ -45,8 +45,17 @@ function install_syncthing() {
     fi
 }
 
+function install_lf {
+    echo "Installing lf"
+    cd $SCRIPT_DIR
+    curl -L https://github.com/gokcehan/lf/releases/download/r30/lf-linux-amd64.tar.gz | tar -xzf -
+    sudo mv $SCRIPT_DIR/lf /usr/local/bin
+    cd -
+}
+
 install_volta
 install_syncthing
+install_lf
 
 # configure global editor for vim
 git config --global core.editor "vim"

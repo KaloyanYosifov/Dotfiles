@@ -61,7 +61,25 @@ brew install insomnia \
     bitwarden
 
 
-brew install pidof lua rg copyq irssi fzf abseil act adns aom apr apr-util argon2 aspell assimp augeas autoconf automake aws-elasticbeanstalk awscli bdw-gc berkeley-db bfg binutils blueutil boost c-ares ca-certificates cairo cjson cmake cmocka composer coreutils cscope curl dbus dex2jar dialog dns2tcp dnsmasq docutils dos2unix double-conversion edencommon fb303 fbthrift ffmpeg findutils fizz flac fmt folly fontconfig freetds freetype frei0r fribidi gcc gd gdbm gettext gflags ghostscript giflib git git-crypt git-flow-avh git-lfs glib glog gmp gnu-getopt gnupg gnutls graphite2 harfbuzz hexedit htop hwloc icu4c imath jemalloc jpeg jpeg-turbo jpeg-xl jq kubernetes-cli lame libarchive libassuan libavif libb2 libdnet libev libevent libffi libfido2 libgcrypt libgpg-error libiconv libidn libidn2 libimagequant libksba libmaxminddb libmetalink libmpc libnghttp2 libogg libpng libpq libproxy libpthread-stubs libraqm librist libsamplerate libslirp libsmi libsndfile libsodium libsoxr libssh2 libtasn1 libtiff libtool libunistring libusb libuv libvidstab libvmaf libvorbis libvpx libvterm libyaml libzip llvm luv lz4 macvim md4c minikube mpfr msgpack mysql-client nasm neovim nginx npth openblas openexr openjdk openjpeg openldap openssh openssl php pigz pinentry pkg-config pv qt rav1e re2 readline redis six sqlite sqlmap srt theora tmux tree tree-sitter unixodbc utf8proc volta wangle watch watchman webp wget wimlib wireshark woff2 x264 x265 
+brew install pidof lua rg copyq irssi fzf abseil act adns \
+    aom apr apr-util argon2 aspell assimp augeas autoconf automake aws-elasticbeanstalk \
+    awscli bdw-gc berkeley-db bfg binutils blueutil boost c-ares ca-certificates cairo \
+    cjson cmake cmocka composer coreutils cscope curl dbus dex2jar dialog \
+    dns2tcp dnsmasq docutils dos2unix double-conversion edencommon fb303 fbthrift ffmpeg findutils \
+    fizz flac fmt folly fontconfig freetds freetype frei0r fribidi gcc \
+    gd gdbm gettext gflags ghostscript giflib git git-crypt git-flow-avh git-lfs \
+    glib glog gmp gnu-getopt gnupg gnutls graphite2 harfbuzz hexedit htop \
+    hwloc icu4c imath jemalloc jpeg jpeg-turbo jpeg-xl jq kubernetes-cli lame \
+    libarchive libassuan libavif libb2 libdnet libev libevent libffi libfido2 libgcrypt \
+    libgpg-error libiconv libidn libidn2 libimagequant libksba libmaxminddb libmetalink libmpc libnghttp2 \
+    libogg libpng libpq libproxy libpthread-stubs libraqm librist libsamplerate libslirp libsmi \
+    libsndfile libsodium libsoxr libssh2 libtasn1 libtiff libtool libunistring libusb libuv \
+    libvidstab libvmaf libvorbis libvpx libvterm libyaml libzip llvm luv lz4 \
+    macvim md4c minikube mpfr msgpack mysql-client nasm neovim nginx npth \
+    openblas openexr openjdk openjpeg openldap openssh openssl php pigz pinentry \
+    pkg-config pv qt rav1e re2 readline redis six sqlite sqlmap \
+    srt theora tmux tree tree-sitter unixodbc utf8proc volta wangle watch \
+    watchman webp wget wimlib wireshark woff2 x264 x265 lf
 
 # Remove outdated versions from the cellar.
 brew cleanup
