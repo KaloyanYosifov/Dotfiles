@@ -20,7 +20,7 @@ set $clipboard copyq show
 # Preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu ls /usr/share/applications | bemenu | xargs swaymsg exec gtk-launch --
+set $menu "(ls /usr/share/applications; ls ~/.local/share/applications) | cat | bemenu | xargs swaymsg exec gtk-launch --"
 
 # Preffered QREcnode creator
 set $qrencode_menu copyq read 0 | qrencode -o /tmp/__temporary_qrcode.png && feh /tmp/__temporary_qrcode.png && rm /tmp/__temporary_qrcode.png
