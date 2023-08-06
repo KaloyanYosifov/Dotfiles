@@ -1,11 +1,17 @@
 {
-    "layer": "top",
+    "layer": "bottom",
     "height": 25,
     "modules-left": ["sway/workspaces", "sway/mode"],
-    "modules-center": ["sway/window"],
-    "modules-right": ["network", "pulseaudio", "temperature", "memory", "cpu", "battery", "clock", "tray"],
+    "modules-right": ["custom/mullvad", "network", "pulseaudio", "temperature", "memory", "cpu", "battery", "clock", "tray"],
     "sway/window": {
         "max-length": 50
+    },
+    "custom/mullvad": {
+        "format": "{} ",
+        "exec": "mullvad status",
+        "exec-if": "which mullvad",
+        "restart-interval": 5,
+        "on-click": "gtk-launch mullvad-vpn.desktop"
     },
     "temperature": {
         "critical-threshold": 80,
@@ -37,7 +43,7 @@
     "clock": {
         "format": "{:%a, %d. %b %H:%M} 󰥔",
         "tooltip": true,
-        "tooltip-format": "{:%Y-%m-%d}"
+        "tooltip-format": "{:%d-%m-%Y}"
     },
     "tray": {
         "spacing": 5

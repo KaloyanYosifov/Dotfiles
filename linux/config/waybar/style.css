@@ -64,11 +64,11 @@ button:hover {
 #network,
 #pulseaudio,
 #wireplumber,
-#custom-media,
 #tray,
 #mode,
 #idle_inhibitor,
 #scratchpad,
+#custom-mullvad,
 #mpd {
     color: #fff;
 }
@@ -82,12 +82,12 @@ button:hover {
 #network,
 #pulseaudio,
 #wireplumber,
-#custom-media,
 #tray,
 #mode,
 #idle_inhibitor,
 #scratchpad,
-#mpd {
+#mpd,
+#custom-mullvad {
     padding: 0 15px;
 }
 
@@ -184,10 +184,6 @@ label:focus {
     min-width: 16px;
 }
 
-#scratchpad {
-    background: rgba(0, 0, 0, 0.2);
-}
-
-#scratchpad.empty {
-	background-color: transparent;
+#custom-mullvad {
+    background: #2c4875;
 }
