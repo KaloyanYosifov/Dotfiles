@@ -19,7 +19,11 @@ function ask_install {
     echo "$1 y/n"
     read should_install
 
-    return [ $should_install = "y" ] || [ $should_install = "yes" ]
+    if [ $should_install = "y" ] || [ $should_install = "yes" ]; then
+            return 0
+    else
+            return 1
+    fi
 }
 
 function install_packages {
