@@ -78,7 +78,7 @@ function install_common_configuration {
     $PARENT_DIR/common/link-custom-binaries.sh
 }
 
-function install_common_configuration {
+function install_additional_configuration {
     echo "Installing additional configuration"
     $PARENT_DIR/common/install-vim.sh
     $PARENT_DIR/common/install-ideavim.sh
