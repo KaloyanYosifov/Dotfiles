@@ -35,7 +35,7 @@ function install_packages {
     sudo dnf install -y <<< curl https://github.com/bitwarden/clients/releases/download/desktop-v2023.7.1/Bitwarden-2023.7.1-x86_64.rpm
 
     # install mullvad
-    sudo dnf install -y <<< https://mullvad.net/media/app/MullvadVPN-2023.4_x86_64.rpm
+    sudo dnf install -y <<< curl https://mullvad.net/media/app/MullvadVPN-2023.4_x86_64.rpm
 
     ask_install "Do you want to install virtualization packages?" && sudo dnf install @virtualization
 }
