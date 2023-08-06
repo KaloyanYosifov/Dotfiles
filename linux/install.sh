@@ -36,6 +36,8 @@ function install_packages {
 
     # install mullvad
     sudo dnf install -y <<< https://mullvad.net/media/app/MullvadVPN-2023.4_x86_64.rpm
+
+    ask_install "Do you want to install virtualization packages?" && sudo dnf install @virtualization
 }
 
 function install_volta {
