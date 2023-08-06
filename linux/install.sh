@@ -37,7 +37,11 @@ function install_packages {
     # install mullvad
     sudo dnf install -y <<< curl https://mullvad.net/media/app/MullvadVPN-2023.4_x86_64.rpm
 
-    ask_install "Do you want to install virtualization packages?" && sudo dnf install @virtualization
+}
+
+function init_virtualization {
+    sudo dnf install -y @virtualization
+    sudo usermod -a -G libvirt,kvm "$(whoami)"
 }
 
 function install_volta {
@@ -85,6 +89,7 @@ function install_common_configuration {
 sudo dnf install -y dnf-plugins-core
 add_repos
 install_packages
+ask_install "Do you want to install virtualization packages?" && init_virtualization
 install_volta
 ask_install "Do you want to install syncthing?" && install_syncthing
 install_lf
