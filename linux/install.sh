@@ -82,6 +82,7 @@ function install_common_configuration {
     # $PARENT_DIR/common/install-haskell.sh
 }
 
+add_repos
 install_packages
 install_volta
 ask_install "Do you want to install syncthing?" && install_syncthing
