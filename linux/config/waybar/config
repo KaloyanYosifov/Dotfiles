@@ -20,7 +20,7 @@
     },
     "memory": {
         "interval": 15,
-        "format": "{used} / {total} GB "
+        "format": "{used:0.1f}G / {total:0.1f}G "
     },
     "battery": {
         "format": "{capacity}% {icon}",
@@ -35,7 +35,9 @@
         "format-alt": "{time} {icon}",
     },
     "clock": {
-        "format": "{:%a, %d. %b  %H:%M}"
+        "format": "{:%a, %d. %b %H:%M} 󰥔",
+        "tooltip": true,
+        "tooltip-format": "{:%Y-%m-%d}"
     },
     "tray": {
         "spacing": 5
