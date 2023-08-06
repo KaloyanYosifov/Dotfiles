@@ -52,7 +52,7 @@ function install_volta {
     echo "Installing volta"
     curl https://get.volta.sh | bash
 
-    volta install node@16
+    ~/.volta/bin/volta install node@16
 }
 
 function install_syncthing {

@@ -17,6 +17,6 @@ echo "Installing Packer for NVIM"
 git clone --depth 1 https://github.com/wbthomason/packer.nvim $HOME/.local/share/nvim/site/pack/packer/start/packer.nvim || true
 
 # install
-vim -c "PackerInstall" -c "q!"
+nvim -c "PackerInstall" -c "q!"
 
 echo "Successfully installed NVim"
