@@ -1,0 +1,65 @@
+{
+    "layer": "top",
+    "height": 25,
+    "modules-left": ["sway/workspaces", "sway/mode"],
+    "modules-center": ["sway/window"],
+    "modules-right": ["network", "pulseaudio", "temperature", "memory", "cpu", "battery", "clock", "tray"],
+    "sway/window": {
+        "max-length": 50
+    },
+    "temperature": {
+        "critical-threshold": 80,
+        "format": "{temperatureC} °C 󰏈",
+        "format-critical": "{temperatureC} °C 󱣗"
+    },
+    "cpu": {
+        "interval": 5,
+        "format": "{usage}% ",
+        "tooltip": false,
+        "on-click": "alacritty -e htop"
+    },
+    "memory": {
+        "interval": 15,
+        "format": "{used} / {total} GB "
+    },
+    "battery": {
+        "format": "{capacity}% {icon}",
+        "format-icons": ["🪫", "🔋"],
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-charging": "{capacity}% ⚡",
+        "format-plugged": "{capacity}% 🔌",
+        "format-alt": "{time} {icon}",
+    },
+    "clock": {
+        "format": "{:%a, %d. %b  %H:%M}"
+    },
+    "tray": {
+        "spacing": 5
+    },
+    "network": {
+        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-ethernet": "{ipaddr}/{cidr} ",
+        "tooltip-format": "{ifname} via {gwaddr} ",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "Disconnected ⚠",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    },
+    "pulseaudio": {
+        "scroll-step": 4,
+        "format": "{volume}% {icon}",
+        "format-bluetooth": "{volume}% {icon} ",
+        "format-bluetooth-muted": " {icon}",
+        "format-muted": " {format_source}",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "󰋍",
+            "default": ["", "", ""]
+        },
+        "on-click": "alacritty -e alsamixer"
+    },
+}

@@ -31,7 +31,7 @@ function install_packages {
 
     sudo dnf update -y
     sudo dnf groupinstall -y "Development Tools"
-    sudo dnf install -y neovim zsh g++ fzf apfs-fuse xclip ripgrep irssi copyq sway alacritty \
+    sudo dnf install -y neovim zsh g++ fzf apfs-fuse xclip ripgrep irssi copyq sway waybar alacritty \
         jetbrains-mono-fonts-all wlsunset bemenu mako htop librewolf feh qrencode ansible helm kubernetes-client \
         keepassxc signal-desktop brave-browser brave-keyring zathura mpv git-crypt
 
