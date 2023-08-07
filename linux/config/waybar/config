@@ -29,16 +29,14 @@
         "format": "{used:0.1f}G / {total:0.1f}G "
     },
     "battery": {
-        "format": "{capacity}% {icon}",
-        "format-icons": ["🪫", "🔋"],
+        "format-critical": "{capacity}% 🪫",
         "states": {
-            "warning": 30,
             "critical": 15
         },
-        "format": "{capacity}% {icon}",
+        "format": "{capacity}% 🔋",
         "format-charging": "{capacity}% ⚡",
         "format-plugged": "{capacity}% 🔌",
-        "format-alt": "{time} {icon}",
+        "format-alt": "{time}",
     },
     "clock": {
         "format": "{:%a, %d. %b %H:%M} 󰥔",
