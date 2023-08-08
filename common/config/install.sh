@@ -53,6 +53,21 @@ function install_lf {
     echo "LF config installed"
 }
 
+function install_tmux {
+    echo "Installing tmux config"
+
+   TMUX_PATH=$HOME/.config/tmux
+
+    if [[ -d $TMUX_PATH ]]; then
+        rm -rf $TMUX_PATH
+    fi
+
+    ln -s $SCRIPT_DIR/tmux $TMUX_PATH
+
+    echo "Tmux config installed"
+}
+
 install_alacritty
 install_gitconfig
 install_lf
+install_tmux
