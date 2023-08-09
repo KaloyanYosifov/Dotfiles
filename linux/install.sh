@@ -90,6 +90,10 @@ function install_additional_configuration {
     # $PARENT_DIR/common/install-haskell.sh
 }
 
+function install_gtklock {
+    $SCRIPT_DIR/install-gtklock.sh
+}
+
 sudo dnf install -y dnf-plugins-core
 add_repos
 install_packages
@@ -99,4 +103,5 @@ ask_install "Do you want to install syncthing?" && install_syncthing
 install_lf
 install_fonts
 install_common_configuration
+install_gtklock
 ask_install "Do you want to install additional configuration?" && install_additional_configuration
