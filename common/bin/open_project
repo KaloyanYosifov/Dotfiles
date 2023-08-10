@@ -3,7 +3,8 @@
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    projects=$(cat ~/.project.txt | tr -d '\n')
+    projects=$(paste -sd ' ' ~/.config/open-project/projects.txt)
+    echo $projects
     selected=$(find $projects -mindepth 1 -maxdepth 2 -type d | fzf)
 fi
 
