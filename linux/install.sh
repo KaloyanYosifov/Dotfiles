@@ -94,6 +94,10 @@ function install_gtklock {
     $SCRIPT_DIR/install-gtklock.sh
 }
 
+function install_gtklock {
+    $SCRIPT_DIR/install-dragon.sh
+}
+
 sudo dnf install -y dnf-plugins-core
 add_repos
 install_packages
@@ -104,4 +108,5 @@ install_lf
 install_fonts
 install_common_configuration
 install_gtklock
+install_dragon
 ask_install "Do you want to install additional configuration?" && install_additional_configuration
