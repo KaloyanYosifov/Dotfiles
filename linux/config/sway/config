@@ -17,6 +17,9 @@ set $term alacritty
 # Preferred clipboard manage
 set $clipboard copyq show
 
+# Set variable for locking the screen  
+set $lock gtklock -d
+
 # Preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
@@ -44,9 +47,9 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 exec mako
 
 exec swayidle -w \
-         timeout 1800 'gtklock -d' \
+         timeout 1800 $lock \
          timeout 3600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-         before-sleep 'gtklock -d'
+         before-sleep $lock
 
 # Set night light always
 exec wlsunset -t 4999 -T 5000
@@ -102,6 +105,9 @@ input "type:keyboard" {
 
     # Open QR encoder
     bindsym $mod+Shift+q exec $qrencode_menu
+
+    # Kill focused window
+    bindsym $mod+Ctrl+l exec $lock
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
