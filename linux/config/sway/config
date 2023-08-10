@@ -107,7 +107,7 @@ input "type:keyboard" {
     bindsym $mod+Shift+q exec $qrencode_menu
 
     # Kill focused window
-    bindsym $mod+Ctrl+l exec $lock
+    bindsym $mod+Ctrl+q exec $lock
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
