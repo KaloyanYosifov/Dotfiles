@@ -4,7 +4,7 @@ if [[ $# -eq 1 ]]; then
     selected=$1
 else
     projects=$(paste -sd ' ' ~/.config/open-project/projects.txt)
-    selected=$(find $projects -mindepth 0 -maxdepth 1 -type d | fzf)
+    selected=$(find $projects -mindepth 0 -maxdepth 2 -type d | fzf)
 fi
 
 if [[ -z $selected ]]; then
