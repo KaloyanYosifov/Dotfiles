@@ -6,7 +6,7 @@ set scrolloff 10
 set icons
 set period 1
 set hiddenfiles ".*:*.aux:*.log:*.bbl:*.bcf:*.blg:*.run.xml"
-set previewer lf-preview
+set previewer lf_preview
 set autoquit true
 
 # cmds/functions
