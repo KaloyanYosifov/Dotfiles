@@ -110,6 +110,12 @@ function change_to_zsh_shell {
     echo "Done! You will have to logout for it to take effect"
 }
 
+function uninstall_gnome {
+    echo "Uninstalling gnome desktop"
+    sudo dnf -y group remove "gnome"
+    echo "Gnome desktop uninstalled"
+}
+
 sudo dnf install -y dnf-plugins-core
 add_repos
 install_packages
@@ -124,5 +130,6 @@ install_gtklock
 install_dragon
 ask_install "Do you want to install additional configuration?" && install_additional_configuration
 change_to_zsh_shell
+uninstall_gnome
 
 echo "Installation done! :)"
