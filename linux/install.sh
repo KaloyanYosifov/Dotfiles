@@ -115,6 +115,11 @@ function uninstall_gnome {
     echo "Gnome desktop uninstalled"
 }
 
+function install_sway_login {
+    echo "Installing sway login"
+    echo '[ "$(tty)" = "/dev/tty1" ] && exec sway' >> $HOME/.zlogin
+}
+
 sudo dnf install -y dnf-plugins-core
 add_repos
 install_packages
@@ -130,5 +135,6 @@ install_dragon
 ask_install "Do you want to install additional configuration?" && install_additional_configuration
 change_to_zsh_shell
 uninstall_gnome
+install_sway_login
 
 echo "Installation done! :)"
