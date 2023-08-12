@@ -89,7 +89,6 @@ function install_additional_configuration {
     $PARENT_DIR/common/install-vim.sh
     $PARENT_DIR/common/install-ideavim.sh
     $PARENT_DIR/common/install-zsh-config.sh
-    $PARENT_DIR/common/install-tmux-config.sh
     $PARENT_DIR/common/install-rust.sh
 
     # Not so into Haskell for now
