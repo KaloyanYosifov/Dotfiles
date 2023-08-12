@@ -99,7 +99,7 @@ function install_gtklock {
     $SCRIPT_DIR/install-gtklock.sh
 }
 
-function install_gtklock {
+function install_dragon {
     $SCRIPT_DIR/install-dragon.sh
 }
 
@@ -116,3 +116,5 @@ install_common_configuration
 install_gtklock
 install_dragon
 ask_install "Do you want to install additional configuration?" && install_additional_configuration
+
+echo "Installation done! :)"
