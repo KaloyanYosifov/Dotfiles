@@ -33,7 +33,8 @@ function install_packages {
     sudo dnf groupinstall -y "Development Tools"
     sudo dnf install -y neovim zsh g++ fzf apfs-fuse xclip ripgrep irssi copyq sway waybar alacritty \
         jetbrains-mono-fonts-all wlsunset bemenu mako htop librewolf feh qrencode ansible helm kubernetes-client \
-        keepassxc signal-desktop brave-browser brave-keyring zathura mpv git-crypt go perl-Image-ExifTool
+        keepassxc signal-desktop brave-browser brave-keyring zathura mpv git-crypt go perl-Image-ExifTool \
+        utils-linux-user
 
     # Install bitwarden
     sudo dnf install -y <<< curl https://github.com/bitwarden/clients/releases/download/desktop-v2023.7.1/Bitwarden-2023.7.1-x86_64.rpm
@@ -103,6 +104,12 @@ function install_dragon {
     $SCRIPT_DIR/install-dragon.sh
 }
 
+function change_to_zsh_shell {
+    echo "Changing to zsh shell for user"
+    sudo chsh -s /bin/zsh $(whoami)
+    echo "Done! You will have to logout for it to take effect"
+}
+
 sudo dnf install -y dnf-plugins-core
 add_repos
 install_packages
@@ -116,5 +123,6 @@ install_common_configuration
 install_gtklock
 install_dragon
 ask_install "Do you want to install additional configuration?" && install_additional_configuration
+change_to_zsh_shell
 
 echo "Installation done! :)"
