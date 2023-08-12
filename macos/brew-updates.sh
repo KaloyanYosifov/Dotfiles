@@ -61,7 +61,7 @@ brew install insomnia \
     bitwarden
 
 
-brew install go pidof lua rg copyq irssi fzf abseil act adns \
+brew install pidof lua rg copyq irssi fzf abseil act adns \
     aom apr apr-util argon2 aspell assimp augeas autoconf automake aws-elasticbeanstalk \
     awscli bdw-gc berkeley-db bfg binutils blueutil boost c-ares ca-certificates cairo \
     cjson cmake cmocka composer coreutils cscope curl dbus dex2jar dialog \
