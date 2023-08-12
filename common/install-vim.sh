@@ -9,7 +9,7 @@ if [ -d $NVIM_DIR ]; then
     rm -rf $NVIM_DIR
 fi
 mkdir -p $NVIM_DIR
-mkdir $HOME/.vim/projects
+mkdir -p $HOME/.vim/projects
 
 git clone https://github.com/KaloyanYosifov/neovim-config $NVIM_DIR
 
