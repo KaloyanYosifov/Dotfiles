@@ -20,6 +20,7 @@ $SCRIPT_DIR/brew-updates.sh
 # Install common configurations
 $PARENT_DIR/common/config/install.sh
 $PARENT_DIR/common/link-custom-binaries.sh
+$PARENT_DIR/common/install-common-binaries.sh
 
 echo "Do you want to install additional configuration? y/n"
 read install_additional

@@ -33,7 +33,7 @@ function install_packages {
     sudo dnf groupinstall -y "Development Tools"
     sudo dnf install -y neovim zsh g++ fzf apfs-fuse xclip ripgrep irssi copyq sway waybar alacritty \
         jetbrains-mono-fonts-all wlsunset bemenu mako htop librewolf feh qrencode ansible helm kubernetes-client \
-        keepassxc signal-desktop brave-browser brave-keyring zathura mpv git-crypt
+        keepassxc signal-desktop brave-browser brave-keyring zathura mpv git-crypt go
 
     # Install bitwarden
     sudo dnf install -y <<< curl https://github.com/bitwarden/clients/releases/download/desktop-v2023.7.1/Bitwarden-2023.7.1-x86_64.rpm
@@ -78,6 +78,11 @@ function install_common_configuration {
     $PARENT_DIR/common/link-custom-binaries.sh
 }
 
+function install_common_binaries {
+    echo "Installing common binaries!"
+    $PARENT_DIR/common/install-common-binaries.sh
+}
+
 function install_additional_configuration {
     echo "Installing additional configuration"
     $PARENT_DIR/common/install-vim.sh
@@ -106,6 +111,7 @@ install_volta
 ask_install "Do you want to install syncthing?" && install_syncthing
 install_lf
 install_fonts
+install_common_binaries
 install_common_configuration
 install_gtklock
 install_dragon
