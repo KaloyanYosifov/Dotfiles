@@ -67,7 +67,22 @@ function install_tmux {
     echo "Tmux config installed"
 }
 
+function install_zsh_config {
+    echo "Installing zsh config"
+
+   ZSH_FOLDER_PATH=$HOME/.config/zsh
+
+    if [[ -d $ZSH_FOLDER_PATH ]]; then
+        rm -rf $ZSH_FOLDER_PATH
+    fi
+
+    ln -s $SCRIPT_DIR/zsh $ZSH_FOLDER_PATH
+
+    echo "ZSH config installed"
+}
+
 install_alacritty
 install_gitconfig
 install_lf
 install_tmux
+install_zsh_config
