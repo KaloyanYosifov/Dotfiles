@@ -109,15 +109,16 @@ function change_to_zsh_shell {
     echo "Done! You will have to logout for it to take effect"
 }
 
-function uninstall_gnome {
-    echo "Uninstalling gnome desktop"
-    sudo dnf -y group remove "gnome"
-    echo "Gnome desktop uninstalled"
-}
-
 function install_sway_login {
     echo "Installing sway login"
     echo '[ "$(tty)" = "/dev/tty1" ] && exec sway' >> $HOME/.zlogin
+}
+
+function cleanup {
+    echo "Running cleanup"
+    sudo dnf -y group remove gnome
+    sudo dnf -y remove firefox
+    echo "Cleanup done"
 }
 
 sudo dnf install -y dnf-plugins-core
@@ -134,7 +135,7 @@ install_gtklock
 install_dragon
 ask_install "Do you want to install additional configuration?" && install_additional_configuration
 change_to_zsh_shell
-uninstall_gnome
 install_sway_login
+cleanup
 
 echo "Installation done! :)"
