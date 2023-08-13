@@ -86,9 +86,7 @@ function install_common_binaries {
 
 function install_additional_configuration {
     echo "Installing additional configuration"
-    $PARENT_DIR/common/install-vim.sh
     $PARENT_DIR/common/install-ideavim.sh
-    $PARENT_DIR/common/install-zsh-config.sh
     $PARENT_DIR/common/install-rust.sh
 
     # Not so into Haskell for now

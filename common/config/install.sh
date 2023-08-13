@@ -78,7 +78,40 @@ function install_zsh_config {
 
     ln -s $SCRIPT_DIR/zsh $ZSH_FOLDER_PATH
 
+    function add_lead_zsh {
+        echo "#Load the lead sh" >> $HOME/.zshrc
+        echo "source \$HOME/.config/zsh/lead.sh" >> $HOME/.zshrc
+    }
+
+    [[ -f $HOME/.zshrc ]] || touch $HOME/.zshrc
+
+    cat $HOME/.zshrc | grep "source \$HOME/.config/zsh/lead.sh" || add_lead_zsh
+
     echo "ZSH config installed"
+}
+
+function install_neovim_config {
+    echo "Installing neovim config"
+
+   NVIM_FOLDER_PATH=$HOME/.config/nvim
+
+    if [[ -d $NVIM_FOLDER_PATH ]]; then
+        rm -rf $NVIM_FOLDER_PATH
+    fi
+
+    ln -s $SCRIPT_DIR/nvim $NVIM_FOLDER_PATH
+
+    mkdir -p $HOME/.vim/projects
+
+    echo "Installing Packer"
+    git clone --depth 1 https://github.com/wbthomason/packer.nvim $HOME/.local/share/nvim/site/pack/packer/start/packer.nvim || true
+
+    # install packages
+    nvim -c "PackerInstall"
+    # install chad deps
+    nvim -c "CHADdeps"
+
+    echo "NeoVim config installed"
 }
 
 install_alacritty
@@ -86,3 +119,4 @@ install_gitconfig
 install_lf
 install_tmux
 install_zsh_config
+install_neovim_config

@@ -27,9 +27,7 @@ read install_additional
 
 if [[ $install_additional == "y" ]] || [[ $install_additional == "yes" ]]; then
     echo "Installing additional configuration"
-    $PARENT_DIR/common/install-vim.sh
     $PARENT_DIR/common/install-ideavim.sh
-    $PARENT_DIR/common/install-zsh.sh
     $PARENT_DIR/common/install-rust.sh
 
     # Not so into Haskell for now
