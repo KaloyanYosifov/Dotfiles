@@ -6,16 +6,21 @@ HISTSIZE=10000000
 SAVEHIST=10000000
 HISTFILE="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/history"
 ZSH_DIR="$HOME/.config/zsh"
-PATH="$PATH"
+
+function not_in_path {
+    echo $PATH | grep -v "$1" 2>&1 > /dev/null
+}
 
 pathsToAdd=(
     "$HOME/.composer/vendor/bin"
     "$HOME/.local/bin"
     "$HOME/go/bin"
+    "$HOME/.volta/bin"
+    "$HOME/.cargo/bin"
 )
 
 for pathToAdd in $pathsToAdd; do
-    [ -d $pathToAdd ] && PATH="$PATH:$pathToAdd"
+    [ -d $pathToAdd ] && not_in_path $pathToAdd && PATH="$PATH:$pathToAdd"
 done
 
 export HOMEBREW_NO_AUTO_UPDATE=1
