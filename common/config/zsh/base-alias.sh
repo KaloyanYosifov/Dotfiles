@@ -9,6 +9,10 @@ case "${unameOut}" in
     *)          machine="UNKNOWN:${unameOut}"
 esac
 
+function command_exists {
+    command -v $1 2>&1 > /dev/null
+}
+
 alias ll="ls -laGh"
 
 #github
@@ -44,8 +48,7 @@ alias unquarantine="sudo xattr -rd com.apple.quarantine"
 localCordova="./node_modules/.bin/cordova"
 alias cordova="$(if [ -f "$localCordova" ]; then echo "$localCordova"; else echo "cordova"; fi)"
 
-which nvim 2>&1 > /dev/null
-
+command_exists nvim
 if [ $? -eq 0 ]; then
     alias vim="nvim"
 fi
@@ -55,7 +58,7 @@ git config --global alias.co checkout
 git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias nope="git reset --hard"
 
-if [[ $machine == "Mac" ]]; then
+if [ $machine = "Mac" ]; then
     alias dappv="sudo spctl --master-disable"
     alias eappv="sudo spctl --master-enable"
 fi
@@ -64,33 +67,33 @@ export EDITOR="$(which vim)"
 export VISUAL="$(which vim)"
 
 # use tldr if we have it and run man command
-command -v tldr 2>&1 > /dev/null
-
+command_exists tldr
 if [ $? -eq 0 ]; then
     alias man="tldr"
 fi
 
 # use rg if we have it
-command -v rg 2>&1 > /dev/null
-if [[ $? -eq 0 ]]; then
+command_exists rg
+if [ $? -eq 0 ]; then
     alias grep="rg"
 fi
 
 COPYQ_INITIALIZED=0
-command -v copyq > /dev/null
-if [[ $? == 0 ]]; then
+command_exists copyq
+if [ $? -eq 0 ]; then
     alias pbcopy="tee >( copyq add - ) | copyq copy -"
     alias pbpaste="copyq read 0"
     COPYQ_INITIALIZED=1
 fi
 
-which xclip 2>&1 > /dev/null
-if [[ $? == 0 ]] && [[ COPYQ_INITIALIZED -ne 1 ]]; then
+command_exists xclip
+if [[ $? -eq 0 ]] && [[ COPYQ_INITIALIZED -ne 1 ]]; then
     alias xclip="xclip -selection clipboard"
     alias pbcopy="xclip"
 fi
 
-if [[ $machine == "Linux" ]]; then
+if [ $machine = "Linux" ]; then
     alias check-temp='head -n 1 /sys/class/thermal/thermal_zone0/temp | xargs -I{} awk "BEGIN {printf \"%.2f\n\", {}/1000}"'
     alias check-cpus="watch -n 1 'grep \"^[c]pu MHz\" /proc/cpuinfo'"
+    command_exists qalc && alias calc="qalc"
 fi
