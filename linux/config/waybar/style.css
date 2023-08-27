@@ -68,6 +68,9 @@ button:hover {
 #idle_inhibitor,
 #scratchpad,
 #custom-mullvad,
+#custom-crypto-btc,
+#custom-crypto-eth,
+#custom-crypto-xmr,
 #mpd {
     color: #fff;
 }
@@ -86,6 +89,9 @@ button:hover {
 #idle_inhibitor,
 #scratchpad,
 #mpd,
+#custom-crypto-btc,
+#custom-crypto-eth,
+#custom-crypto-xmr,
 #custom-mullvad {
     padding: 0 15px;
 }
@@ -181,6 +187,18 @@ label:focus {
     padding: 0 5px;
     margin: 0 5px;
     min-width: 16px;
+}
+
+#custom-crypto-btc {
+    background: #F7931A;
+}
+
+#custom-crypto-eth {
+    background: #12100B;
+}
+
+#custom-crypto-xmr {
+    background: #FF6600;
 }
 
 #custom-mullvad {

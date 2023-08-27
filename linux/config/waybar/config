@@ -2,16 +2,34 @@
     "layer": "bottom",
     "height": 25,
     "modules-left": ["sway/workspaces", "sway/mode"],
-    "modules-right": ["custom/mullvad", "network", "pulseaudio", "temperature", "memory", "cpu", "battery", "clock", "tray"],
+    "modules-right": ["custom/crypto-btc", "custom/crypto-eth", "custom/crypto-xmr", "custom/mullvad", "network", "pulseaudio", "temperature", "memory", "cpu", "battery", "clock", "tray"],
     "sway/window": {
         "max-length": 50
     },
     "custom/mullvad": {
         "format": "{} ",
-        "exec": "mullvad status",
-        "exec-if": "which mullvad",
+        "exec": "mullvad status | cut -d' ' -f 5,6 || echo 'Disconnected'",
+        "exec-if": "command -v mullvad",
         "restart-interval": 5,
         "on-click": "gtk-launch mullvad-vpn.desktop"
+    },
+    "custom/crypto-btc": {
+        "format": " {}",
+        "exec": "crypto_price btc",
+        "exec-if": "command -v crypto_price",
+        "restart-interval": 5
+    },
+    "custom/crypto-eth": {
+        "format": "󰡪 {}",
+        "exec": "crypto_price eth",
+        "exec-if": "command -v crypto_price",
+        "restart-interval": 5
+    },
+    "custom/crypto-xmr": {
+        "format": "󰗹 {}",
+        "exec": "crypto_price xmr",
+        "exec-if": "command -v crypto_price",
+        "restart-interval": 5
     },
     "temperature": {
         "critical-threshold": 80,

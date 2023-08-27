@@ -1,0 +1,32 @@
+#!/bin/sh
+
+[ -z "$1" ] && echo "No argument passed" && exit 1
+
+url="rate.sx"
+target="$1"
+denom="eur"
+name="$(echo $target | tr '[:lower:]' '[:upper:]')"
+
+dir="$HOME/.cache/crypto-prices"
+pricefile="$dir/$target-$denom"
+filestat="$(stat -c %x "$pricefile" 2> /dev/null)"
+current_price=$(cat $pricefile 2> /dev/null || echo)
+
+[ -d "$dir" ] || mkdir -p "$dir"
+
+updateprice() { 
+    curl -sf -m 1 --fail-early $denom.$url/{1$target} --output "$pricefile" \
+        && printf "%i" $(cat $pricefile) 2> /dev/null > $pricefile
+    
+    current_price=$(cat $pricefile)
+}
+
+[ "${filestat%% *}" != "$(date '+%Y-%m-%d')" ] && updateme="1"
+[ -z "$current_price" ] && updateme="1"
+
+[ -n "$updateme" ] &&
+	updateprice "$target" &&
+	notify-send "Price update for $name complete." "Price is now €$current_price"
+
+
+echo "€$current_price"
