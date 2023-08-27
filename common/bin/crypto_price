@@ -2,6 +2,7 @@
 
 [ -z "$1" ] && echo "No argument passed" && exit 1
 
+HOUR_IN_SECONDS=3600
 url="rate.sx"
 target="$1"
 denom="eur"
@@ -9,19 +10,20 @@ name="$(echo $target | tr '[:lower:]' '[:upper:]')"
 
 dir="$HOME/.cache/crypto-prices"
 pricefile="$dir/$target-$denom"
-filestat="$(stat -c %x "$pricefile" 2> /dev/null)"
+last_access="$(stat -c %X "$pricefile" 2> /dev/null || echo 0)"
 current_price=$(cat $pricefile 2> /dev/null || echo)
 
 [ -d "$dir" ] || mkdir -p "$dir"
 
 updateprice() { 
-    curl -sf -m 1 --fail-early $denom.$url/{1$target} --output "$pricefile" \
-        && printf "%i" $(cat $pricefile) 2> /dev/null > $pricefile
-    
-    current_price=$(cat $pricefile)
+    current_price=$(curl -sf -m 10 --fail-early $denom.$url/{1$target} | xargs printf "%i" 2> /dev/null)
+
+    ([ -n $current_price ] && [ $current_price -gt 0 ]) && echo $current_price > $pricefile
 }
 
-[ "${filestat%% *}" != "$(date '+%Y-%m-%d')" ] && updateme="1"
+seconds_since_last_update=$(echo $(( $(date '+%s') - ${last_access} )))
+
+[ $seconds_since_last_update -gt $HOUR_IN_SECONDS ] && updateme="1"
 [ -z "$current_price" ] && updateme="1"
 
 [ -n "$updateme" ] &&

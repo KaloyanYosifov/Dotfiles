@@ -17,19 +17,19 @@
         "format": " {}",
         "exec": "crypto_price btc",
         "exec-if": "command -v crypto_price",
-        "restart-interval": 5
+        "restart-interval": 300
     },
     "custom/crypto-eth": {
         "format": "󰡪 {}",
         "exec": "crypto_price eth",
         "exec-if": "command -v crypto_price",
-        "restart-interval": 5
+        "restart-interval": 300
     },
     "custom/crypto-xmr": {
         "format": "󰗹 {}",
         "exec": "crypto_price xmr",
         "exec-if": "command -v crypto_price",
-        "restart-interval": 5
+        "restart-interval": 300
     },
     "temperature": {
         "critical-threshold": 80,
