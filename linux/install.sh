@@ -41,7 +41,9 @@ function install_packages {
 
     # install mullvad
     sudo dnf install -y <<< curl https://mullvad.net/media/app/MullvadVPN-2023.4_x86_64.rpm
-
+    
+    # Install glow
+    sudo dnf install -y <<< curl -L https://github.com/charmbracelet/glow/releases/download/v1.5.1/glow-1.5.1.x86_64.rpm
 }
 
 function init_virtualization {

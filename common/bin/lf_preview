@@ -17,6 +17,7 @@ case "$1" in
 *.docx) docx2txt "$1" - ;;
 *.doc) antiword "$1" ;;
 *.csv) cat "$1" | sed s/,/\\n/g ;;
+*.md) glow "$1" ;;
 *.wav | *.mp3 | *.flac | *.m4a | *.wma | *.ape | *.ac3 | *.og[agx] | *.spx | *.opus | *.as[fx] | *.jpg | *.png) exiftool "$1" ;;
 *) cat "$1" ;;
 esac
