@@ -3,9 +3,7 @@
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 function delete_folder {
-    if [ -d $1 ]; then
-        rm -rf $1
-    fi
+    [ -d $1 ] && rm -rf $1
 }
 
 function install_sway {
@@ -26,7 +24,13 @@ function install_waybar {
     echo "Waybar config installed"
 }
 
+function install_gtk {
+    delete_folder $HOME/.config/gtk-3.0 
+    ln -s $SCRIPT_DIR/gtk-3.0 $HOME/.config/gtk-3.0
+    echo "GTK 3.0 config installed"
+}
 
 install_sway
 install_mako
 install_waybar
+install_gtk
