@@ -81,7 +81,7 @@ input "1133:45108:Logitech_MX_Master_3S" {
 input "type:keyboard" {
   repeat_delay 200
   repeat_rate 50
-  xkb_layout us
+  xkb_layout "us, de, bg(phonetic)"
 }
 #
 # You can get the names of your inputs by running: swaymsg -t get_inputs
@@ -91,6 +91,9 @@ input "type:keyboard" {
 #
 # Basics:
 #
+    # Change keyboard layout
+    bindsym $mod+Ctrl+Space exec swaymsg input "type:keyboard" xkb_switch_layout next
+
     # Start a terminal
     bindsym $mod+Return exec $term
 

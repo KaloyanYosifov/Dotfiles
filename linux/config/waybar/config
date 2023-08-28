@@ -2,7 +2,7 @@
     "layer": "bottom",
     "height": 25,
     "modules-left": ["sway/workspaces", "sway/mode"],
-    "modules-right": ["custom/crypto-btc", "custom/crypto-eth", "custom/crypto-xmr", "custom/mullvad", "network", "pulseaudio", "temperature", "memory", "cpu", "battery", "clock", "tray"],
+    "modules-right": ["custom/crypto-btc", "custom/crypto-eth", "custom/crypto-xmr", "custom/mullvad", "sway/language", "network", "pulseaudio", "temperature", "memory", "cpu", "battery", "clock", "tray"],
     "sway/window": {
         "max-length": 50
     },
@@ -30,6 +30,10 @@
         "exec": "crypto_price xmr",
         "exec-if": "command -v crypto_price",
         "restart-interval": 300
+    },
+    "sway/language": {
+        "format": "{short}",
+        "on-click": "swaymsg input type:keyboard xkb_switch_layout next"
     },
     "temperature": {
         "critical-threshold": 80,
