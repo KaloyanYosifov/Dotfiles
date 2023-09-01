@@ -95,5 +95,6 @@ fi
 if [ $machine = "Linux" ]; then
     alias check-temp='head -n 1 /sys/class/thermal/thermal_zone0/temp | xargs -I{} awk "BEGIN {printf \"%.2f\n\", {}/1000}"'
     alias check-cpus="watch -n 1 'grep \"^[c]pu MHz\" /proc/cpuinfo'"
+    alias run-ansible="function run_ansible { ansible --ask-become-pass --become -m \"ansible.builtin.command\" -a \"\$1\" \$2}; run_ansible"
     command_exists qalc && alias calc="qalc"
 fi
