@@ -1,0 +1,32 @@
+#! /bin/bash
+
+[ $# != 2 ] && echo "Please enter ticker and date" && exit 1 
+
+CACHE_FOLDER="$HOME/.cache/stocks-prices"
+MONTH_IN_SECONDS=2592000
+ticker="$1"
+date="$2"
+cache_file="$CACHE_FOLDER/$ticker-$date"
+api_key_file="$CACHE_FOLDER/apikey.txt"
+apikey=$(cat $api_key_file || echo)
+last_access="$(stat -c %X "$cache_file" 2> /dev/null || echo 0)"
+last_close=$(cat $cache_file 2> /dev/null || echo)
+
+[ -z $apikey ] && echo "Please create and add apikey to $api_key_file" && exit 1
+
+[ ! -d $CACHE_FOLDER ] && mkdir -p $CACHE_FOLDER 
+
+function update_ticker_data {
+    ticker_data=$(curl "https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=$ticker&apikey=$apikey")
+    last_close=$(echo $ticker_data | jq '.["Monthly Time Series"]["'$date'"]["4. close"]' | bc)
+    [ $last_close != 0 ] && echo $last_close > $cache_file
+}
+
+seconds_since_last_update=$(echo $(( $(date '+%s') - ${last_access} )))
+
+[ $seconds_since_last_update -gt $MONTH_IN_SECONDS ] && updateme="1"
+[ -z "$last_close" ] && updateme="1"
+
+[ -n "$updateme" ] && update_ticker_data
+
+echo "Close for ticker $1 on $2 is: $last_close"
