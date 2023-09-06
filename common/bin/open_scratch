@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+scratches_folder=$HOME/.cache/scratches
+
+mkdir -p $scratches_folder
+
+if [ $# = 1 ]; then
+    selected="$1"
+else
+    selected="$(ls $HOME/.cache/scratches | fzf --bind=enter:replace-query+print-query | tr ' ' '_')"
+fi
+
+namespace="scratches"
+
+[ -z $selected ] && echo "No scratch found :(" && exit 1
+
+vim $scratches_folder/$selected
