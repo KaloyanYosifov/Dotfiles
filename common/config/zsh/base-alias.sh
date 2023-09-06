@@ -20,7 +20,8 @@ alias gs="git status"
 alias delLGB="git branch --merged | egrep -v \"(^\*|master|main)\" | xargs git branch -d"
 
 #Laravel
-alias art="php artisan"
+alias sail="[ -f ./vendor/bin/sail ] && ./vendor/bin/sail"
+alias art="[ -f ./artisan ] && php artisan"
 
 # php
 alias phpstan="XDEBUG_MODE=off ./vendor/bin/phpstan analyse"
@@ -43,6 +44,9 @@ alias gc="git commit -m"
 alias arc="arduino-cli"
 alias rust-arduino="cargo generate --git https://github.com/Rahix/avr-hal-template.git"
 alias unquarantine="sudo xattr -rd com.apple.quarantine"
+
+# K8s
+alias kubeExec="function __kube_exec { [ \$# -ne 2 ] && echo 'Usage: kubeExec {namespace} {pod_name}' || k exec -it -n \$1 \$(k get pods -n \$1 | grep \$2 | head -n1 | cut -d' ' -f 1) -- bash }; __kube_exec"
 
 # cordova
 localCordova="./node_modules/.bin/cordova"
