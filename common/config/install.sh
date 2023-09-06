@@ -3,11 +3,11 @@
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 function install_alacritty {
+    echo "Installing alacritty"
+
     ALACRITTY_PATH=$HOME/.config/alacritty 
 
-    if [[ -d $ALACRITTY_PATH ]]; then
-        rm -rf $ALACRITTY_PATH
-    fi
+    [ -d $ALACRITTY_PATH ] && rm -rf $ALACRITTY_PATH
 
     ln -s $SCRIPT_DIR/alacritty $ALACRITTY_PATH
     echo "Alacritty config installed"
@@ -44,9 +44,7 @@ function install_lf {
 
     LF_PATH=$HOME/.config/lf
 
-    if [[ -d $LF_PATH ]]; then
-        rm -rf $LF_PATH
-    fi
+    [ -d $LF_PATH ] && rm -rf $LF_PATH
 
     ln -s $SCRIPT_DIR/lf $LF_PATH
 
@@ -56,11 +54,9 @@ function install_lf {
 function install_tmux {
     echo "Installing tmux config"
 
-   TMUX_PATH=$HOME/.config/tmux
+    TMUX_PATH=$HOME/.config/tmux
 
-    if [[ -d $TMUX_PATH ]]; then
-        rm -rf $TMUX_PATH
-    fi
+    [ -d $TMUX_PATH ] && rm -rf $TMUX_PATH
 
     ln -s $SCRIPT_DIR/tmux $TMUX_PATH
 
@@ -70,11 +66,9 @@ function install_tmux {
 function install_zsh_config {
     echo "Installing zsh config"
 
-   ZSH_FOLDER_PATH=$HOME/.config/zsh
+    ZSH_FOLDER_PATH=$HOME/.config/zsh
 
-    if [[ -d $ZSH_FOLDER_PATH ]]; then
-        rm -rf $ZSH_FOLDER_PATH
-    fi
+    [ -d $ZSH_FOLDER_PATH ] && rm -rf $ZSH_FOLDER_PATH
 
     ln -s $SCRIPT_DIR/zsh $ZSH_FOLDER_PATH
 
@@ -93,11 +87,9 @@ function install_zsh_config {
 function install_neovim_config {
     echo "Installing neovim config"
 
-   NVIM_FOLDER_PATH=$HOME/.config/nvim
+    NVIM_FOLDER_PATH=$HOME/.config/nvim
 
-    if [[ -d $NVIM_FOLDER_PATH ]]; then
-        rm -rf $NVIM_FOLDER_PATH
-    fi
+    [ -d $NVIM_FOLDER_PATH ] && rm -rf $NVIM_FOLDER_PATH
 
     ln -s $SCRIPT_DIR/nvim $NVIM_FOLDER_PATH
 
@@ -114,9 +106,22 @@ function install_neovim_config {
     echo "NeoVim config installed"
 }
 
+function install_newsboat {
+    echo "Installing newsboat config"
+
+   NEWSBOAT_FOLDER_PATH=$HOME/.config/newsboat
+
+   [ -d $NEWSBOAT_FOLDER_PATH ] && rm -rf $NEWSBOAT_FOLDER_PATH
+
+    ln -s $SCRIPT_DIR/newsboat $NEWSBOAT_FOLDER_PATH
+
+    echo "Newsboat config installed"
+}
+
 install_alacritty
 install_gitconfig
 install_lf
 install_tmux
 install_zsh_config
 install_neovim_config
+install_newsboat

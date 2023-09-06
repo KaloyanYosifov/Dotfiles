@@ -2,9 +2,14 @@
 # ENVIRONMENTS #
 ###########################################################
 
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export BROWSER="brave-browser"
+
 HISTSIZE=10000000
 SAVEHIST=10000000
-HISTFILE="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/history"
+HISTFILE="$XDG_CACHE_HOME/zsh/history"
 ZSH_DIR="$HOME/.config/zsh"
 
 function not_in_path {
