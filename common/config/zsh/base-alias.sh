@@ -67,9 +67,6 @@ if [ $machine = "Mac" ]; then
     alias eappv="sudo spctl --master-enable"
 fi
 
-export EDITOR="$(which vim)"
-export VISUAL="$(which vim)"
-
 # use tldr if we have it and run man command
 command_exists tldr
 if [ $? -eq 0 ]; then

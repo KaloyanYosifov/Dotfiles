@@ -2,10 +2,26 @@
 # ENVIRONMENTS #
 ###########################################################
 
+unameOut="$(uname -s)"
+case "${unameOut}" in
+    Linux*)     machine=Linux;;
+    Darwin*)    machine=Mac;;
+    CYGWIN*)    machine=Cygwin;;
+    MINGW*)     machine=MinGw;;
+    *)          machine="UNKNOWN:${unameOut}"
+esac
+
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
-export BROWSER="brave-browser"
+export NVIM_CONFIG="$HOME/.config/nvim"
+export HOMEBREW_NO_AUTO_UPDATE=1
+export VI_MODE_SET_CURSOR=true
+export GPG_TTY=$(tty)
+export EDITOR="nvim"
+export TERM=xterm-256color
+export EDITOR="$(which vim)"
+export VISUAL="$(which vim)"
 
 HISTSIZE=10000000
 SAVEHIST=10000000
@@ -28,12 +44,7 @@ for pathToAdd in $pathsToAdd; do
     [ -d $pathToAdd ] && not_in_path $pathToAdd && PATH="$PATH:$pathToAdd"
 done
 
-export HOMEBREW_NO_AUTO_UPDATE=1
-export VI_MODE_SET_CURSOR=true
-export NVIM_CONFIG=$HOME/.config/nvim
-export GPG_TTY=$(tty)
-export EDITOR="nvim"
-export TERM=xterm-256color
+[ $machine = "Mac" ] && export BROWSER="/Applications/Brave\ Browser.app/Contents/MacOS/Brave\ Browser" || export BROWSER="brave-browser"
 
 fpath=(/usr/local/share/zsh-completions $fpath)
 
