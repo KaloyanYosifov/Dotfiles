@@ -20,8 +20,6 @@ export VI_MODE_SET_CURSOR=true
 export GPG_TTY=$(tty)
 export EDITOR="nvim"
 export TERM=xterm-256color
-export EDITOR="$(which vim)"
-export VISUAL="$(which vim)"
 
 HISTSIZE=10000000
 SAVEHIST=10000000

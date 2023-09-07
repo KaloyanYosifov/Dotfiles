@@ -73,6 +73,9 @@ if [ $? -eq 0 ]; then
     alias man="tldr"
 fi
 
+export EDITOR="$(which vim)"
+export VISUAL="$(which vim)"
+
 # use rg if we have it
 command_exists rg
 if [ $? -eq 0 ]; then
