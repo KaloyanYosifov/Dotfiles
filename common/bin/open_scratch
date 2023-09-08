@@ -14,4 +14,6 @@ namespace="scratches"
 
 [ -z $selected ] && echo "No scratch found :(" && exit 1
 
-vim $scratches_folder/$selected
+file="$scratches_folder/$selected"
+command -v nvim 2>&1 /dev/null && nvim $file || vim $file
+
