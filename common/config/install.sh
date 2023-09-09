@@ -118,6 +118,18 @@ function install_newsboat {
     echo "Newsboat config installed"
 }
 
+function install_mpv {
+    echo "Installing mpv config"
+
+   MPV_FOLDER_PATH=$HOME/.config/mpv
+
+   [ -d $MPV_FOLDER_PATH ] && rm -rf $MPV_FOLDER_PATH
+
+    ln -s $SCRIPT_DIR/mpv $MPV_FOLDER_PATH
+
+    echo "MPV config installed"
+}
+
 install_alacritty
 install_gitconfig
 install_lf
@@ -125,3 +137,4 @@ install_tmux
 install_zsh_config
 install_neovim_config
 install_newsboat
+install_mpv
