@@ -4,7 +4,7 @@
 	log = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 [user]
 	name = KaloyanYosifov
-	email = kaloqn665@gmail.com
+	email = kyosifovs@proton.me
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
