@@ -1,6 +1,6 @@
 auto-reload yes
 
-browser `echo $BROWSER`
+browser "`echo $BROWSER`"
 external-url-viewer "urlscan -dc -r 'linkhandler {}'"
 download-path `echo $XDG_DATA_HOME`/newsboat/podcasts
 
@@ -46,4 +46,4 @@ highlight article ":.*\\(embedded flash\\)$" magenta default
 
 # Macros
 
-macro 1 set browser mpv; one; set browser `echo $BROWSER` # macro to listen to podcasts 
+macro 1 set browser mpv; one; set browser "`echo $BROWSER`" # macro to listen to podcasts 
