@@ -14,18 +14,11 @@ fi
 selected_name=$(basename "$selected" | tr . _)
 tmux_running=$(pgrep tmux)
 
-if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
-    tmux new-session -s "$selected_name" -c "$selected"
+[ -z $TMUX ] && [ -z $tmux_running ] && tmux new-session -s "$selected_name" -c "$selected" && exit 0
 
-    exit 0
-fi
+# check if session already exists
+# and if not create a new one
+# This is when we are in tmux
+tmux has-session -t "$selected_name" 2>/dev/null || tmux new-session -ds $selected_name -c $selected
 
-if ! tmux has-session -t "$selected_name" 2>/dev/null; then
-    tmux new-session -ds $selected_name -c $selected
-fi
-
-if [[ -z $TMUX ]]; then
-    tmux at -t $selected_name
-else
-    tmux switch-client -t $selected_name
-fi
+[ -z $TMUX ] && tmux at -t $selected_name || tmux switch-client -t $selected_name
