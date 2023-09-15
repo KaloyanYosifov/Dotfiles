@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+[ $# -ne 0 ] && echo "Please do not pass any paramters" && exit 1
+
+session=$(tmux ls | cut -d':' -f1 | fzf)
+
+[ -z $session ] && echo "No session selected" && exit 2
+
+tmux at -t $session
+
+[ -z $TMUX ] && tmux at -t $session || tmux switch-client -t $session
