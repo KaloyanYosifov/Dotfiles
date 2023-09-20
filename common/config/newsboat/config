@@ -1,6 +1,7 @@
 auto-reload yes
 
 browser "`echo $BROWSER`"
+player mpv
 external-url-viewer "urlscan -dc -r 'linkhandler {}'"
 download-path `echo $XDG_DATA_HOME`/newsboat/podcasts
 
