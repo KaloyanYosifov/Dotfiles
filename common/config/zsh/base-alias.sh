@@ -46,7 +46,9 @@ alias rust-arduino="cargo generate --git https://github.com/Rahix/avr-hal-templa
 alias unquarantine="sudo xattr -rd com.apple.quarantine"
 
 # K8s
+#k config get-contexts | tr -s ' '  | cut -d ' ' -f2 | tail -n +2
 alias kubeExec="function __kube_exec { [ \$# -ne 2 ] && echo 'Usage: kubeExec {namespace} {pod_name}' || k exec -it -n \$1 \$(k get pods -n \$1 | grep \$2 | head -n1 | cut -d' ' -f 1) -- bash }; __kube_exec"
+alias kubeContext="function __kube_context { kubectl config get-contexts | tr -s ' ' | tail -n +2 | cut -d ' ' -f2 | fzf | xargs kubectl config use-context }; __kube_context"
 
 # cordova
 localCordova="./node_modules/.bin/cordova"
