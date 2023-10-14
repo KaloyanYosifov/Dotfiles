@@ -234,5 +234,8 @@ bar {
     swaybar_command waybar
 }
 
+# Set CopyQ to be a floating window
+for_window [app_id="copyq"] floating enable, resize set 800 800
+
 include $HOME/.config/sway-custom/*
 include /etc/sway/config.d/*

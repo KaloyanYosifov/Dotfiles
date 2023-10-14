@@ -89,11 +89,12 @@ command_exists copyq
 if [ $? -eq 0 ]; then
     alias pbcopy="tee >( copyq add - ) | copyq copy -"
     alias pbpaste="copyq read 0"
+    alias clear_clipboard="seq 0 100 | xargs copyq remove"
     COPYQ_INITIALIZED=1
 fi
 
 command_exists xclip
-if [[ $? -eq 0 ]] && [[ COPYQ_INITIALIZED -ne 1 ]]; then
+if [ $? -eq 0 ] && [ $COPYQ_INITIALIZED -ne 1 ]; then
     alias xclip="xclip -selection clipboard"
     alias pbcopy="xclip"
 fi
