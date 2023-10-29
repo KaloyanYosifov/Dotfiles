@@ -17,19 +17,22 @@
         "format": " {}",
         "exec": "crypto_price btc",
         "exec-if": "command -v crypto_price",
-        "restart-interval": 300
+        "restart-interval": 300,
+        "on-cick": "brave-browser https://www.coingecko.com/en/coins/bitcoin"
     },
     "custom/crypto-eth": {
         "format": "󰡪 {}",
         "exec": "crypto_price eth",
         "exec-if": "command -v crypto_price",
-        "restart-interval": 300
+        "restart-interval": 300,
+        "on-cick": "brave-browser https://www.coingecko.com/en/coins/ethereum"
     },
     "custom/crypto-xmr": {
         "format": "󰗹 {}",
         "exec": "crypto_price xmr",
         "exec-if": "command -v crypto_price",
-        "restart-interval": 300
+        "restart-interval": 300,
+        "on-cick": "brave-browser https://www.coingecko.com/en/coins/monero"
     },
     "sway/language": {
         "format": "{short}",
