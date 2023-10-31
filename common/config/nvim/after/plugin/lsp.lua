@@ -5,6 +5,7 @@ local lsps_to_install = {
     'lua_ls',
     'jsonls',
     'yamlls',
+    'volar'
 }
 
 local exists = os.execute('command -v composer > /dev/null')
