@@ -20,7 +20,7 @@ alias gs="git status"
 alias delLGB="git branch --merged | egrep -v \"(^\*|master|main)\" | xargs git branch -d"
 
 #Laravel
-alias sail="[ -f ./vendor/bin/sail ] && (./vendor/bin/sail || true) || docker compose"
+alias sail="function __run_sail { [ -f ./vendor/bin/sail ] && (./vendor/bin/sail \$@ || true) || docker compose \$@ }; __run_sail"
 alias art="[ -f ./artisan ] && php artisan"
 
 # php
