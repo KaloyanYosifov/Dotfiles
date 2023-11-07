@@ -17,6 +17,7 @@ alias ll="ls -laGh"
 
 #github
 alias gs="git status"
+alias gc="git branch | fzf | xargs git checkout"
 alias delLGB="git branch --merged | egrep -v \"(^\*|master|main)\" | xargs git branch -d"
 
 #Laravel
@@ -40,7 +41,6 @@ alias stack="TERM=dumb stack"
 alias tmux="tmux"
 alias k="kubectl"
 alias hls="haskell-language-server-wrapper"
-alias gc="git commit -m"
 alias arc="arduino-cli"
 alias rust-arduino="cargo generate --git https://github.com/Rahix/avr-hal-template.git"
 alias unquarantine="sudo xattr -rd com.apple.quarantine"
