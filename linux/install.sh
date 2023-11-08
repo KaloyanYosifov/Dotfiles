@@ -35,7 +35,7 @@ function install_packages {
         jetbrains-mono-fonts-all wlsunset bemenu mako htop librewolf feh qrencode ansible helm kubernetes-client \
         keepassxc signal-desktop brave-browser brave-keyring zathura mpv git-crypt perl-Image-ExifTool \
         util-linux-user tar tmux alsa-utils mupdf zathura-pdf-mupdf rsync pinentry bind-utils tcpdump qalculate \
-        newsboat clang
+        newsboat clang yubikey-manager yubikey-manager-qt
 
     # Install bitwarden
     sudo dnf install -y <<< curl https://github.com/bitwarden/clients/releases/download/desktop-v2023.7.1/Bitwarden-2023.7.1-x86_64.rpm
