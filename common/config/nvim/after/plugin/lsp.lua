@@ -5,7 +5,8 @@ local lsps_to_install = {
     'lua_ls',
     'jsonls',
     'yamlls',
-    'volar'
+    'volar',
+    'tailwindcss'
 }
 
 local exists = os.execute('command -v composer > /dev/null')
