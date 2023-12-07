@@ -37,14 +37,26 @@ function install_packages {
         util-linux-user tar tmux alsa-utils mupdf zathura-pdf-mupdf rsync pinentry bind-utils tcpdump qalculate \
         newsboat clang yubikey-manager yubikey-manager-qt
 
-    # Install bitwarden
-    sudo dnf install -y <<< curl https://github.com/bitwarden/clients/releases/download/desktop-v2023.7.1/Bitwarden-2023.7.1-x86_64.rpm
+    echo "Installing additional packages that are not in official repos"
+    echo "-----------------------------------------------------------"
+    echo ""
 
-    # install mullvad
-    sudo dnf install -y <<< curl https://mullvad.net/media/app/MullvadVPN-2023.5_x86_64.rpm
-    
-    # Install glow
-    sudo dnf install -y <<< curl -L https://github.com/charmbracelet/glow/releases/download/v1.5.1/glow-1.5.1.x86_64.rpm
+    non_repo_packages=(
+        "https://github.com/bitwarden/clients/releases/download/desktop-v2023.7.1/Bitwarden-2023.7.1-x86_64.rpm"
+        "https://mullvad.net/media/app/MullvadVPN-2023.5_x86_64.rpm"
+        "https://github.com/charmbracelet/glow/releases/download/v1.5.1/glow-1.5.1.x86_64.rpm"
+    )
+    package_names=()
+
+    printf '%s\n' "${non_repo_packages[@]}" | parallel -u curl -O -L
+
+    for package in "${non_repo_packages[@]}"; do
+        package_names+=("$SCRIPT_DIR/$(basename $package)")
+    done
+
+    sudo dnf install -y ${package_names[@]}
+
+    rm ${package_names[@]}
 }
 
 function init_virtualization {
