@@ -131,6 +131,8 @@ function cleanup {
     echo "Running cleanup"
     sudo dnf -y group remove gnome
     sudo dnf -y remove firefox
+    sudo systemctl disable gdm
+    sudo systemctl stop gdm
     echo "Cleanup done"
 }
 
@@ -150,5 +152,6 @@ ask_install "Do you want to install additional configuration?" && install_additi
 change_to_zsh_shell
 install_sway_login
 cleanup
+reboot
 
 echo "Installation done! :)"
