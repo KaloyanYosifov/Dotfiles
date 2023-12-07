@@ -15,4 +15,5 @@ cd $SCRIPT_DIR \
     && meson install -C builddir \
     && cd .. \
     && rm -rf gtklock \
+    && sudo mv /usr/local/etc/pam.d/gtklock /etc/pam.d/gtklock \
     || rm -rf gtklock
