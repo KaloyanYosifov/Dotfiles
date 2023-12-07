@@ -35,7 +35,7 @@ function install_packages {
         jetbrains-mono-fonts-all wlsunset bemenu mako htop librewolf feh qrencode ansible helm kubernetes-client \
         keepassxc signal-desktop brave-browser brave-keyring zathura mpv git-crypt perl-Image-ExifTool \
         util-linux-user tar tmux alsa-utils mupdf zathura-pdf-mupdf rsync pinentry bind-utils tcpdump qalculate \
-        newsboat clang yubikey-manager yubikey-manager-qt
+        newsboat clang yubikey-manager yubikey-manager-qt parallel
 
     echo "Installing additional packages that are not in official repos"
     echo "-----------------------------------------------------------"
@@ -43,7 +43,7 @@ function install_packages {
 
     non_repo_packages=(
         "https://github.com/bitwarden/clients/releases/download/desktop-v2023.7.1/Bitwarden-2023.7.1-x86_64.rpm"
-        "https://mullvad.net/media/app/MullvadVPN-2023.5_x86_64.rpm"
+        "https://mullvad.net/media/app/MullvadVPN-2023.6_x86_64.rpm"
         "https://github.com/charmbracelet/glow/releases/download/v1.5.1/glow-1.5.1.x86_64.rpm"
     )
     package_names=()
