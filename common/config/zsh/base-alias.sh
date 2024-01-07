@@ -44,6 +44,7 @@ alias hls="haskell-language-server-wrapper"
 alias arc="arduino-cli"
 alias rust-arduino="cargo generate --git https://github.com/Rahix/avr-hal-template.git"
 alias unquarantine="sudo xattr -rd com.apple.quarantine"
+alias crontab="VISUAL=vim EDITOR=vim crontab"
 
 # K8s
 #k config get-contexts | tr -s ' '  | cut -d ' ' -f2 | tail -n +2
