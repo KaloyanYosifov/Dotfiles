@@ -17,6 +17,7 @@ last_close=$(cat $cache_file 2> /dev/null || echo)
 [ ! -d $CACHE_FOLDER ] && mkdir -p $CACHE_FOLDER 
 
 function update_ticker_data {
+    # Date should be like 1999-12-31
     ticker_data=$(curl "https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=$ticker&apikey=$apikey")
     last_close=$(echo $ticker_data | jq '.["Monthly Time Series"]["'$date'"]["4. close"]' | bc)
     [ $last_close != 0 ] && echo $last_close > $cache_file
