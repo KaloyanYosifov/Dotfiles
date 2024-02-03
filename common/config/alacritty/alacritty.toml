@@ -1,0 +1,69 @@
+live_config_reload = true
+
+[colors]
+draw_bold_text_with_bright_colors = true
+
+[colors.bright]
+black = "0x000000"
+blue = "0x2f5af3"
+cyan = "0x3e953a"
+green = "0x3e953a"
+magenta = "0xa00095"
+red = "0xde3d35"
+white = "0xffffff"
+yellow = "0xd2b67b"
+
+[colors.normal]
+black = "0x000000"
+blue = "0x2f5af3"
+cyan = "0x3e953a"
+green = "0x3e953a"
+magenta = "0xa00095"
+red = "0xde3d35"
+white = "0xbbbbbb"
+yellow = "0xd2b67b"
+
+[colors.primary]
+background = "0xf8f8f8"
+foreground = "0x2a2b33"
+
+[font]
+size = 12
+
+[font.bold]
+family = "JetBrains Mono Nerd Font Mono"
+style = "Bold"
+
+[font.italic]
+family = "JetBrains Mono Nerd Font Mono"
+style = "Italic"
+
+[font.normal]
+family = "JetBrains Mono Nerd Font Mono"
+style = "Regular"
+
+[font.offset]
+x = 0
+y = 1
+
+[[keyboard.bindings]]
+action = "CreateNewWindow"
+key = "Return"
+mods = "Control"
+
+[scrolling]
+history = 5000
+
+[window]
+dynamic_padding = false
+decorations_theme_variant = "light"
+opacity = 1.0
+title = "Alacritty"
+
+[window.class]
+general = "Alacritty"
+instance = "Alacritty"
+
+[window.padding]
+x = 10
+y = 10
