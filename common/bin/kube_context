@@ -1,0 +1,34 @@
+#! /bin/bash
+
+contexts="$(kubectl config get-contexts -o=name)"
+CACHE_FOLDER="$HOME/.cache/kube_context_cache"
+DAY_IN_SECONDS=86400
+
+! [[ -d $CACHE_FOLDER ]] && mkdir -p $CACHE_FOLDER
+
+for context in $contexts; do
+    slugged_context=$(echo "$context" | sed 's/[^a-zA-Z0-9]/-/g' | tr '[:upper:]' '[:lower:]')
+    context_file="$CACHE_FOLDER/$slugged_context.txt"
+
+    if [[ $(uname) == "Darwin" ]]; then
+        last_access="$(stat -f "%m" "$context_file" 2> /dev/null || echo 0)"
+    else
+        last_access="$(stat -c %X "$context_file" 2> /dev/null || echo 0)"
+    fi
+
+    seconds_since_last_update=$(echo $(( $(date '+%s') - ${last_access} )))
+
+    if [[ $seconds_since_last_update -gt $DAY_IN_SECONDS ]]; then
+        namespaces=$(kubectl get namespaces --context="$context" --no-headers -o custom-columns=NAME:.metadata.name 2> /dev/null)
+        echo $namespaces > $context_file
+    else
+        namespaces=$(cat $context_file || "")
+    fi
+    
+    if ! [[ -z $namespaces ]]; then
+        namespace=$(echo $namespaces | tr ' ' '\n' | rg "^[\w]+-(dev|qa|next|live|prev|test)+\$" | tr '\n' ' ')
+        echo "$context $namespace"
+    else
+        echo "$context"
+    fi
+done | fzf | cut -d ' ' -f 1 | xargs kubectl config use-context
