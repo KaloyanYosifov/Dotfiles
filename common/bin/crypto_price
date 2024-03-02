@@ -3,7 +3,7 @@
 [ -z "$1" ] && echo "No argument passed" && exit 1
 
 HOUR_IN_SECONDS=3600
-url="rate.sx"
+url="https://api.coinmarketcap.com/data-api/v3/cryptocurrency/market-pairs/latest"
 target="$1"
 denom="usd"
 name="$(echo $target | tr '[:lower:]' '[:upper:]')"
@@ -16,7 +16,7 @@ current_price=$(cat $pricefile 2> /dev/null || echo)
 [ -d "$dir" ] || mkdir -p "$dir"
 
 updateprice() { 
-    current_price=$(curl -sf -m 10 --fail-early $url/{1$target} | xargs printf "%i" 2> /dev/null)
+    current_price=$(curl -sf -m 10 --fail-early "$url?slug=$target&category=spot" | jq ".data.marketPairs[0].price" | xargs printf "%i" 2> /dev/null)
 
     ([ -n $current_price ] && [ $current_price -gt 0 ]) && echo $current_price > $pricefile || exit 1
 }

@@ -1,6 +1,6 @@
 #! /bin/bash
 
-[ $# != 2 ] && echo "Please enter ticker and date" && exit 1 
+[ $# != 2 ] && echo "Please enter ticker and date. Usage: $(basename $0) APPL 1999-12-31" && exit 1 
 
 CACHE_FOLDER="$HOME/.cache/stocks-prices"
 MONTH_IN_SECONDS=2592000
