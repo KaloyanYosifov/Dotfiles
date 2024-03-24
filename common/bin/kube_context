@@ -2,7 +2,7 @@
 
 contexts="$(kubectl config get-contexts -o=name)"
 CACHE_FOLDER="$HOME/.cache/kube_context_cache"
-DAY_IN_SECONDS=86400
+DAY_IN_SECONDS=$(( 86400 * 31 )) # if all months are 31 days lol
 
 ! [[ -d $CACHE_FOLDER ]] && mkdir -p $CACHE_FOLDER
 

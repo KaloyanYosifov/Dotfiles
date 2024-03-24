@@ -105,4 +105,5 @@ source $ZSH_DIR/themes/gentoo-theme.zsh
 
 bindkey -s '^o' 'open_project\n'
 bindkey -s '^s' 'open_scratch\n'
+bindkey -s '^e' 'open_secret\n'
 bindkey -s '^t' 'open_tmux_session\n'
