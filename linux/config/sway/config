@@ -48,7 +48,7 @@ exec mako
 
 exec swayidle -w \
          timeout 900 "$lock" \
-         timeout 1800 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+         timeout 9000 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
          before-sleep "$lock"
 
 # Set night light always
@@ -69,6 +69,11 @@ input "type:touchpad" {
 }
 
 input "1133:45108:MX_Master_3S" {
+  pointer_accel 0.8
+  natural_scroll enabled
+}
+
+input "1133:50504:Logitech_USB_Receiver_Mouse" {
   pointer_accel 0.8
   natural_scroll enabled
 }
