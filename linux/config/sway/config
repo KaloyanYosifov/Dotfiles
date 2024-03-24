@@ -117,6 +117,9 @@ input "type:keyboard" {
     # Kill focused window
     bindsym $mod+Ctrl+q exec $lock
 
+    # Take a screenshot
+    bindsym $mod+Shift+i exec IMAGE_PATH="$HOME/Screenshots/screenshot-$(date +%F-%T).png" && mkdir -p $HOME/Screenshots && grim -g "$(slurp)" "$IMAGE_PATH" && imv "$IMAGE_PATH"
+
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
     # Despite the name, also works for non-floating windows.

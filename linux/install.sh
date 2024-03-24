@@ -35,7 +35,7 @@ function install_packages {
         jetbrains-mono-fonts-all wlsunset bemenu mako htop librewolf feh qrencode ansible helm kubernetes-client \
         keepassxc signal-desktop brave-browser brave-keyring zathura mpv git-crypt perl-Image-ExifTool \
         util-linux-user tar tmux alsa-utils mupdf zathura-pdf-mupdf rsync pinentry bind-utils tcpdump qalculate \
-        newsboat clang yubikey-manager yubikey-manager-qt parallel
+        newsboat clang yubikey-manager yubikey-manager-qt parallel slurp imv grim
 
     echo "Installing additional packages that are not in official repos"
     echo "-----------------------------------------------------------"
