@@ -42,7 +42,8 @@ for pathToAdd in $pathsToAdd; do
     [ -d $pathToAdd ] && not_in_path $pathToAdd && PATH="$PATH:$pathToAdd"
 done
 
-[ $machine = "Mac" ] && export BROWSER="/Applications/Brave\ Browser.app/Contents/MacOS/Brave\ Browser" || export BROWSER="brave-browser"
+# on mac unset the browser and it will use the default we have setup in MAC
+[ $machine = "Mac" ] && unset BROWSER || export BROWSER="brave-browser"
 
 fpath=(/usr/local/share/zsh-completions $fpath)
 
