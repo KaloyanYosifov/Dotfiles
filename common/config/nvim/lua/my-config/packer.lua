@@ -65,6 +65,9 @@ return require("packer").startup(function(use)
     use("ThePrimeagen/harpoon")
     use({ "ms-jpq/chadtree", run = "python3 -m chadtree deps" })
 
+    -- debugging
+    use("mfussenegger/nvim-dap")
+
     -- other
     use("laytan/cloak.nvim")
     use("windwp/nvim-autopairs")

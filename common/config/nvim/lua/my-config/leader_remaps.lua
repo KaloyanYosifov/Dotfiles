@@ -23,5 +23,5 @@ vim.keymap.set({ "n", "v" }, "<leader>pa", [["+p]])
 vim.keymap.set("n", "<leader>Pa", [["+P]])
 
 -- on main rc file
-vim.keymap.set("n", "<leader>sv", ":lua my_config_reload_config()<cr>")
+vim.keymap.set("n", "<leader>sv", ":lua require('my-config.reloader').my_config_reload_config()<cr>")
 vim.keymap.set("n", "<leader>ev", ":tabedit $MYVIMRC<cr>")

@@ -1,5 +1,7 @@
+local M = {}
+
 --- Reload the entire configuration
-function my_config_reload_config()
+function M.my_config_reload_config()
     for name, _ in pairs(package.loaded) do
         if string.match(name, "^my%-config") then
             package.loaded[name] = nil
@@ -18,3 +20,5 @@ function my_config_reload_config()
 
     vim.notify("Nvim configuration reloaded!", vim.log.levels.INFO)
 end
+
+return M
