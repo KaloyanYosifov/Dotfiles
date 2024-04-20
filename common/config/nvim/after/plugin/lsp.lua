@@ -14,9 +14,17 @@ if (utils.command_exists("composer")) then
     table.insert(lsps_to_install, "phpactor");
 end
 
-lsp.preset("recommended")
+require('mason').setup({})
+require('mason-lspconfig').setup({
+    ensure_installed = lsps_to_install,
+    handlers = {
+        function(server_name)
+            require('lspconfig')[server_name].setup({})
+        end
+    }
+})
 
-lsp.ensure_installed(lsps_to_install)
+lsp.preset("recommended")
 
 -- Fix Undefined global "vim"
 lsp.nvim_workspace()
