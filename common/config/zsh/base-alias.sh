@@ -53,6 +53,9 @@ alias kubeExec="function __kube_exec { [ \$# -ne 2 ] && echo 'Usage: kubeExec {n
 localCordova="./node_modules/.bin/cordova"
 alias cordova="$(if [ -f "$localCordova" ]; then echo "$localCordova"; else echo "cordova"; fi)"
 
+# Vim
+alias commitWiki="function __commit_wiki { [ \$# -eq 1 ] && (git -C ~/vimwiki add . && git -C ~/vimwiki commit -m \$1 && git -C ~/vimwiki push) || echo 'Usage: commitWiki {message}' }; __commit_wiki"
+
 command_exists nvim
 if [ $? -eq 0 ]; then
     alias vim="nvim"
