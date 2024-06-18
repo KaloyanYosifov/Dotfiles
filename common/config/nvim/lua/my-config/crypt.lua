@@ -80,6 +80,8 @@ local function on_read()
 
     vim.api.nvim_buf_set_lines(current_buf, 0, -1, false, decrypted_text)
 
+    utils.clear_undo_history(current_buf)
+
     M.encrypted_buffers[current_buf] = {
         pass = pass
     }

@@ -48,4 +48,14 @@ function M.ask_password(prompt)
     return pass
 end
 
+function M.clear_undo_history(buf)
+    local undolevels = vim.api.nvim_buf_get_option(buf, 'undolevels')
+
+    vim.api.nvim_buf_set_option(buf, 'undolevels', -1)
+
+    vim.cmd("exe \"normal a \\<BS>\\<Esc>\"")
+
+    vim.api.nvim_buf_set_option(buf, 'undolevels', undolevels)
+end
+
 return M
