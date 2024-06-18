@@ -21,6 +21,7 @@ $SCRIPT_DIR/brew-updates.sh
 $PARENT_DIR/common/config/install.sh
 $PARENT_DIR/common/link-custom-binaries.sh
 $PARENT_DIR/common/install-common-binaries.sh
+$PARENT_DIR/common/initialize-vimwiki.sh
 
 echo "Do you want to install additional configuration? y/n"
 read install_additional

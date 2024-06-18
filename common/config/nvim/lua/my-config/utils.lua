@@ -34,13 +34,15 @@ function M.split_string(str, delimiter)
     return result
 end
 
-function M.ask_password()
-    local pass = vim.fn.inputsecret("Enter Password: ")
+function M.ask_password(prompt)
+    prompt = prompt and prompt or "Enter Password: "
+
+    local pass = vim.fn.inputsecret(prompt)
 
     while pass == "" do
         vim.print("Password cannot be empty!")
 
-        pass = vim.fn.inputsecret("Enter Password: ")
+        pass = vim.fn.inputsecret(prompt)
     end
 
     return pass

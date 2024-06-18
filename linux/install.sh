@@ -99,6 +99,11 @@ function install_common_binaries {
     $PARENT_DIR/common/install-common-binaries.sh
 }
 
+function init_common_binaries {
+    echo "Initializing Vimwiki!"
+    $PARENT_DIR/common/initialize-vimwiki.sh
+}
+
 function install_additional_configuration {
     echo "Installing additional configuration"
     $PARENT_DIR/common/install-ideavim.sh
@@ -145,6 +150,7 @@ ask_install "Do you want to install syncthing?" && install_syncthing
 install_lf
 install_fonts
 install_common_binaries
+init_common_binaries
 install_common_configuration
 install_gtklock
 install_dragon

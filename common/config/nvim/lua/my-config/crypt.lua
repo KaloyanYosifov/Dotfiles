@@ -16,6 +16,28 @@ local function get_current_buf_state_pass()
     return buffer_crypt_state.pass
 end
 
+local function mark_buffer_for_encryption(buf)
+    local pass = nil
+
+    while pass == nil do
+        pass = utils.ask_password("Enter password (or type exit): ")
+
+        if pass == "exit" then
+            return
+        end
+
+        local confirm = utils.ask_password("Confirm password: ");
+
+        if confirm ~= pass then
+            pass = nil
+        end
+    end
+
+    M.encrypted_buffers[buf] = {
+        pass = pass
+    }
+end
+
 local function on_read()
     local current_buf = vim.api.nvim_get_current_buf()
     local filename = vim.api.nvim_buf_get_name(current_buf)
@@ -82,14 +104,25 @@ local function on_write()
         )
     )
 
-    vim.api.nvim_exec(string.format("!rm %s", filename), true)
-    vim.api.nvim_exec(string.format("!mv %s %s", temp_filename, filename), true)
+    vim.api.nvim_exec(string.format("!mv -f %s %s", temp_filename, filename), true)
+
+    M.encrypted_buffers[current_buf] = {
+        pass = pass
+    }
 end
 
 local function on_leave()
     local current_buf = vim.api.nvim_get_current_buf()
 
     M.encrypted_buffers[current_buf] = nil
+end
+
+local function setup_commands()
+    vim.api.nvim_create_user_command(
+        "CryptEncryptFile",
+        function() mark_buffer_for_encryption(vim.api.nvim_get_current_buf()) end,
+        {}
+    )
 end
 
 M.setup = function()
@@ -107,6 +140,8 @@ M.setup = function()
         pattern = "*",
         callback = on_leave,
     })
+
+    setup_commands()
 end
 
 return M
