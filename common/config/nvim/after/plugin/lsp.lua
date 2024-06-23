@@ -1,28 +1,4 @@
-local utils = require("my-config.utils")
 local lsp = require("lsp-zero")
-local lsps_to_install = {
-    "tsserver",
-    "rust_analyzer",
-    "lua_ls",
-    "jsonls",
-    "yamlls",
-    "volar",
-    "tailwindcss"
-}
-
-if (utils.command_exists("composer")) then
-    table.insert(lsps_to_install, "phpactor");
-end
-
-require('mason').setup({})
-require('mason-lspconfig').setup({
-    ensure_installed = lsps_to_install,
-    handlers = {
-        function(server_name)
-            require('lspconfig')[server_name].setup({})
-        end
-    }
-})
 
 lsp.preset("recommended")
 

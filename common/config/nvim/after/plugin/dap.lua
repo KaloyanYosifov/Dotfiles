@@ -1,65 +1,40 @@
-local utils = require("my-config.utils")
 local dap = require("dap")
+local dap_configuration_paths = { "./.nvim-dap/nvim-dap.lua", "./.nvim-dap.lua", "./.nvim/nvim-dap.lua" }
 
-if vim.fn.has("macunix") then
-    local function init()
-        if not utils.command_exists("lldb-vscode") and not utils.command_exists("lldb-dap") then
-            print("lldb-vscode or lldb-dap not found!")
-            print(
-                "Please install llvm: brew install llvm and then link vscode or dap. `ln -s /opt/homebrew/opt/llvm/bin/lldb-vscode /opt/homebrew/bin/lldb-vscode`"
-            )
+function init_project_config()
+    if not pcall(require, "dap") then
+        vim.notify("[nvim-dap-projects] Could not find nvim-dap, make sure you load it before nvim-dap-projects.",
+            vim.log.levels.ERROR, nil)
 
-            return
-        end
-
-        dap.adapters.lldb = {
-            type = "executable",
-            command = utils.command_path("lldb-vscode"),
-            name = "lldb"
-        }
-
-        dap.configurations.rust = {
-            {
-                name = 'Launch',
-                type = 'lldb',
-                request = 'launch',
-                program = function()
-                    return '' -- executable
-                end,
-                cwd = '${workspaceFolder}',
-                stopOnEntry = false,
-                args = {},
-                initCommands = function()
-                    -- Find out where to look for the pretty printer Python module
-                    local rustc_sysroot = utils.execute('rustc --print sysroot')
-
-                    local script_import = 'command script import "' ..
-                        rustc_sysroot .. '/lib/rustlib/etc/lldb_lookup.py"'
-                    local commands_file = rustc_sysroot .. '/lib/rustlib/etc/lldb_commands'
-
-                    local commands = {}
-                    local file = io.open(commands_file, 'r')
-                    if file then
-                        for line in file:lines() do
-                            table.insert(commands, line)
-                        end
-                        file:close()
-                    end
-                    table.insert(commands, 1, script_import)
-
-                    return commands
-                end,
-                -- ...,
-            }
-        }
+        return
     end
 
-    init()
-else
-    dap.adapters.gdb = {
+    local project_config = ""
+    for _, path in ipairs(dap_configuration_paths) do
+        local f = io.open(path)
 
-    }
+        if f ~= nil then
+            f:close()
+
+            project_config = path
+
+            break
+        end
+    end
+
+    if project_config == "" then
+        return
+    end
+
+    vim.notify("[nvim-dap-projects] Found nvim-dap configuration at." .. project_config, vim.log.levels.INFO, nil)
+
+    dap.adapters = (function() return {} end)()
+    dap.configurations = (function() return {} end)()
+
+    vim.cmd(":luafile " .. project_config)
 end
+
+init_project_config()
 
 -- map K to hover
 local api = vim.api
