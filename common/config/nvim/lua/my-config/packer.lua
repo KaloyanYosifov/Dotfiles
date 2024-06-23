@@ -38,7 +38,6 @@ return require("packer").startup(function(use)
             { "neovim/nvim-lspconfig" },
             { "williamboman/mason.nvim" },
             { "williamboman/mason-lspconfig.nvim" },
-            { "jay-babu/mason-nvim-dap.nvim" },
 
             -- Autocompletion
             { "hrsh7th/nvim-cmp" },
@@ -48,11 +47,13 @@ return require("packer").startup(function(use)
             { "hrsh7th/cmp-nvim-lsp" },
             { "hrsh7th/cmp-nvim-lua" },
 
+            -- formatter
+            { "mhartington/formatter.nvim" },
+
             -- Snippets
             { "L3MON4D3/LuaSnip" },
         }
     })
-    use("lukas-reineke/lsp-format.nvim")
 
     -- Managing Projects
     use("ahmedkhalf/project.nvim")
@@ -67,7 +68,12 @@ return require("packer").startup(function(use)
     use({ "ms-jpq/chadtree", run = "python3 -m chadtree deps" })
 
     -- debugging
-    use("mfussenegger/nvim-dap")
+    use({
+        "mfussenegger/nvim-dap",
+        requires = {
+            { "jay-babu/mason-nvim-dap.nvim" }
+        }
+    })
 
     -- other
     use("laytan/cloak.nvim")

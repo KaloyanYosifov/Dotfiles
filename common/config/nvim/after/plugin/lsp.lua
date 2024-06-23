@@ -31,10 +31,8 @@ lsp.set_preferences({
     }
 })
 
-lsp.on_attach(function(client, bufnr)
+lsp.on_attach(function(_, bufnr)
     local opts = { buffer = bufnr, remap = false }
-
-    require("lsp-format").on_attach(client)
 
     -- vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
     -- vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
@@ -50,6 +48,14 @@ lsp.on_attach(function(client, bufnr)
     vim.keymap.set("n", "<leader>vre", function() vim.lsp.buf.rename() end, opts)
     vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
 end)
+
+
+lsp.set_sign_icons({
+  error = '✘',
+  warn = '▲',
+  hint = '⚑',
+  info = '»'
+})
 
 lsp.setup()
 
