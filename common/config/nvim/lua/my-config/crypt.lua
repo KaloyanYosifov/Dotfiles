@@ -38,12 +38,17 @@ local function mark_buffer_for_encryption(buf)
     }
 end
 
+local function is_exit_code_good(value)
+    return value == 0 or value == true
+end
+
 local function on_read()
     local current_buf = vim.api.nvim_get_current_buf()
     local filename = vim.api.nvim_buf_get_name(current_buf)
-    local is_file_encrypted = utils.execute_for_status(string.format("(file %s | grep PGP) || (file %s | grep GPG)", filename, filename))
+    local is_file_pgp = utils.execute_for_status(string.format("file %s | grep PGP", filename))
+    local is_file_gpg = utils.execute_for_status(string.format("file %s | grep GPG", filename))
 
-    if is_file_encrypted ~= 0 and is_file_encrypted ~= true then
+    if not is_exit_code_good(is_file_pgp) and not is_exit_code_good(is_file_gpg) then
         return
     end
 
