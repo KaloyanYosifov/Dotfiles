@@ -41,9 +41,9 @@ end
 local function on_read()
     local current_buf = vim.api.nvim_get_current_buf()
     local filename = vim.api.nvim_buf_get_name(current_buf)
-    local is_file_encrypted = utils.execute_for_status(string.format("file %s | grep PGP", filename))
+    local is_file_encrypted = utils.execute_for_status(string.format("(file %s | grep PGP) || (file %s | grep GPG)", filename, filename))
 
-    if is_file_encrypted ~= 0 then
+    if is_file_encrypted ~= 0 and is_file_encrypted ~= true then
         return
     end
 
