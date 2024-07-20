@@ -35,7 +35,7 @@ function install_packages {
         jetbrains-mono-fonts-all wlsunset bemenu mako htop librewolf feh qrencode ansible helm kubernetes-client \
         keepassxc signal-desktop brave-browser brave-keyring zathura mpv git-crypt perl-Image-ExifTool \
         util-linux-user tar tmux alsa-utils mupdf zathura-pdf-mupdf rsync pinentry bind-utils tcpdump qalculate \
-        newsboat clang yubikey-manager yubikey-manager-qt parallel slurp imv grim
+        newsboat clang yubikey-manager yubikey-manager-qt parallel slurp imv grim macchanger
 
     echo "Installing additional packages that are not in official repos"
     echo "-----------------------------------------------------------"
@@ -141,6 +141,71 @@ function cleanup {
     echo "Cleanup done"
 }
 
+function setup_mac_changer {
+    echo "Setting up mac changer"
+    interfaces="$(ip -j link | jq -r '.[] | select (.link_type == "ether") | select (.ifname | startswith("docker") | not)' | jq -r '.ifname')"
+    template="
+        [Unit]
+        Description=macchanger on <device_name>
+        Wants=network-pre.target
+        Before=network-pre.target
+        BindsTo=sys-subsystem-net-devices-<device_name>.device
+        After=sys-subsystem-net-devices-<device_name>.device
+
+        [Service]
+        ExecStart=/usr/bin/macchanger -e <device_name>
+        Type=oneshot
+
+        [Install]
+        WantedBy=multi-user.target
+    "
+
+    for interface in $interfaces; do
+        file="/etc/systemd/user/macchanger_$interface.service"
+        sudo tee $file > /dev/null << EOL
+[Unit]
+Description=macchanger on $interface
+Wants=network-pre.target
+Before=network-pre.target
+BindsTo=sys-subsystem-net-devices-$interface.device
+After=sys-subsystem-net-devices-$interface.device
+
+[Service]
+ExecStart=/usr/bin/macchanger -e $interface
+Type=oneshot
+
+[Install]
+WantedBy=multi-user.target
+EOL
+
+    sudo chmod 744 $file
+    done
+}
+
+function setup_machine_id {
+    echo "Changing machine id"
+    echo "b08dfa6083e7567a1921a715000001fb" | sudo tee /etc/machine-id > /dev/null
+}
+
+function permission_hardening {
+    echo "Running permission hardening"
+
+    echo "umask 0077" | sudo tee /etc/profile.d/umask-update.sh > /dev/null
+    sudo chmod g+r,o+r /etc/profile.d/umask-update.sh
+
+
+    echo "Disallow people looking at sensitive directories"
+    sudo chmod 700 /boot /usr/src /lib/modules /usr/lib/modules
+}
+
+function increase_password_hashing_rounds {
+    echo "Increasing password hashing rounds"
+    current_user="$(whoami)"
+    echo "password required pam_unix.so sha512 shadow nullok rounds=65536" | sudo tee -a /etc/pam.d/passwd > /dev/null && sudo passwd $current_user
+}
+
+increase_password_hashing_rounds
+exit 0
 sudo dnf install -y dnf-plugins-core
 add_repos
 install_packages
@@ -157,6 +222,10 @@ install_dragon
 ask_install "Do you want to install additional configuration?" && install_additional_configuration
 change_to_zsh_shell
 install_sway_login
+permission_hardening
+setup_mac_changer
+setup_machine_id
+increase_password_hashing_rounds
 cleanup
 reboot
 
