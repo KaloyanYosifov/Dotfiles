@@ -1,15 +1,33 @@
 local telescope = require("telescope")
 
 telescope.setup({
-    defaults = {
-        mappings = {
-            i = {
-                ["<CR>"] = "select_tab",
-                ["<C-j>"] = "move_selection_next",
-                ["<C-k>"] = "move_selection_previous",
-            }
-        }
-    }
+	defaults = {
+		vimgrep_arguments = {
+			"rg",
+			"--hidden",
+			"--color=never",
+			"--no-heading",
+			"--with-filename",
+			"--line-number",
+			"--column",
+			"--smart-case",
+		},
+		file_ignore_patterns = {
+			"^.git/",
+			"%.lock",
+			"^public/",
+			"^target/",
+			"%-lock.json",
+            "^node_modules/",
+		},
+		mappings = {
+			i = {
+				["<CR>"] = "select_tab",
+				["<C-j>"] = "move_selection_next",
+				["<C-k>"] = "move_selection_previous",
+			},
+		},
+	},
 })
 
 local builtin = require("telescope.builtin")
