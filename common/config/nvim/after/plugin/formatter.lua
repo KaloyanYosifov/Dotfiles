@@ -25,14 +25,19 @@ formatter.setup({
 
 				for _, executable in ipairs(executables) do
 					local exe = bin_path .. executable
-					local f = io.open(exe, "r")
 
 					if utils.file_exists(exe) then
-						return {
+						local opts = {
 							exe = exe,
 							stdin = false,
 							ignore_exitcode = false,
 						}
+
+						if executable == "php-cs-fixer" then
+							opts.args = { "fix" }
+						end
+
+						return opts
 					end
 				end
 

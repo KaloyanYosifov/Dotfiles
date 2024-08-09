@@ -59,14 +59,17 @@ function M.clear_undo_history(buf)
 end
 
 function M.file_exists(file)
+	if file == nil or file == " " then
+		return false
+	end
+
 	local f = io.open(file)
 	local exists = false
 
 	if f ~= nil then
 		exists = true
+		io.close(f)
 	end
-
-	io.close(f)
 
 	return exists
 end
