@@ -3,29 +3,34 @@ live_config_reload = true
 [colors]
 draw_bold_text_with_bright_colors = true
 
-[colors.bright]
-black = "0x000000"
-blue = "0x2f5af3"
-cyan = "0x3e953a"
-green = "0x3e953a"
-magenta = "0xa00095"
-red = "0xde3d35"
-white = "0xffffff"
-yellow = "0xd2b67b"
+# Colors (PaperColor - Light)
 
-[colors.normal]
-black = "0x000000"
-blue = "0x2f5af3"
-cyan = "0x3e953a"
-green = "0x3e953a"
-magenta = "0xa00095"
-red = "0xde3d35"
-white = "0xbbbbbb"
-yellow = "0xd2b67b"
-
+# Default colors
 [colors.primary]
-background = "0xf8f8f8"
-foreground = "0x2a2b33"
+background = '#ffffff'
+foreground = '#474747'
+
+# Normal colors
+[colors.normal]
+black   = '#282828'
+red     = '#d6000c'
+green   = '#1d9700'
+yellow  = '#c49700'
+blue    = '#0064e4'
+magenta = '#dd0f9d'
+cyan    = '#00ad9c'
+white   = '#cdcdcd'
+
+# Bright colors
+[colors.bright]
+black   = '#878787'
+red     = '#df0000'
+green   = '#008400'
+yellow  = '#af8500'
+blue    = '#0054cf'
+magenta = '#c7008b'
+cyan    = '#009a8a'
+white   = '#ebebeb'
 
 [font]
 size = 12
