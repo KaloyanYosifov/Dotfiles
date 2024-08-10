@@ -8,6 +8,8 @@ return {
 			vim.opt.background = "light"
 			vim.cmd.colorscheme("onedark")
 		end,
+
+        opts = {}
 	},
 	{
 		"nvim-lualine/lualine.nvim",

@@ -6,5 +6,6 @@ return {
 			vim.keymap.set("n", "grr", require("substitute").line, { noremap = true })
 			vim.keymap.set("x", "gr", require("substitute").visual, { noremap = true })
 		end,
+		opts = {},
 	},
 }

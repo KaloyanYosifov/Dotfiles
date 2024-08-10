@@ -14,5 +14,7 @@ return {
 			vim.keymap.set("n", "<leader>hn", ui.nav_next)
 			vim.keymap.set("n", "<leader>hb", ui.nav_prev)
 		end,
+
+        opts = {}
 	},
 }
