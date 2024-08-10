@@ -1,6 +1,7 @@
 require('my-config.settings')
 require('my-config.reloader')
-require('my-config.packer')
+-- require('my-config.packer')
+require('my-config.lazy')
 require('my-config.autocommands')
 require('my-config.leader_remaps')
 require('my-config.non_leader_remaps')

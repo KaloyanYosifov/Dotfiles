@@ -1,5 +1,3 @@
-vim.g.mapleader = ","
-
 -- vim.keymap.set("n", "<leader>rf", vim.lsp.buf.format)
 
 -- remaps for moving current line to another line
