@@ -18,7 +18,7 @@
   "mason-nvim-dap.nvim": { "branch": "main", "commit": "8b9363d83b5d779813cdd2819b8308651cec2a09" },
   "mason.nvim": { "branch": "main", "commit": "e2f7f9044ec30067bc11800a9e266664b88cda22" },
   "nui.nvim": { "branch": "main", "commit": "61574ce6e60c815b0a0c4b5655b8486ba58089a1" },
-  "nvim-autopairs": { "branch": "master", "commit": "4a39f2dcbe1967ddc3a0f76f863540dd3aa7871a" },
+  "nvim-autopairs": { "branch": "master", "commit": "48ca9aaee733911424646cb1605f27bc01dedbe3" },
   "nvim-cmp": { "branch": "main", "commit": "ae644feb7b67bf1ce4260c231d1d4300b19c6f30" },
   "nvim-dap": { "branch": "master", "commit": "2b428ff2632e73295e9decbcf1c40d8e26213305" },
   "nvim-dbee": { "branch": "master", "commit": "21d2cc0844a16262bb6ea93ab3d0a0f20bd87853" },
@@ -26,6 +26,7 @@
   "nvim-treesitter": { "branch": "master", "commit": "8a966f32c973511f9697264b3533e9846d29fd09" },
   "nvim-treesitter-context": { "branch": "master", "commit": "0f3332788e0bd37716fbd25f39120dcfd557c90f" },
   "nvim-web-devicons": { "branch": "master", "commit": "3722e3d1fb5fe1896a104eb489e8f8651260b520" },
+  "onedark.nvim": { "branch": "master", "commit": "fae34f7c635797f4bf62fb00e7d0516efa8abe37" },
   "plenary.nvim": { "branch": "master", "commit": "a3e3bc82a3f95c5ed0d7201546d5d2c19b20d683" },
   "project.nvim": { "branch": "main", "commit": "8c6bad7d22eef1b71144b401c9f74ed01526a4fb" },
   "substitute.nvim": { "branch": "main", "commit": "97f49d16f8eea7967d41db4f657dd63af53eeba1" },
@@ -33,7 +34,6 @@
   "toggleterm.nvim": { "branch": "master", "commit": "fe530f475cde67e91a63673467ab139c6ac78883" },
   "undotree": { "branch": "master", "commit": "56c684a805fe948936cda0d1b19505b84ad7e065" },
   "vim-commentary": { "branch": "master", "commit": "c4b8f52cbb7142ec239494e5a2c4a512f92c4d07" },
-  "vim-one": { "branch": "master", "commit": "187f5c85b682c1933f8780d4d419c55d26a82e24" },
   "vim-surround": { "branch": "master", "commit": "3d188ed2113431cf8dac77be61b842acb64433d9" },
   "vimwiki": { "branch": "dev", "commit": "705ad1e0dded0e3b7ff5fac78547ab67c9d39bdf" }
 }

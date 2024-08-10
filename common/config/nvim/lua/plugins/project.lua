@@ -1,7 +1,5 @@
 local projects_storage = os.getenv("HOME") .. "/.vim/projects"
 
-require("telescope").load_extension("projects")
-
 return {
 	{
 		"ahmedkhalf/project.nvim",

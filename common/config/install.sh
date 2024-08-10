@@ -5,7 +5,7 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 function install_alacritty {
     echo "Installing alacritty"
 
-    ALACRITTY_PATH=$HOME/.config/alacritty 
+    ALACRITTY_PATH=$HOME/.config/alacritty
 
     [ -d $ALACRITTY_PATH ] && rm -rf $ALACRITTY_PATH
 
@@ -14,11 +14,11 @@ function install_alacritty {
 }
 
 function install_gitconfig {
-    GITCONFIG_PATH=$HOME/.config/gitconfig 
-    GITCONFIG_FILE=$HOME/.gitconfig 
+    GITCONFIG_PATH=$HOME/.config/gitconfig
+    GITCONFIG_FILE=$HOME/.gitconfig
 
     mkdir -p $GITCONFIG_PATH
-    
+
     for file in $(ls -a $SCRIPT_DIR/gitconfig); do
         # do not use . and .. and .gitconfig is not part of gitconfig folder
         if [[ $file == "." ]] || [[ $file == ".." ]] || [[ $file == ".gitconfig" ]]; then
@@ -94,14 +94,6 @@ function install_neovim_config {
     ln -s $SCRIPT_DIR/nvim $NVIM_FOLDER_PATH
 
     mkdir -p $HOME/.vim/projects
-
-    echo "Installing Packer"
-    git clone --depth 1 https://github.com/wbthomason/packer.nvim $HOME/.local/share/nvim/site/pack/packer/start/packer.nvim || true
-
-    # install packages
-    nvim -c "PackerInstall"
-    # install chad deps
-    nvim -c "CHADdeps"
 
     echo "NeoVim config installed"
 }

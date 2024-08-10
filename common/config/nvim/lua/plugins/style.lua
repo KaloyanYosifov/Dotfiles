@@ -1,6 +1,21 @@
 return {
-	"rakr/vim-one",
 	"Yggdroot/indentLine",
 	"nvim-tree/nvim-web-devicons",
-	"nvim-lualine/lualine.nvim",
+	{
+		"navarasu/onedark.nvim",
+
+		init = function()
+			vim.opt.background = "light"
+			vim.cmd.colorscheme("onedark")
+		end,
+	},
+	{
+		"nvim-lualine/lualine.nvim",
+
+		opts = {
+			options = {
+				theme = "onedark",
+			},
+		},
+	},
 }
