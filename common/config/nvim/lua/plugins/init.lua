@@ -10,7 +10,6 @@ return {
 	{ "my-config/crypt", dev = true },
 
 	-- other
-	"vimwiki/vimwiki",
 	"windwp/nvim-autopairs",
 	"gpanders/editorconfig.nvim",
 	"MunifTanjim/nui.nvim",
