@@ -80,4 +80,18 @@ function M.get_current_file_uri()
 	return vim.uri_from_bufnr(bufnr)
 end
 
+function M.is_buffer_uri_already_open(uri)
+	local buffers = vim.api.nvim_list_bufs() -- Get a list of all open buffers
+
+	for _, bufnr in ipairs(buffers) do
+		if vim.api.nvim_buf_is_loaded(bufnr) then
+			if uri == vim.uri_from_bufnr(bufnr) then
+				return true
+			end
+		end
+	end
+
+	return false
+end
+
 return M
