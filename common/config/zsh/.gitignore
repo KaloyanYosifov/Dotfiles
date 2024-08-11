@@ -4,3 +4,4 @@ alias*
 scripts
 tags
 external-plugins
+!external-plugins/autoenv
