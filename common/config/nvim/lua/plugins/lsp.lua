@@ -1,67 +1,142 @@
+local utils = require("my-config.utils")
+
 return {
 	{
 		"VonHeikemen/lsp-zero.nvim",
-		branch = "v1.x",
+		branch = "v4.x",
+		lazy = false,
+		config = false,
+	},
+	{
+		"williamboman/mason.nvim",
+		lazy = false,
+		config = true,
+	},
+	-- Formatter
+	{
+		"mhartington/formatter.nvim",
+		init = function()
+			local augroup_name = "__lsp_formatter__"
+			vim.api.nvim_create_augroup(augroup_name, { clear = true })
+			vim.api.nvim_create_autocmd("BufWritePost", {
+				group = augroup_name,
+				command = ":FormatWrite",
+			})
+		end,
+		config = function()
+			require("formatter").setup({
+				logging = true,
+
+				log_level = vim.log.levels.ERROR,
+
+				filetype = {
+					lua = {
+						require("formatter.filetypes.lua").stylua,
+					},
+
+					php = {
+						function()
+							local composer_root = require("lspconfig").util.root_pattern("composer.json")
+							local path = composer_root(vim.fn.getcwd())
+
+							if path == nil then
+								return nil
+							end
+
+							local executables = { "pint", "php-cs-fixer" }
+							local bin_path = path .. "/vendor/bin/"
+
+							for _, executable in ipairs(executables) do
+								local exe = bin_path .. executable
+
+								if utils.file_exists(exe) then
+									local opts = {
+										exe = exe,
+										stdin = false,
+										ignore_exitcode = false,
+									}
+
+									if executable == "php-cs-fixer" then
+										opts.args = { "fix" }
+									end
+
+									return opts
+								end
+							end
+
+							return nil
+						end,
+					},
+
+					rust = {
+						require("formatter.filetypes.rust").rustfmt,
+					},
+
+					["*"] = {
+						require("formatter.filetypes.any").remove_trailing_whitespace,
+					},
+				},
+			})
+		end,
+	},
+	-- Autocompletion
+	{
+		"hrsh7th/nvim-cmp",
 		dependencies = {
-			"neovim/nvim-lspconfig",
-			"williamboman/mason.nvim",
-			"williamboman/mason-lspconfig.nvim",
+			{ "L3MON4D3/LuaSnip" },
+			{ "hrsh7th/nvim-cmp" },
+			{ "hrsh7th/cmp-buffer" },
+			{ "hrsh7th/cmp-path" },
+			{ "saadparwaiz1/cmp_luasnip" },
+			{ "hrsh7th/cmp-nvim-lsp" },
+			{ "hrsh7th/cmp-nvim-lua" },
+		},
+		config = function()
+			local cmp = require("cmp")
+			local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
-			-- Autocompletion
-			"hrsh7th/nvim-cmp",
-			"hrsh7th/cmp-buffer",
-			"hrsh7th/cmp-path",
-			"saadparwaiz1/cmp_luasnip",
-			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/cmp-nvim-lua",
+			cmp.setup({
+				sources = {
+					{ name = "nvim_lsp" },
+				},
+				mapping = cmp.mapping.preset.insert({
+					["<C-k>"] = cmp.mapping.select_prev_item(cmp_select),
+					["<C-j>"] = cmp.mapping.select_next_item(cmp_select),
+					["<CR>"] = cmp.mapping.confirm({ select = true }),
+					["<Tab>"] = cmp.mapping.confirm({ select = true }),
+					["<C-Space>"] = cmp.mapping.complete(),
+					["<S-Tab>"] = nil,
+				}),
+				snippet = {
+					expand = function(args)
+						vim.snippet.expand(args.body)
+					end,
+				},
+			})
+		end,
+	},
 
-			-- formatter
-			"mhartington/formatter.nvim",
-
-			-- Snippets
-			"L3MON4D3/LuaSnip",
+	-- LSP
+	{
+		"neovim/nvim-lspconfig",
+		cmd = { "LspInfo", "LspInstall", "LspStart" },
+		event = { "BufReadPre", "BufNewFile" },
+		dependencies = {
+			{ "hrsh7th/cmp-nvim-lsp" },
+			{ "williamboman/mason.nvim" },
+			{ "williamboman/mason-lspconfig.nvim" },
 		},
 		init = function()
 			vim.diagnostic.config({
 				virtual_text = true,
 			})
 		end,
-		opts = {},
-		config = function(_, opts)
-			local lsp = require("lsp-zero")
+		config = function()
+			local lsp_zero = require("lsp-zero")
 
-			lsp.preset("recommended")
-
-			-- Fix Undefined global "vim"
-			lsp.nvim_workspace()
-
-			local cmp = require("cmp")
-			local cmp_select = { behavior = cmp.SelectBehavior.Select }
-			local cmp_mappings = lsp.defaults.cmp_mappings({
-				["<C-k>"] = cmp.mapping.select_prev_item(cmp_select),
-				["<C-j>"] = cmp.mapping.select_next_item(cmp_select),
-				["<CR>"] = cmp.mapping.confirm({ select = true }),
-				["<Tab>"] = cmp.mapping.confirm({ select = true }),
-				["<C-Space>"] = cmp.mapping.complete(),
-			})
-
-			cmp_mappings["<S-Tab>"] = nil
-
-			lsp.setup_nvim_cmp({
-				mapping = cmp_mappings,
-			})
-
-			lsp.set_preferences({
-				suggest_lsp_servers = false,
-				sign_icons = {
-					error = "E",
-					warn = "W",
-					hint = "H",
-					info = "I",
-				},
-			})
-
-			lsp.on_attach(function(_, bufnr)
+			-- lsp_attach is where you enable features that only work
+			-- if there is a language server active in the file
+			local lsp_attach = function(_, bufnr)
 				local opts = { buffer = bufnr, remap = false }
 
 				-- vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
@@ -97,16 +172,42 @@ return {
 				vim.keymap.set("i", "<C-h>", function()
 					vim.lsp.buf.signature_help()
 				end, opts)
-			end)
+			end
 
-			lsp.set_sign_icons({
+			lsp_zero.extend_lspconfig({
+				sign_text = true,
+				lsp_attach = lsp_attach,
+				capabilities = require("cmp_nvim_lsp").default_capabilities(),
+			})
+			lsp_zero.set_sign_icons({
 				error = "✘",
 				warn = "▲",
 				hint = "⚑",
 				info = "»",
 			})
 
-			lsp.setup(opts)
+			local lsps_to_install = {
+				"tsserver",
+				"rust_analyzer",
+				"lua_ls",
+				"jsonls",
+				"yamlls",
+				"volar",
+				"tailwindcss",
+			}
+
+			if utils.command_exists("composer") then
+				table.insert(lsps_to_install, "phpactor")
+			end
+
+			require("mason-lspconfig").setup({
+				ensure_installed = lsps_to_install,
+				handlers = {
+					function(server_name)
+						require("lspconfig")[server_name].setup({})
+					end,
+				},
+			})
 		end,
 	},
 }

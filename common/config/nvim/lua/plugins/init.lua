@@ -1,3 +1,5 @@
+
+
 return {
 	-- functionality
 	"tpope/vim-surround",
@@ -7,9 +9,18 @@ return {
 	{ "ms-jpq/chadtree", build = "python3 -m chadtree deps" },
 
 	-- custom
-	{ "my-config/crypt", dev = true },
+	{
+		"my-config/crypt",
+		dev = true,
+		config = function()
+			require("my-config/crypt").setup()
+		end,
+	},
 
 	-- other
-	"windwp/nvim-autopairs",
 	"gpanders/editorconfig.nvim",
+	{
+		"windwp/nvim-autopairs",
+		opts = {},
+	},
 }

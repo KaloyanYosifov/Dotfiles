@@ -2,7 +2,7 @@ return {
 	{
 		"mfussenegger/nvim-dap",
 		dependencies = {
-			"jay-babu/mason-nvim-dap.nvim",
+			{ "jay-babu/mason-nvim-dap.nvim" },
 		},
 		init = function()
 			local dap = require("dap")
@@ -86,6 +86,17 @@ return {
 			-- Mappings
 			vim.keymap.set("n", "<leader>rc", ":lua require('dap').continue()<cr>")
 			vim.keymap.set("n", "<leader>rb", ":lua require('dap').toggle_breakpoint()<cr>")
+		end,
+
+		config = function()
+			local dap_adapters_to_install = {
+				"codelldb",
+				"cpptools",
+			}
+
+			require("mason-nvim-dap").setup({
+				ensure_installed = dap_adapters_to_install,
+			})
 		end,
 	},
 }
