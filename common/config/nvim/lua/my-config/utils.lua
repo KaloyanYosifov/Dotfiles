@@ -94,4 +94,30 @@ function M.is_buffer_uri_already_open(uri)
 	return false
 end
 
+function M.get_sql_at_current_cursor()
+	local ts_utils = require("nvim-treesitter.ts_utils")
+	local current_node = ts_utils.get_node_at_cursor()
+
+	local last_statement = nil
+	while current_node do
+		if current_node:type() == "statement" then
+			last_statement = current_node
+		end
+
+		if current_node:type() == "program" then
+			break
+		end
+
+		current_node = current_node:parent()
+	end
+
+	if not last_statement then
+		return ""
+	end
+
+	local srow, scol, erow, ecol = vim.treesitter.get_node_range(last_statement)
+	local selection = vim.api.nvim_buf_get_text(0, srow, scol, erow, ecol, {})
+	return table.concat(selection, "\n")
+end
+
 return M

@@ -10,7 +10,7 @@ local function open_lsp_location_in_new_tab(_, result, ctx, _)
 		result = result[1]
 	end
 
-	if not utils.is_buffer_uri_already_open(result.uri) then
+	if not utils.is_buffer_uri_already_open(result.uri or result.targetUri) then
 		vim.cmd("tabnew")
 	end
 
