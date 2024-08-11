@@ -13,5 +13,5 @@ function __plugin_ensure_installed() {
 function __plugin_load_plugin() {
     __plugin_ensure_installed $1 $2
 
-    source "$__ZSH_EXTERNAL_PLUGIN_DIR/$1"
+    source "$__ZSH_EXTERNAL_PLUGIN_DIR/$1/$1.plugin.zsh"
 }
