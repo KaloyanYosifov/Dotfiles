@@ -21,14 +21,13 @@ return {
 			-- Snippets
 			"L3MON4D3/LuaSnip",
 		},
-
 		init = function()
 			vim.diagnostic.config({
 				virtual_text = true,
 			})
 		end,
-
-		config = function()
+		opts = {},
+		config = function(_, opts)
 			local lsp = require("lsp-zero")
 
 			lsp.preset("recommended")
@@ -107,7 +106,7 @@ return {
 				info = "»",
 			})
 
-			lsp.setup()
+			lsp.setup(opts)
 		end,
 	},
 }

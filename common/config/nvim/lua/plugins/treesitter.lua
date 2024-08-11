@@ -1,9 +1,7 @@
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
-
 		lazy = vim.fn.argc(-1) == 0,
-
 		opts = {
 			-- A list of parser names, or "all"
 			ensure_installed = { "vimdoc", "javascript", "typescript", "php", "c", "lua", "rust", "dockerfile" },
@@ -27,11 +25,8 @@ return {
 				additional_vim_regex_highlighting = false,
 			},
 		},
-
 		build = ":TSUpdate",
-
 		cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
-
 		config = function(_, opts)
 			require("nvim-treesitter.configs").setup(opts)
 		end,

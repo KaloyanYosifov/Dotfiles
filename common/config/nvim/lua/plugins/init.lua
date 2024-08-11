@@ -12,6 +12,4 @@ return {
 	-- other
 	"windwp/nvim-autopairs",
 	"gpanders/editorconfig.nvim",
-	"MunifTanjim/nui.nvim",
-	"nvim-lua/plenary.nvim",
 }

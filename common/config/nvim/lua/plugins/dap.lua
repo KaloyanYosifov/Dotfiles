@@ -1,11 +1,9 @@
 return {
 	{
 		"mfussenegger/nvim-dap",
-
 		dependencies = {
 			"jay-babu/mason-nvim-dap.nvim",
 		},
-
 		init = function()
 			local dap = require("dap")
 			local dap_configuration_paths = { "./.nvim-dap/nvim-dap.lua", "./.nvim-dap.lua", "./.nvim/nvim-dap.lua" }

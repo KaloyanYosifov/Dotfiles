@@ -26,12 +26,10 @@ end
 return {
 	{
 		"KaloyanYosifov/toggleterm.nvim",
-
 		init = function()
 			-- if you only want these mappings for toggle term use term://*toggleterm#* instead
 			vim.cmd("autocmd! TermOpen term://*toggleterm#* lua set_terminal_keymaps()")
 		end,
-
 		opts = {
 			size = 20,
 			open_mapping = [[<c-\>]],
@@ -54,7 +52,6 @@ return {
 				},
 			},
 		},
-
 		config = function(_, opts)
 			require("toggleterm").setup(opts)
 		end,

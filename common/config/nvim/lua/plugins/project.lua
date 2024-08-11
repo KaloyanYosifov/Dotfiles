@@ -3,7 +3,6 @@ local projects_storage = os.getenv("HOME") .. "/.vim/projects"
 return {
 	{
 		"ahmedkhalf/project.nvim",
-
 		init = function()
 			require("telescope").load_extension("projects")
 
@@ -14,12 +13,10 @@ return {
 				vim.fn.mkdir(projects_storage)
 			end
 		end,
-
 		opts = {
 			show_hidden = true,
 			datapath = projects_storage,
 		},
-
 		config = function(_, opts)
 			require("project_nvim").setup(opts)
 		end,

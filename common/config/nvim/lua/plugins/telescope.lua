@@ -1,11 +1,8 @@
 return {
 	{
 		"nvim-telescope/telescope.nvim",
-
 		version = "0.1.6",
-
 		dependencies = { "nvim-lua/plenary.nvim" },
-
 		init = function()
 			local builtin = require("telescope.builtin")
 
@@ -14,7 +11,6 @@ return {
 			vim.keymap.set("n", "<leader>f", builtin.live_grep, {})
 			vim.keymap.set("n", "<leader>vh", builtin.help_tags, {})
 		end,
-
 		opts = {
 			defaults = {
 				vimgrep_arguments = {
