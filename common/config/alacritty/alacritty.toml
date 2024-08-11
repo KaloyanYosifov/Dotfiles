@@ -31,15 +31,15 @@ white   = '#ffffff'
 size = 12
 
 [font.bold]
-family = "JetBrains Mono Nerd Font Mono"
+family = "JetBrainsMono Nerd Font Mono"
 style = "Bold"
 
 [font.italic]
-family = "JetBrains Mono Nerd Font Mono"
+family = "JetBrainsMono Nerd Font Mono"
 style = "Italic"
 
 [font.normal]
-family = "JetBrains Mono Nerd Font Mono"
+family = "JetBrainsMono Nerd Font Mono"
 style = "Regular"
 
 [font.offset]
