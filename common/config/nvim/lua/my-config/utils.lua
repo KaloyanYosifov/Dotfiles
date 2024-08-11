@@ -74,4 +74,10 @@ function M.file_exists(file)
 	return exists
 end
 
+function M.get_current_file_uri()
+	local bufnr = vim.api.nvim_get_current_buf()
+
+	return vim.uri_from_bufnr(bufnr)
+end
+
 return M

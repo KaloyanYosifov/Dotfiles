@@ -6,7 +6,9 @@ local function open_lsp_location_in_new_tab(_, result, ctx, _)
 		return
 	end
 
-	vim.cmd("tabnew")
+	if result.uri ~= utils.get_current_file_uri() then
+		vim.cmd("tabnew")
+	end
 
 	if vim.tbl_islist(result) then
 		vim.lsp.util.jump_to_location(result[1], "utf-8", true)
