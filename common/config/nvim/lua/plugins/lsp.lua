@@ -1,5 +1,20 @@
 local utils = require("my-config.utils")
 
+local function open_lsp_location_in_new_tab(_, result, ctx, _)
+	if not result or vim.tbl_isempty(result) then
+		print("No location found for " .. ctx.method)
+		return
+	end
+
+	vim.cmd("tabnew")
+
+	if vim.tbl_islist(result) then
+		vim.lsp.util.jump_to_location(result[1], "utf-8", true)
+	else
+		vim.lsp.util.jump_to_location(result, "utf-8", true)
+	end
+end
+
 return {
 	{
 		"VonHeikemen/lsp-zero.nvim",
@@ -208,6 +223,12 @@ return {
 					end,
 				},
 			})
+
+			vim.lsp.handlers["textDocument/definition"] = open_lsp_location_in_new_tab
+			vim.lsp.handlers["textDocument/references"] = open_lsp_location_in_new_tab
+			vim.lsp.handlers["textDocument/implementation"] = open_lsp_location_in_new_tab
+			vim.lsp.handlers["textDocument/declaration"] = open_lsp_location_in_new_tab
+			vim.lsp.handlers["textDocument/typeDefinition"] = open_lsp_location_in_new_tab
 		end,
 	},
 }

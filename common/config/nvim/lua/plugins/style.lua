@@ -17,4 +17,15 @@ return {
 			},
 		},
 	},
+
+	--- UI
+	{
+		"stevearc/dressing.nvim",
+		event = "VeryLazy",
+		opts = {
+			select = {
+				enabled = false,
+			},
+		},
+	},
 }
