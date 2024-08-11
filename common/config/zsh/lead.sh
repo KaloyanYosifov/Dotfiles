@@ -91,7 +91,7 @@ fi
 ###########################################################
 
 for i in $(ls $ZSH_DIR/plugins); do
-    source $ZSH_DIR/plugins/$i
+    source "$ZSH_DIR/plugins/$i"
 done
 
 ###########################################################
