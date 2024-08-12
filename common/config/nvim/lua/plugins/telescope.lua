@@ -1,3 +1,22 @@
+-- We cache the results of "git rev-parse"
+-- Process creation is expensive in Windows, so this reduces latency
+local is_inside_work_tree = {}
+local project_files = function()
+	local opts = {}
+
+	local cwd = vim.fn.getcwd()
+	if is_inside_work_tree[cwd] == nil then
+		vim.fn.system("git rev-parse --is-inside-work-tree")
+		is_inside_work_tree[cwd] = vim.v.shell_error == 0
+	end
+
+	if is_inside_work_tree[cwd] then
+		require("telescope.builtin").git_files(opts)
+	else
+		require("telescope.builtin").find_files(opts)
+	end
+end
+
 return {
 	{
 		"nvim-telescope/telescope.nvim",
@@ -7,11 +26,11 @@ return {
 			local builtin = require("telescope.builtin")
 
 			vim.keymap.set("n", "<leader>pf", builtin.find_files, {})
-			vim.keymap.set("n", "<C-p>", builtin.git_files, {})
+			vim.keymap.set("n", "<C-p>", project_files, {})
 			vim.keymap.set("n", "<leader>f", builtin.live_grep, {})
 			vim.keymap.set("n", "<leader>vh", builtin.help_tags, {})
 
-            -- support opening files in a new tab, but any other actions will not 
+			-- support opening files in a new tab, but any other actions will not
 			local actions_state = require("telescope.actions.state")
 			local select_key_to_edit_key = actions_state.select_key_to_edit_key
 			actions_state.select_key_to_edit_key = function(type)
@@ -21,6 +40,7 @@ return {
 		end,
 		opts = {
 			defaults = {
+				filesize_limit = 10, -- MB
 				vimgrep_arguments = {
 					"rg",
 					"--hidden",
@@ -30,6 +50,7 @@ return {
 					"--line-number",
 					"--column",
 					"--smart-case",
+					"--trim",
 				},
 				file_ignore_patterns = {
 					"^.git/",
@@ -45,7 +66,7 @@ return {
 						["<C-k>"] = "move_selection_previous",
 					},
 				},
-			},
+			}
 		},
 	},
 }
