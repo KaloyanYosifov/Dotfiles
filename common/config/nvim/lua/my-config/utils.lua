@@ -122,4 +122,8 @@ function M.get_sql_at_current_cursor()
 	return table.concat(selection, "\n")
 end
 
+function M.get_env(name, default)
+	return os.getenv(name) or default
+end
+
 return M

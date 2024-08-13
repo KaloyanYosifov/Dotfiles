@@ -1,3 +1,5 @@
+local utils = require("my-config.utils")
+
 return {
 	"nvim-neotest/neotest",
 	lazy = true,
@@ -18,7 +20,11 @@ return {
 	config = function()
 		require("neotest").setup({
 			adapters = {
-				require("neotest-phpunit"),
+				require("neotest-phpunit")({
+					phpunit_cmd = function()
+						return utils.get_env("VIM_PHPUNIT_TEST_CMD", "vendor/bin/phpunit")
+					end,
+				}),
 			},
 		})
 	end,
