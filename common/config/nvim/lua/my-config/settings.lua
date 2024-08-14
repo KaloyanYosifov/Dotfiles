@@ -49,3 +49,8 @@ vim.opt.swapfile = false
 -- This is also a good place to setup other settings (vim.opt)
 vim.g.mapleader = ","
 vim.g.maplocalleader = "\\"
+
+-- disable netrw
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+

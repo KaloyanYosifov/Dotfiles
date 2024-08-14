@@ -5,10 +5,10 @@ return {
 
 	-- editor
 	{
-		"ms-jpq/chadtree",
-		build = "python3 -m chadtree deps",
+		"nvim-tree/nvim-tree.lua",
+		opts = {},
 		init = function()
-			vim.keymap.set("n", "<leader>nd", ":CHADopen<cr>")
+			vim.keymap.set("n", "<leader>nd", ":NvimTreeToggle<cr>")
 		end,
 	},
 

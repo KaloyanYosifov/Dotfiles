@@ -85,6 +85,32 @@ return {
 						end,
 					},
 
+					vue = {
+						function()
+							local package_json = require("lspconfig").util.root_pattern("package.json")
+							local path = package_json(vim.fn.getcwd())
+
+							if path == nil then
+								return nil
+							end
+
+							local util = require("formatter.util")
+							local bin_path = path .. "/node_modules/.bin/eslint"
+
+							return {
+								exe = bin_path,
+								args = {
+									"--stdin-filename",
+									util.escape_path(util.get_current_buffer_file_path()),
+									"--fix",
+                                    "--cache"
+								},
+								stdin = false,
+								try_node_modules = true,
+							}
+						end,
+					},
+
 					rust = {
 						require("formatter.filetypes.rust").rustfmt,
 					},
