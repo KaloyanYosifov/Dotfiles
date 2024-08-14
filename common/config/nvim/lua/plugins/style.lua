@@ -1,5 +1,10 @@
 return {
 	"Yggdroot/indentLine",
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		main = "ibl",
+		opts = {},
+	},
 	"nvim-tree/nvim-web-devicons",
 	{
 		"navarasu/onedark.nvim",

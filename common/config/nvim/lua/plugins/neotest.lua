@@ -11,6 +11,7 @@ return {
 
 		-- adapters
 		"olimorris/neotest-phpunit",
+		"rouge8/neotest-rust",
 	},
 	init = function()
 		local neotest = require("neotest")
@@ -20,6 +21,10 @@ return {
 	config = function()
 		require("neotest").setup({
 			adapters = {
+				-- rust
+				require("neotest-rust"),
+
+				-- php
 				require("neotest-phpunit")({
 					phpunit_cmd = function()
 						return utils.get_env("VIM_PHPUNIT_TEST_CMD", "vendor/bin/phpunit")

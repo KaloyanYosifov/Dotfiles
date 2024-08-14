@@ -16,12 +16,10 @@ return {
 				vim.fn.mkdir(projects_storage)
 			end
 		end,
+		main = "project_nvim",
 		opts = {
 			show_hidden = true,
 			datapath = projects_storage,
 		},
-		config = function(_, opts)
-			require("project_nvim").setup(opts)
-		end,
 	},
 }

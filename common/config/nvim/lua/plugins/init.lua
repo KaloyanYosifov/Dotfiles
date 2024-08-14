@@ -1,5 +1,3 @@
-
-
 return {
 	-- functionality
 	"tpope/vim-surround",
@@ -12,9 +10,8 @@ return {
 	{
 		"my-config/crypt",
 		dev = true,
-		config = function()
-			require("my-config/crypt").setup()
-		end,
+		main = "my-config/crypt",
+		opts = {},
 	},
 
 	-- other
