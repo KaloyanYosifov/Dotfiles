@@ -11,9 +11,6 @@ vim.keymap.set("n", "<leader><space>", ":nohlsearch<cr>")
 vim.keymap.set("n", "<leader>vs", ":vs<cr>")
 vim.keymap.set("n", "<leader>w", "<C-w><C-w>")
 
--- Chad Tree
-vim.keymap.set("n", "<leader>nd", ":CHADopen<cr>")
-
 -- Copy to main clipboard
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])

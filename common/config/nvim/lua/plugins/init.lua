@@ -4,7 +4,13 @@ return {
 	"tpope/vim-commentary",
 
 	-- editor
-	{ "ms-jpq/chadtree", build = "python3 -m chadtree deps" },
+	{
+		"ms-jpq/chadtree",
+		build = "python3 -m chadtree deps",
+		init = function()
+			vim.keymap.set("n", "<leader>nd", ":CHADopen<cr>")
+		end,
+	},
 
 	-- custom
 	{
