@@ -7,7 +7,7 @@ PARENT_DIR=$SCRIPT_DIR/..
 
 function add_repos {
     repos="https://rpm.librewolf.net/librewolf-repo.repo"
-    repos+=" https://download.opensuse.org/repositories/network:im:signal/Fedora_38/network:im:signal.repo"
+    repos+=" https://download.opensuse.org/repositories/network:im:signal/Fedora_40/network:im:signal.repo"
     repos+=" https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo"
 
     for repo in $repos; do
