@@ -5,9 +5,11 @@ set -eu
 SCRIPT_DIR=$( cd -- $( dirname -- ${BASH_SOURCE[0]} ) &> /dev/null && pwd )
 PARENT_DIR=$SCRIPT_DIR/..
 
+source /etc/os-release
+
 function add_repos {
     repos="https://rpm.librewolf.net/librewolf-repo.repo"
-    repos+=" https://download.opensuse.org/repositories/network:im:signal/Fedora_40/network:im:signal.repo"
+    repos+=" https://download.opensuse.org/repositories/network:im:signal/Fedora_$VERSION_ID/network:im:signal.repo"
     repos+=" https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo"
 
     for repo in $repos; do
