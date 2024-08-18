@@ -126,4 +126,8 @@ function M.get_env(name, default)
 	return os.getenv(name) or default
 end
 
+function M.notify(text, ttl)
+	require("fidget").notify(text, nil, { ttl })
+end
+
 return M

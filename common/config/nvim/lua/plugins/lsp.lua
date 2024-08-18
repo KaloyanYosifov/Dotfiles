@@ -17,6 +17,30 @@ local function open_lsp_location_in_new_tab(_, result, ctx, _)
 	vim.lsp.util.jump_to_location(result, "utf-8", true)
 end
 
+local function js_eco_system_formatter()
+	local package_json = require("lspconfig").util.root_pattern("package.json")
+	local path = package_json(vim.fn.getcwd())
+
+	if path == nil then
+		return nil
+	end
+
+	local util = require("formatter.util")
+	local bin_path = path .. "/node_modules/.bin/eslint"
+
+	return {
+		exe = bin_path,
+		args = {
+			"--stdin-filename",
+			util.escape_path(util.get_current_buffer_file_path()),
+			"--fix",
+			"--cache",
+		},
+		stdin = false,
+		try_node_modules = true,
+	}
+end
+
 return {
 	{
 		"VonHeikemen/lsp-zero.nvim",
@@ -85,30 +109,16 @@ return {
 						end,
 					},
 
+					js = {
+						js_eco_system_formatter,
+					},
+
+					ts = {
+						js_eco_system_formatter,
+					},
+
 					vue = {
-						function()
-							local package_json = require("lspconfig").util.root_pattern("package.json")
-							local path = package_json(vim.fn.getcwd())
-
-							if path == nil then
-								return nil
-							end
-
-							local util = require("formatter.util")
-							local bin_path = path .. "/node_modules/.bin/eslint"
-
-							return {
-								exe = bin_path,
-								args = {
-									"--stdin-filename",
-									util.escape_path(util.get_current_buffer_file_path()),
-									"--fix",
-                                    "--cache"
-								},
-								stdin = false,
-								try_node_modules = true,
-							}
-						end,
+						js_eco_system_formatter,
 					},
 
 					rust = {

@@ -4,7 +4,7 @@ return {
 		opts = {
 			integration = {
 				["nvim-tree"] = {
-					enable = true, -- Integrate with nvim-tree/nvim-tree.lua (if installed)
+					enable = true,
 				},
 			},
 		},
