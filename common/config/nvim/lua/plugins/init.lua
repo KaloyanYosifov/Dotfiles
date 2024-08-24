@@ -6,7 +6,11 @@ return {
 	-- editor
 	{
 		"nvim-tree/nvim-tree.lua",
-		opts = {},
+		opts = {
+            update_focused_file = {
+                enable = true
+            }
+        },
 		init = function()
 			vim.keymap.set("n", "<leader>nd", ":NvimTreeToggle<cr>")
 		end,
