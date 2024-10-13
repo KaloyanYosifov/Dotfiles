@@ -8,7 +8,7 @@
     },
     "custom/mullvad": {
         "format": "{} ",
-        "exec": "mullvad status | cut -d' ' -f 5,6 || echo 'Disconnected'",
+        "exec": "[ \"x$(mullvad status --json | jq '.state' | tr -d '\"')\" = \"xconnected\" ] && mullvad status --json | jq '.details.location.city + \", \" + .details.location.country' | tr -d '\"' || echo 'Disconnected'",
         "exec-if": "command -v mullvad",
         "restart-interval": 5,
         "on-click": "gtk-launch mullvad-vpn.desktop"

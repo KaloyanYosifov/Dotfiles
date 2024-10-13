@@ -1,33 +1,33 @@
-#!/bin/sh
+#! /bin/bash
 
-[ -z "$1" ] && echo "No argument passed" && exit 1
+[ $# != 2 ] && echo "Please enter ticker and date. Usage: $(basename $0) BTC 1999-12-31" && exit 1
 
-HOUR_IN_SECONDS=3600
-url="https://api.coinmarketcap.com/data-api/v3/cryptocurrency/market-pairs/latest"
-target="$1"
-denom="usd"
-name="$(echo $target | tr '[:lower:]' '[:upper:]')"
+CACHE_FOLDER="$HOME/.cache/crypto-prices"
+MONTH_IN_SECONDS=2592000
+ticker="$1"
+date="$2"
+cache_file="$CACHE_FOLDER/$ticker-$date"
+api_key_file="$CACHE_FOLDER/apikey.txt"
+apikey=$(cat $api_key_file || echo)
+last_access="$(stat -c %X "$cache_file" 2> /dev/null || echo 0)"
+last_close=$(cat $cache_file 2> /dev/null || echo)
 
-dir="$HOME/.cache/crypto-prices"
-pricefile="$dir/$target-$denom"
-last_access="$(stat -c %X "$pricefile" 2> /dev/null || echo 0)"
-current_price=$(cat $pricefile 2> /dev/null || echo)
+[ -z $apikey ] && echo "Please create and add apikey to $api_key_file" && exit 1
 
-[ -d "$dir" ] || mkdir -p "$dir"
+[ ! -d $CACHE_FOLDER ] && mkdir -p $CACHE_FOLDER
 
-updateprice() { 
-    current_price=$(curl -sf -m 10 --fail-early "$url?slug=$target&category=spot" | jq ".data.marketPairs[0].price" | xargs printf "%i" 2> /dev/null)
-
-    ([ -n $current_price ] && [ $current_price -gt 0 ]) && echo $current_price > $pricefile || exit 1
+function update_ticker_data {
+    # Date should be like 1999-12-31
+    ticker_data=$(curl "https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_MONTHLY&market=USD&symbol=$ticker&apikey=$apikey")
+    last_close=$(echo $ticker_data | jq '.["Time Series (Digital Currency Monthly)"]["'$date'"]["4. close"]' | bc)
+    [ $last_close != 0 ] && echo $last_close > $cache_file
 }
 
 seconds_since_last_update=$(echo $(( $(date '+%s') - ${last_access} )))
 
-[ $seconds_since_last_update -gt $HOUR_IN_SECONDS ] && updateme="1"
-[ -z "$current_price" ] && updateme="1"
+[ $seconds_since_last_update -gt $MONTH_IN_SECONDS ] && updateme="1"
+[ -z "$last_close" ] && updateme="1"
 
-[ -n "$updateme" ] &&
-	updateprice "$target" &&
-    notify-send "Price update for $name complete." "Price is now \$$current_price"
+[ -n "$updateme" ] && update_ticker_data
 
-echo "\$$current_price"
+echo "Close for ticker $1 on $2 is: $last_close"
