@@ -1,0 +1,33 @@
+#!/bin/sh
+
+[ -z "$1" ] && echo "No argument passed" && exit 1
+
+HOUR_IN_SECONDS=3600
+url="https://api.coinmarketcap.com/data-api/v3/cryptocurrency/market-pairs/latest"
+target="$1"
+denom="usd"
+name="$(echo $target | tr '[:lower:]' '[:upper:]')"
+
+dir="$HOME/.cache/crypto-prices"
+pricefile="$dir/$target-$denom"
+last_access="$(stat -c %X "$pricefile" 2> /dev/null || echo 0)"
+current_price=$(cat $pricefile 2> /dev/null || echo)
+
+[ -d "$dir" ] || mkdir -p "$dir"
+
+updateprice() { 
+    current_price=$(curl -sf -m 10 --fail-early "$url?slug=$target&category=spot" | jq ".data.marketPairs[0].price" | xargs printf "%i" 2> /dev/null)
+
+    ([ -n $current_price ] && [ $current_price -gt 0 ]) && echo $current_price > $pricefile || exit 1
+}
+
+seconds_since_last_update=$(echo $(( $(date '+%s') - ${last_access} )))
+
+[ $seconds_since_last_update -gt $HOUR_IN_SECONDS ] && updateme="1"
+[ -z "$current_price" ] && updateme="1"
+
+[ -n "$updateme" ] &&
+	updateprice "$target" &&
+    notify-send "Price update for $name complete." "Price is now \$$current_price"
+
+echo "\$$current_price"

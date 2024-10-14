@@ -1,0 +1,7 @@
+#! /bin/sh
+
+caller="Enter password"
+prompt="${1:-$caller}"
+hidden=black
+
+dmenu -p "[$prompt]" -nf "$hidden" -nb "$hidden" <&-
