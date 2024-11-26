@@ -4,7 +4,20 @@ return {
 		lazy = vim.fn.argc(-1) == 0,
 		opts = {
 			-- A list of parser names, or "all"
-			ensure_installed = { "vimdoc", "javascript", "typescript", "php", "c", "lua", "rust", "dockerfile" },
+			ensure_installed = {
+				"css",
+				"vimdoc",
+				"javascript",
+				"jsdoc",
+				"typescript",
+				"vue",
+				"php",
+				"phpdoc",
+				"c",
+				"lua",
+				"rust",
+				"dockerfile",
+			},
 
 			-- Install parsers synchronously (only applied to `ensure_installed`)
 			sync_install = false,

@@ -257,7 +257,35 @@ return {
 				ensure_installed = lsps_to_install,
 				handlers = {
 					function(server_name)
-						require("lspconfig")[server_name].setup({})
+						local config = {}
+
+						if server_name == "ts_ls" then
+							local vue_typescript_plugin = require("mason-registry")
+								.get_package("vue-language-server")
+								:get_install_path() .. "/node_modules/@vue/language-server" .. "/node_modules/@vue/typescript-plugin"
+							config = {
+								init_options = {
+									plugins = {
+										{
+											name = "@vue/typescript-plugin",
+											location = vue_typescript_plugin,
+											languages = { "javascript", "typescript", "vue" },
+										},
+									},
+								},
+								filetypes = {
+									"javascript",
+									"javascriptreact",
+									"javascript.jsx",
+									"typescript",
+									"typescriptreact",
+									"typescript.tsx",
+									"vue",
+								},
+							}
+						end
+
+						require("lspconfig")[server_name].setup(config)
 					end,
 				},
 			})
