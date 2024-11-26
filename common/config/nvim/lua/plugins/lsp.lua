@@ -240,7 +240,7 @@ return {
 			})
 
 			local lsps_to_install = {
-				"tsserver",
+				"ts_ls",
 				"rust_analyzer",
 				"lua_ls",
 				"jsonls",

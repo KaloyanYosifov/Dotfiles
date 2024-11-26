@@ -12,6 +12,7 @@ return {
 		-- adapters
 		"olimorris/neotest-phpunit",
 		"rouge8/neotest-rust",
+		"nvim-neotest/neotest-jest",
 	},
 	init = function()
 		local neotest = require("neotest")
@@ -28,6 +29,17 @@ return {
 				require("neotest-phpunit")({
 					phpunit_cmd = function()
 						return utils.get_env("VIM_PHPUNIT_TEST_CMD", "vendor/bin/phpunit")
+					end,
+				}),
+
+				-- javascript
+				require("neotest-jest")({
+					jestCommand = function()
+						return utils.get_env("VIM_JEST_TEST_CMD", "node_modules/.bin/jest")
+					end,
+					jestConfigFile = "jest.config.js",
+					cwd = function()
+						return vim.fn.getcwd()
 					end,
 				}),
 			},
