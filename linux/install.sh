@@ -137,7 +137,7 @@ function install_sway_login {
 function cleanup {
     echo "Running cleanup"
     sudo dnf -y group remove gnome
-    sudo dnf -y remove firefox
+    sudo dnf -y remove firefox samba-client samba-common
     sudo systemctl disable gdm
     sudo systemctl stop gdm
     echo "Cleanup done"
