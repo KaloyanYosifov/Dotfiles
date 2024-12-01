@@ -13,8 +13,14 @@ function M.command_exists(command)
 	return M.execute_for_status(string.format("command -v %s", command)) == 0
 end
 
-function M.command_path(command)
-	return M.execute(string.format("command -v %s", command))
+function M.command_path(command, default)
+	local commandExec = "command -v %s"
+
+	if default ~= nil then
+		commandExec = commandExec .. " || echo %s"
+	end
+
+	return M.execute(string.format(commandExec, command, default))
 end
 
 -- Credit: https://gist.github.com/jaredallard/ddb152179831dd23b230

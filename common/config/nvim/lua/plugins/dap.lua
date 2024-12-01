@@ -1,3 +1,5 @@
+local utils = require("my-config.utils")
+
 return {
 	{
 		"mfussenegger/nvim-dap",
@@ -43,7 +45,16 @@ return {
 				)
 
 				dap.adapters = (function()
-					return {}
+					return {
+						lldb = {
+							type = "executable",
+							command = utils.command_path(
+								"lldb-dap",
+								"/Library/Developer/CommandLineTools/usr/bin/lldb-dap"
+							),
+							name = "lldb",
+						},
+					}
 				end)()
 				dap.configurations = (function()
 					return {}
@@ -84,19 +95,30 @@ return {
 			end
 
 			-- Mappings
-			vim.keymap.set("n", "<leader>rc", ":lua require('dap').continue()<cr>")
 			vim.keymap.set("n", "<leader>rb", ":lua require('dap').toggle_breakpoint()<cr>")
+			vim.keymap.set("n", "<leader>dc", ":lua require('dap').continue()<cr>")
+			vim.keymap.set("n", "<leader>di", ":lua require('dap').step_into()<cr>")
+			vim.keymap.set("n", "<leader>do", ":lua require('dap').step_over()<cr>")
 		end,
 
 		config = function()
-			local dap_adapters_to_install = {
-				"codelldb",
-				"cpptools",
-			}
+			local dap_adapters_to_install = {}
 
 			require("mason-nvim-dap").setup({
 				ensure_installed = dap_adapters_to_install,
 			})
+		end,
+	},
+
+	{
+		"rcarriga/nvim-dap-ui",
+		dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
+		init = function()
+			local dap_ui = require("dapui")
+
+			dap_ui.setup()
+
+			vim.keymap.set("n", "<leader>dk", ":lua require('dapui').toggle()<cr>")
 		end,
 	},
 }
