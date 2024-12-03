@@ -3,6 +3,15 @@ return {
 	"tpope/vim-surround",
 	"tpope/vim-commentary",
 
+	-- focus
+	{
+		"nvim-focus/focus.nvim",
+		version = false,
+		init = function()
+			require("focus").setup()
+		end,
+	},
+
 	-- custom
 	{
 		"my-config/crypt",

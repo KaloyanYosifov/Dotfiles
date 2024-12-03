@@ -18,7 +18,10 @@ return {
 			end,
 		},
 		init = function()
-			vim.keymap.set("n", "<leader>nd", ":NvimTreeToggle<cr>")
+			vim.keymap.set("n", "<leader>nd", function()
+				vim.cmd("NvimTreeToggle")
+				require("focus").resize("autoresize")
+			end)
 		end,
 	},
 }
