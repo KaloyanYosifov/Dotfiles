@@ -148,9 +148,34 @@ return {
 			local cmp = require("cmp")
 			local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
+			cmp.event:on("menu_closed", function()
+				local bufnr = vim.api.nvim_get_current_buf()
+				vim.b[bufnr]._vue_ts_cached_is_in_start_tag = nil
+			end)
+
 			cmp.setup({
 				sources = {
-					{ name = "nvim_lsp" },
+					{
+						name = "nvim_lsp",
+						entry_filter = function(entry, ctx)
+							-- Check if the buffer type is 'vue'
+							if ctx.filetype ~= "vue" then
+								return true
+							end
+
+							local cursor_before_line = ctx.cursor_before_line
+							-- For events
+							if cursor_before_line:sub(-1) == "@" then
+								return entry.completion_item.label:match("^@")
+							-- For props also exclude events with `:on-` prefix
+							elseif cursor_before_line:sub(-1) == ":" then
+								return entry.completion_item.label:match("^:")
+									and not entry.completion_item.label:match("^:on%-")
+							else
+								return true
+							end
+						end, -- <--- HERE
+					},
 				},
 				mapping = cmp.mapping.preset.insert({
 					["<C-k>"] = cmp.mapping.select_prev_item(cmp_select),
@@ -193,8 +218,10 @@ return {
 				local opts = { buffer = bufnr, remap = false }
 
 				-- vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
-				-- vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
 
+				vim.keymap.set("n", "<leader>vd", function()
+					vim.diagnostic.open_float()
+				end, opts)
 				vim.keymap.set("n", "gd", function()
 					vim.lsp.buf.definition()
 				end, opts)
@@ -240,13 +267,13 @@ return {
 			})
 
 			local lsps_to_install = {
-				"ts_ls",
 				"rust_analyzer",
 				"lua_ls",
 				"jsonls",
 				"yamlls",
-				"volar",
 				"tailwindcss",
+				"ts_ls",
+				"volar",
 			}
 
 			if utils.command_exists("composer") then
@@ -260,26 +287,38 @@ return {
 						local config = {}
 
 						if server_name == "ts_ls" then
-							local vue_typescript_plugin = require("mason-registry")
+							local vue_language_server_path = require("mason-registry")
 								.get_package("vue-language-server")
-								:get_install_path() .. "/node_modules/@vue/language-server" .. "/node_modules/@vue/typescript-plugin"
+								:get_install_path() .. "/node_modules/@vue/language-server"
 							config = {
 								init_options = {
 									plugins = {
 										{
 											name = "@vue/typescript-plugin",
-											location = vue_typescript_plugin,
-											languages = { "javascript", "typescript", "vue" },
+											location = vue_language_server_path,
+											languages = { "vue" },
 										},
 									},
 								},
 								filetypes = {
+									"vue",
 									"javascript",
 									"javascriptreact",
 									"javascript.jsx",
 									"typescript",
 									"typescriptreact",
 									"typescript.tsx",
+								},
+							}
+						elseif server_name == "volar" then
+							config = {
+								init_options = {
+									vue = {
+										hybridMode = false,
+									},
+								},
+
+								filetypes = {
 									"vue",
 								},
 							}
