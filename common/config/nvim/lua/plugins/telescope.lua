@@ -42,6 +42,7 @@ return {
 		end,
 		opts = {
 			defaults = {
+				path_display = { "truncate" },
 				filesize_limit = 10, -- MB
 				vimgrep_arguments = {
 					"rg",
