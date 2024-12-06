@@ -102,6 +102,7 @@ nnoremap <leader>hh :action ShowBookmarks<CR>
 nnoremap <leader>ha :action ToggleBookmark<CR>
 nnoremap <leader>o :action OptimizeImports<CR>
 nnoremap <leader>pm :action ManageRecentProjects<CR>
+nnoremap <leader>gm :action Show.Current.Revision<CR>
 
 " Window switching
 nnoremap <S-k> :action NextTab<cr>
