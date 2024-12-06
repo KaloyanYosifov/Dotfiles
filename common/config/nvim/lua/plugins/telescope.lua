@@ -29,6 +29,7 @@ return {
 			vim.keymap.set("n", "<C-p>", project_files, {})
 			vim.keymap.set("n", "<leader>f", builtin.live_grep, {})
 			vim.keymap.set("n", "<leader>vh", builtin.help_tags, {})
+			vim.keymap.set("n", "<leader>ml", builtin.marks, {})
 
 			-- Commented out for now, since I am only using telescope for file finder
 			-- hence it's not a problem for me to just remap the bindings

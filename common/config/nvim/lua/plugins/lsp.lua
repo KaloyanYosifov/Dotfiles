@@ -1,5 +1,7 @@
 local utils = require("my-config.utils")
 
+local debug_mode = utils.get_env("NVIM_LSP_DEBUG", "0") == "1"
+
 local function open_lsp_location_in_new_tab(_, result, ctx, _)
 	if not result or vim.tbl_isempty(result) then
 		print("No location found for " .. ctx.method)
@@ -205,6 +207,10 @@ return {
 			{ "williamboman/mason-lspconfig.nvim" },
 		},
 		init = function()
+			if debug_mode then
+				vim.lsp.set_log_level("debug")
+			end
+
 			vim.diagnostic.config({
 				virtual_text = true,
 			})
@@ -274,6 +280,7 @@ return {
 				"tailwindcss",
 				"ts_ls",
 				"volar",
+				"bashls",
 			}
 
 			if utils.command_exists("composer") then
@@ -285,13 +292,21 @@ return {
 				handlers = {
 					function(server_name)
 						local config = {}
+						local mason_registry = require("mason-registry")
 
 						if server_name == "ts_ls" then
-							local vue_language_server_path = require("mason-registry")
+							local vue_language_server_path = mason_registry
 								.get_package("vue-language-server")
 								:get_install_path() .. "/node_modules/@vue/language-server"
+							local tsserver_exec_path = mason_registry
+								.get_package("typescript-language-server")
+								:get_install_path() .. "/node_modules/typescript/lib/tsserver.js"
+
 							config = {
 								init_options = {
+									tsserver = {
+										path = tsserver_exec_path,
+									},
 									plugins = {
 										{
 											name = "@vue/typescript-plugin",
@@ -299,7 +314,13 @@ return {
 											languages = { "vue" },
 										},
 									},
+									preferences = {
+										includeInlayParameterNameHints = "literals",
+										includeInlayVariableTypeHints = true,
+										includeInlayEnumMemberValueHints = true,
+									},
 								},
+								cmd = { "typescript-language-server", "--stdio" },
 								filetypes = {
 									"vue",
 									"javascript",
@@ -310,18 +331,11 @@ return {
 									"typescript.tsx",
 								},
 							}
-						elseif server_name == "volar" then
-							config = {
-								init_options = {
-									vue = {
-										hybridMode = false,
-									},
-								},
 
-								filetypes = {
-									"vue",
-								},
-							}
+							if debug_mode then
+								config.init_options.tsserver.logVerbosity = "verbose"
+								config.cmd = { "typescript-language-server", "--stdio", "--log-level", "4" }
+							end
 						end
 
 						require("lspconfig")[server_name].setup(config)
