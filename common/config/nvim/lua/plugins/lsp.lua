@@ -45,6 +45,12 @@ end
 
 return {
 	{
+		"folke/lazydev.nvim",
+		ft = "lua",
+		opts = {},
+	},
+
+	{
 		"VonHeikemen/lsp-zero.nvim",
 		branch = "v4.x",
 		lazy = false,
@@ -153,6 +159,7 @@ return {
 			cmp.setup({
 				sources = {
 					{ name = "nvim_lsp" },
+					{ name = "lazydev", group_index = 0 },
 				},
 				mapping = cmp.mapping.preset.insert({
 					["<C-k>"] = cmp.mapping.select_prev_item(cmp_select),

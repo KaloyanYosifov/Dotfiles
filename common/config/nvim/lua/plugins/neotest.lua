@@ -18,6 +18,8 @@ return {
 		local neotest = require("neotest")
 
 		vim.keymap.set("n", "<leader>rt", neotest.run.run, {})
+		vim.keymap.set("n", "<leader>rr", neotest.run.run_last, {})
+		vim.keymap.set("n", "<leader>rs", neotest.output_panel.toggle, {})
 	end,
 	config = function()
 		require("neotest").setup({
