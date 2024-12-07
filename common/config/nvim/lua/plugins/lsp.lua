@@ -111,11 +111,11 @@ return {
 						end,
 					},
 
-					js = {
+					javascript = {
 						js_eco_system_formatter,
 					},
 
-					ts = {
+					typescript = {
 						js_eco_system_formatter,
 					},
 
@@ -150,34 +150,9 @@ return {
 			local cmp = require("cmp")
 			local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
-			cmp.event:on("menu_closed", function()
-				local bufnr = vim.api.nvim_get_current_buf()
-				vim.b[bufnr]._vue_ts_cached_is_in_start_tag = nil
-			end)
-
 			cmp.setup({
 				sources = {
-					{
-						name = "nvim_lsp",
-						entry_filter = function(entry, ctx)
-							-- Check if the buffer type is 'vue'
-							if ctx.filetype ~= "vue" then
-								return true
-							end
-
-							local cursor_before_line = ctx.cursor_before_line
-							-- For events
-							if cursor_before_line:sub(-1) == "@" then
-								return entry.completion_item.label:match("^@")
-							-- For props also exclude events with `:on-` prefix
-							elseif cursor_before_line:sub(-1) == ":" then
-								return entry.completion_item.label:match("^:")
-									and not entry.completion_item.label:match("^:on%-")
-							else
-								return true
-							end
-						end, -- <--- HERE
-					},
+					{ name = "nvim_lsp" },
 				},
 				mapping = cmp.mapping.preset.insert({
 					["<C-k>"] = cmp.mapping.select_prev_item(cmp_select),
@@ -237,6 +212,9 @@ return {
 				vim.keymap.set("n", "gD", function()
 					vim.lsp.buf.declaration()
 				end, opts)
+				vim.keymap.set("n", "gr", function()
+					vim.lsp.buf.references()
+				end, opts)
 				vim.keymap.set("n", "<leader>k", function()
 					vim.lsp.buf.hover()
 				end, opts)
@@ -248,9 +226,6 @@ return {
 				end, opts)
 				vim.keymap.set("n", "<leader>cac", function()
 					vim.lsp.buf.code_action()
-				end, opts)
-				vim.keymap.set("n", "<leader>vrr", function()
-					vim.lsp.buf.references()
 				end, opts)
 				vim.keymap.set("n", "<leader>vre", function()
 					vim.lsp.buf.rename()

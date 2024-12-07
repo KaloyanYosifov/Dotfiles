@@ -28,7 +28,13 @@ return {
 				-- php
 				require("neotest-phpunit")({
 					phpunit_cmd = function()
-						return utils.get_env("VIM_PHPUNIT_TEST_CMD", "vendor/bin/phpunit")
+						local phpunit_container = utils.get_env("NEOTEST_PHPUNIT_CONTAINER", nil)
+
+						if phpunit_container == nil then
+							return utils.get_env("VIM_PHPUNIT_TEST_CMD", "vendor/bin/phpunit")
+						end
+
+						return vim.fn.stdpath("config") .. "/scripts/phpunit-in-docker.sh"
 					end,
 				}),
 
