@@ -219,7 +219,7 @@ return {
 				vim.keymap.set("n", "gD", function()
 					vim.lsp.buf.declaration()
 				end, opts)
-				vim.keymap.set("n", "gr", function()
+				vim.keymap.set("n", "<leader>gr", function()
 					vim.lsp.buf.references()
 				end, opts)
 				vim.keymap.set("n", "<leader>k", function()
@@ -260,7 +260,7 @@ return {
 				"jsonls",
 				"yamlls",
 				"tailwindcss",
-				"ts_ls",
+				"typescript-language-server",
 				"volar",
 				"bashls",
 			}
