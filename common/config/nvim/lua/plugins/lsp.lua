@@ -1,6 +1,38 @@
 local utils = require("my-config.utils")
+local telescope_builtin = require("telescope.builtin")
 
 local debug_mode = utils.get_env("NVIM_LSP_DEBUG", "0") == "1"
+
+-- inneficient way of checking if we are on the same line as the definition
+-- so that we can open references instead
+local function go_to_definition()
+	local params = vim.lsp.util.make_position_params()
+	vim.lsp.buf_request(0, vim.lsp.protocol.Methods.textDocument_definition, params, function(err, result)
+		if err then
+			vim.notify("Error fetching definition: " .. err.message, vim.log.levels.ERROR)
+
+			return
+		end
+
+		if not result or vim.tbl_isempty(result) then
+			telescope_builtin.lsp_references()
+
+			return
+		end
+
+		if not vim.islist(result) then
+			local cursor_position = vim.fn.getcurpos()
+
+			if result.range.start.line == (cursor_position[2] - 1) then
+				telescope_builtin.lsp_references()
+
+				return
+			end
+		end
+
+		vim.lsp.buf.definition()
+	end)
+end
 
 local function open_lsp_location_in_new_tab(_, result, ctx, _)
 	if not result or vim.tbl_isempty(result) then
@@ -8,7 +40,7 @@ local function open_lsp_location_in_new_tab(_, result, ctx, _)
 		return
 	end
 
-	if vim.tbl_islist(result) then
+	if vim.islist(result) then
 		result = result[1]
 	end
 
@@ -211,7 +243,7 @@ return {
 					vim.diagnostic.open_float()
 				end, opts)
 				vim.keymap.set("n", "gd", function()
-					vim.lsp.buf.definition()
+					go_to_definition()
 				end, opts)
 				vim.keymap.set("n", "gi", function()
 					vim.lsp.buf.implementation()
@@ -220,7 +252,7 @@ return {
 					vim.lsp.buf.declaration()
 				end, opts)
 				vim.keymap.set("n", "<leader>gr", function()
-					vim.lsp.buf.references()
+					telescope_builtin.lsp_references()
 				end, opts)
 				vim.keymap.set("n", "<leader>k", function()
 					vim.lsp.buf.hover()
