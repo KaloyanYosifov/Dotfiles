@@ -260,7 +260,7 @@ return {
 				"jsonls",
 				"yamlls",
 				"tailwindcss",
-				"typescript-language-server",
+				"ts_ls",
 				"volar",
 				"bashls",
 			}
@@ -270,6 +270,7 @@ return {
 			end
 
 			require("mason-lspconfig").setup({
+				automatic_installation = true,
 				ensure_installed = lsps_to_install,
 				handlers = {
 					function(server_name)
@@ -293,7 +294,7 @@ return {
 										{
 											name = "@vue/typescript-plugin",
 											location = vue_language_server_path,
-											languages = { "javascript", "typescript", "vue" },
+											languages = { "vue" },
 										},
 									},
 									preferences = {
@@ -318,6 +319,15 @@ return {
 								config.init_options.tsserver.logVerbosity = "verbose"
 								config.cmd = { "typescript-language-server", "--stdio", "--log-level", "4" }
 							end
+						elseif server_name == "volar" then
+							config = {
+								filetypes = { "vue" },
+								init_options = {
+									vue = {
+										hybridMode = false,
+									},
+								},
+							}
 						end
 
 						require("lspconfig")[server_name].setup(config)
