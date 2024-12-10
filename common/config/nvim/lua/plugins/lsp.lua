@@ -1,12 +1,13 @@
 local utils = require("my-config.utils")
 local telescope_builtin = require("telescope.builtin")
-
 local debug_mode = utils.get_env("NVIM_LSP_DEBUG", "0") == "1"
 
 -- inneficient way of checking if we are on the same line as the definition
 -- so that we can open references instead
 local function go_to_definition()
 	local params = vim.lsp.util.make_position_params()
+	local cursor_position = vim.fn.getcurpos()
+
 	vim.lsp.buf_request(0, vim.lsp.protocol.Methods.textDocument_definition, params, function(err, result)
 		if err then
 			vim.notify("Error fetching definition: " .. err.message, vim.log.levels.ERROR)
@@ -21,9 +22,7 @@ local function go_to_definition()
 		end
 
 		if not vim.islist(result) then
-			local cursor_position = vim.fn.getcurpos()
-
-			if result.range.start.line == (cursor_position[2] - 1) then
+			if result.uri == vim.api.nvim_buf_get_name(0) and result.range.start.line == (cursor_position[2] - 1) then
 				telescope_builtin.lsp_references()
 
 				return
