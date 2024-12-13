@@ -30,6 +30,7 @@ return {
 	{
 		"my-config/crypt",
 		dev = true,
+		virtual = true,
 		main = "my-config/crypt",
 		opts = {},
 	},
