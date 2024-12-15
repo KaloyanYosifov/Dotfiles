@@ -136,4 +136,17 @@ function M.notify(text, ttl)
 	require("fidget").notify(text, nil, { ttl })
 end
 
+function M.download_and_store(url, path)
+    local http = {}
+	local body, code = http.request(url)
+
+	if not body then
+		error(code)
+	end
+
+	local f = assert(io.open(path, "wb"))
+	f:write(body)
+	f:close()
+end
+
 return M

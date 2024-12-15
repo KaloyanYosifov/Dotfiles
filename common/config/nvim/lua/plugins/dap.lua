@@ -1,4 +1,11 @@
 local utils = require("my-config.utils")
+local data_path = vim.fn.stdpath("data")
+local non_mason_debuggers = {
+	php = {
+		url = "https://github.com/xdebug/vscode-php-debug/releases/download/v1.35.0/php-debug-1.35.0.vsix",
+		path = data_path .. "/php-debugger",
+	},
+}
 
 return {
 	{
@@ -54,6 +61,11 @@ return {
 							),
 							name = "lldb",
 						},
+						php = {
+							type = "executable",
+							command = "node",
+							args = { vim.fn.stdpath("data") .. "/debuggers/php/out/phpDebug.js" },
+						},
 					}
 				end)()
 				dap.configurations = (function()
@@ -105,20 +117,30 @@ return {
 			local dap_adapters_to_install = {}
 
 			require("mason-nvim-dap").setup({
+				automatic_installation = true,
 				ensure_installed = dap_adapters_to_install,
 			})
+
+			-- Finish up
+			-- for key, config in pairs(non_mason_debuggers) do
+
+			-- end
 		end,
 	},
 
 	{
 		"rcarriga/nvim-dap-ui",
-		dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
+		dependencies = { "nvim-neotest/nvim-nio" },
 		init = function()
-			local dap_ui = require("dapui")
-
-			dap_ui.setup()
-
-			vim.keymap.set("n", "<leader>dk", ":lua require('dapui').toggle()<cr>")
+			vim.keymap.set("n", "<leader>dk", function()
+				require("dapui").toggle()
+			end)
 		end,
+		opts = {},
+	},
+
+	{
+		"theHamsta/nvim-dap-virtual-text",
+		opts = {},
 	},
 }
