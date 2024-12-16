@@ -1,0 +1,5 @@
+#! /usr/bin/env bash
+
+local_tmux="$(pwd)/.init-tmux"
+
+[[ -f "$local_tmux" ]] && chmod u+x $local_tmux && $local_tmux && clear

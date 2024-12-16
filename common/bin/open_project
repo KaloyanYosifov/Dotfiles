@@ -7,18 +7,23 @@ else
     selected=$(find $projects -mindepth 0 -maxdepth 2 -type d | fzf)
 fi
 
-if [[ -z $selected ]]; then
-    exit 0
-fi
+# exit if we have no selected
+[[ -z $selected ]] && exit 0
 
 selected_name=$(basename "$selected" | tr . _)
 tmux_running=$(pgrep tmux)
 
-[ -z $TMUX ] && [ -z $tmux_running ] && tmux new-session -s "$selected_name" -c "$selected" && exit 0
+function open_session {
+    [[ -z $TMUX ]] && tmux at -t $selected_name || tmux switch-client -t $selected_name
+}
 
-# check if session already exists
-# and if not create a new one
-# This is when we are in tmux
-tmux has-session -t "$selected_name" 2>/dev/null || tmux new-session -ds $selected_name -c $selected
+if tmux has-session -t "$selected_name" 2>/dev/null; then
+    open_session
 
-[ -z $TMUX ] && tmux at -t $selected_name || tmux switch-client -t $selected_name
+    exit 0
+fi
+
+tmux new-session -ds $selected_name -c $selected
+
+tmux send-keys -t $selected_name "init-tmux" 
+open_session
