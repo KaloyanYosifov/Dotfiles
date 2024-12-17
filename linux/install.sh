@@ -45,7 +45,7 @@ function install_packages {
 
     non_repo_packages=(
         "https://github.com/bitwarden/clients/releases/download/desktop-v2024.9.0/Bitwarden-2024.9.0-x86_64.rpm"
-        "https://mullvad.net/media/app/MullvadVPN-2024.5_x86_64.rpm"
+        "https://github.com/mullvad/mullvadvpn-app/releases/download/2024.8/MullvadVPN-2024.8_x86_64.rpm"
         "https://github.com/charmbracelet/glow/releases/download/v1.5.1/glow-1.5.1.x86_64.rpm"
     )
     package_names=()
