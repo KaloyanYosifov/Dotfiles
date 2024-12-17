@@ -12,12 +12,12 @@ yabai -m signal --add event=window_minimized active=yes action="if \$(yabai -m q
 
 # global settings
 yabai -m config                              \
-    external_bar                off:41:0     \
+    external_bar                all:40:0     \
     mouse_follows_focus         on           \
     focus_follows_mouse         autoraise    \
     window_placement            second_child \
     window_topmost              off          \
-    window_shadow               off          \
+    window_shadow               float          \
     window_animation_duration   0.25         \
     window_opacity_duration     0.25         \
     active_window_opacity       1.00         \
@@ -34,11 +34,11 @@ yabai -m config                              \
     split_ratio                 0.50         \
     split_type                  auto         \
     auto_balance                off          \
-    top_padding                 10           \
+    top_padding                 5           \
     left_padding                10           \
     right_padding               10           \
     bottom_padding              10           \
-    window_gap                  5            \
+    window_gap                  10            \
     layout                      bsp          \
     mouse_modifier              fn           \
     mouse_action1               move         \

@@ -46,4 +46,4 @@ alt - t : yabai -m window --toggle float --grid 4:4:1:1:2:2
 alt - q : yabai -m window --close
 
 # reload
-shift + alt - c : skhd -r && yabai --restart-service
+shift + alt - c : skhd -r && sketchybar --reload && yabai --stop-service && yabai --start-service
