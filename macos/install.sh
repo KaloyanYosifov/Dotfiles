@@ -18,6 +18,7 @@ echo "Installing programs from brew"
 $SCRIPT_DIR/brew-updates.sh
 
 # Install common configurations
+$SCRIPT_DIR/config/install.sh
 $PARENT_DIR/common/config/install.sh
 $PARENT_DIR/common/link-custom-binaries.sh
 $PARENT_DIR/common/install-common-binaries.sh
@@ -34,6 +35,17 @@ if [[ $install_additional == "y" ]] || [[ $install_additional == "yes" ]]; then
     # Not so into Haskell for now
     # $PARENT_DIR/common/install-haskell.sh
 fi
+
+# Configure yabai
+echo "Configuring yabai..."
+echo "$(whoami) ALL=(root) NOPASSWD: sha256:$(shasum -a 256 $(which yabai) | cut -d " " -f 1) $(which yabai) --load-sa" | sudo tee /private/etc/sudoers.d/yabai
+yabay --start-service
+
+# Configure skhd
+skhd --start-service
+
+# Configure sketchybar
+brew services start sketchybar
 
 # Disable saving to icloud
 defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false

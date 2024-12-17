@@ -49,10 +49,8 @@ brew install avr-binutils avr-gcc avrdude
 # Install other useful binaries.
 brew install imagemagick --with-webp
 
-# install rectangle a new version of spectacles
 brew install --cask docker
 brew install insomnia \
-    rectangle \
     alacritty \
     notion \
     slack \
@@ -60,6 +58,10 @@ brew install insomnia \
     mullvad \
     bitwarden
 
+# install yabai, sketchybar and skhd
+brew install koekeishiya/formulae/yabai \
+    koekeishiya/formulae/skhd \
+    FelixKratz/formulae/sketchybar
 
 brew install pidof lua rg copyq irssi fzf abseil act adns \
     aom apr apr-util argon2 aspell assimp augeas autoconf automake aws-elasticbeanstalk \
@@ -80,11 +82,10 @@ brew install pidof lua rg copyq irssi fzf abseil act adns \
     pkg-config pv qt rav1e re2 readline redis six sqlite sqlmap \
     srt theora tmux tree tree-sitter unixodbc utf8proc volta wangle watch \
     watchman webp wget wimlib wireshark woff2 x264 x265 lf font-jetbrains-mono font-jetbrains-mono-nerd-font \
-    zathura mpv glow newsboat
+    zathura mpv glow newsboat font-hack-nerd-font
 
 # Install mupdf and zathura plugin in another command, so we do not break the first one
 brew install mupdf zathura-pdf-mupdf || echo "Zathura plugins could not be installed :("
-
 
 # Remove outdated versions from the cellar.
 brew cleanup
