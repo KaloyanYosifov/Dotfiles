@@ -9,13 +9,13 @@ lalt - k : yabai -m window --focus north || yabai -m display --focus north
 lalt - l : yabai -m window --focus east || yabai -m display --focus east
 
 # move window
-shift + lalt - h : yabai -m window --warp west || yabai -m window --display west && yabai -m display --focus west && yabai -m window --warp last
-shift + lalt - j : yabai -m window --warp south || yabai -m window --display south && yabai -m display --focus south && yabai -m window --warp last
-shift + lalt - k : yabai -m window --warp north || yabai -m window --display north && yabai -m display --focus north && yabai -m window --warp last
-shift + lalt - l : yabai -m window --warp east || yabai -m window --display east && yabai -m display --focus east && yabai -m window --warp first
+shift + lalt - h : yabai -m window --warp west || (yabai -m window --display west && yabai -m display --focus west && yabai -m window --warp last)
+shift + lalt - j : yabai -m window --warp south || (yabai -m window --display south && yabai -m display --focus south && yabai -m window --warp last)
+shift + lalt - k : yabai -m window --warp north || (yabai -m window --display north && yabai -m display --focus north && yabai -m window --warp last)
+shift + lalt - l : yabai -m window --warp east || (yabai -m window --display east && yabai -m display --focus east && yabai -m window --warp first)
 
 # balance size of windows
-shift + alt - 0 : yabai -m space --balance
+shift + alt - 0 : yabai -m space --balance && yabai -m space --layout bsp
 
 # send window to desktop and follow focus
 shift + lalt - 1 : yabai -m window --space 1 && yabai -m space --focus 1
