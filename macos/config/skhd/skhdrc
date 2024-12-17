@@ -9,10 +9,10 @@ lalt - k : yabai -m window --focus north || yabai -m display --focus north
 lalt - l : yabai -m window --focus east || yabai -m display --focus east
 
 # move window
-shift + alt - h : yabai -m window --warp west
-shift + alt - j : yabai -m window --warp south
-shift + alt - k : yabai -m window --warp north
-shift + alt - l : yabai -m window --warp east
+shift + lalt - h : yabai -m window --warp west || $(yabai -m window --display west && yabai -m display --focus west && yabai -m window --warp last) || yabai -m window --move rel:-10:0
+shift + lalt - j : yabai -m window --warp south || $(yabai -m window --display south && yabai -m display --focus south && yabai -m window --warp last) || yabai -m window --move rel:0:10
+shift + lalt - k : yabai -m window --warp north || $(yabai -m window --display north && yabai -m display --focus north && yabai -m window --warp last) || yabai -m window --move rel:-10:0
+shift + lalt - l : yabai -m window --warp east || $(yabai -m window --display east && yabai -m display --focus east && yabai -m window --warp first) || yabai -m window --move rel:10:0
 
 # balance size of windows
 shift + alt - 0 : yabai -m space --balance
@@ -27,6 +27,15 @@ shift + lalt - 6 : yabai -m window --space 6 && yabai -m space --focus 6
 shift + lalt - 7 : yabai -m window --space 7 && yabai -m space --focus 7
 shift + lalt - 8 : yabai -m window --space 8 && yabai -m space --focus 8
 shift + lalt - 9 : yabai -m window --space 9 && yabai -m space --focus 9
+
+# Stacks
+shift + ctrl - h : yabai -m window west --stack $(yabai -m query --windows --window | jq -r '.id')
+shift + ctrl - j : yabai -m window south --stack $(yabai -m query --windows --window | jq -r '.id')
+shift + ctrl - k : yabai -m window north --stack $(yabai -m query --windows --window | jq -r '.id')
+shift + ctrl - l : yabai -m window east --stack $(yabai -m query --windows --window | jq -r '.id')
+
+shift + ctrl - n : yabai -m window --focus stack.next
+shift + ctrl - p : yabai -m window --focus stack.prev
 
 # focus monitor
 alt - 1  : yabai -m space --focus 1
