@@ -20,7 +20,7 @@ end
 return {
 	{
 		"nvim-telescope/telescope.nvim",
-		version = "0.1.6",
+		version = "0.1.8",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		init = function()
 			local builtin = require("telescope.builtin")

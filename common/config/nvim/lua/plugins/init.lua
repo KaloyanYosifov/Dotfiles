@@ -6,7 +6,7 @@ return {
 	-- focus
 	{
 		"nvim-focus/focus.nvim",
-		version = false,
+		version = "v1.0.0",
 		opts = {},
 	},
 
