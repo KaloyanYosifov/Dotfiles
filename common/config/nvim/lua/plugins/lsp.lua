@@ -30,6 +30,10 @@ local function js_eco_system_formatter()
 	local util = require("formatter.util")
 	local bin_path = path .. "/node_modules/.bin/eslint"
 
+	if not utils.file_exists(bin_path) then
+		return nil
+	end
+
 	return {
 		exe = bin_path,
 		args = {
