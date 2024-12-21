@@ -17,7 +17,7 @@ set $term alacritty
 # Preferred clipboard manage
 set $clipboard copyq show
 
-# Set variable for locking the screen  
+# Set variable for locking the screen
 set $lock gtklock -d
 
 # Preferred application launcher
@@ -140,6 +140,9 @@ input "type:keyboard" {
     bindsym $mod+$down focus down
     bindsym $mod+$up focus up
     bindsym $mod+$right focus right
+
+    bindsym Ctrl+Shift+n focus next
+    bindsym Ctrl+Shift+p focus prev
 
     # Move the focused window with the same, but add Shift
     bindsym $mod+Shift+$left move left
