@@ -185,7 +185,7 @@ return {
 	-- LSP
 	{
 		"neovim/nvim-lspconfig",
-        version = "v1.1.0",
+		version = "v1.1.0",
 		cmd = { "LspInfo", "LspInstall", "LspStart" },
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
@@ -345,6 +345,18 @@ return {
 			vim.lsp.handlers["textDocument/implementation"] = open_lsp_location_in_new_tab
 			vim.lsp.handlers["textDocument/declaration"] = open_lsp_location_in_new_tab
 			vim.lsp.handlers["textDocument/typeDefinition"] = open_lsp_location_in_new_tab
+
+            -- Temp fix to ignore cancel request from rust-analyzer
+            -- @see https://github.com/neovim/neovim/issues/30985
+			for _, method in ipairs({ "textDocument/diagnostic", "workspace/diagnostic" }) do
+				local default_diagnostic_handler = vim.lsp.handlers[method]
+				vim.lsp.handlers[method] = function(err, result, context, config)
+					if err ~= nil and err.code == -32802 then
+						return
+					end
+					return default_diagnostic_handler(err, result, context, config)
+				end
+			end
 		end,
 	},
 }
