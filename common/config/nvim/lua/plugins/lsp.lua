@@ -19,7 +19,7 @@ local function open_lsp_location_in_new_tab(_, result, ctx, _)
 	vim.lsp.util.jump_to_location(result, "utf-8", true)
 end
 
-local function js_eco_system_formatter()
+local function js_eco_system_formatter(parser)
 	local package_json = require("lspconfig").util.root_pattern("package.json")
 	local path = package_json(vim.fn.getcwd())
 
@@ -29,8 +29,13 @@ local function js_eco_system_formatter()
 
 	local util = require("formatter.util")
 	local bin_path = path .. "/node_modules/.bin/eslint"
+	local prettier_bin_path = path .. "/node_modules/.bin/prettier"
 
 	if not utils.file_exists(bin_path) then
+		if utils.file_exists(prettier_bin_path) then
+			return require("formatter.defaults.prettier")(parser)
+		end
+
 		return nil
 	end
 
@@ -73,7 +78,7 @@ return {
 			vim.api.nvim_create_augroup(augroup_name, { clear = true })
 			vim.api.nvim_create_autocmd("BufWritePost", {
 				group = augroup_name,
-				command = ":FormatWrite",
+				command = ":FormatWriteLock",
 			})
 		end,
 		config = function()
@@ -121,25 +126,15 @@ return {
 						end,
 					},
 
-					javascript = {
-						js_eco_system_formatter,
-					},
+					javascript = js_eco_system_formatter,
+					typescript = js_eco_system_formatter,
+					typescriptreact = js_eco_system_formatter,
+					javascriptreact = js_eco_system_formatter,
+					vue = js_eco_system_formatter,
 
-					typescript = {
-						js_eco_system_formatter,
-					},
+					rust = require("formatter.filetypes.rust").rustfmt,
 
-					vue = {
-						js_eco_system_formatter,
-					},
-
-					rust = {
-						require("formatter.filetypes.rust").rustfmt,
-					},
-
-					["*"] = {
-						require("formatter.filetypes.any").remove_trailing_whitespace,
-					},
+					["*"] = require("formatter.filetypes.any").remove_trailing_whitespace,
 				},
 			})
 		end,
@@ -346,8 +341,8 @@ return {
 			vim.lsp.handlers["textDocument/declaration"] = open_lsp_location_in_new_tab
 			vim.lsp.handlers["textDocument/typeDefinition"] = open_lsp_location_in_new_tab
 
-            -- Temp fix to ignore cancel request from rust-analyzer
-            -- @see https://github.com/neovim/neovim/issues/30985
+			-- Temp fix to ignore cancel request from rust-analyzer
+			-- @see https://github.com/neovim/neovim/issues/30985
 			for _, method in ipairs({ "textDocument/diagnostic", "workspace/diagnostic" }) do
 				local default_diagnostic_handler = vim.lsp.handlers[method]
 				vim.lsp.handlers[method] = function(err, result, context, config)
