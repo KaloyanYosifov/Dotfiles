@@ -27,29 +27,28 @@ local function js_eco_system_formatter(parser)
 		return nil
 	end
 
-	local util = require("formatter.util")
-	local bin_path = path .. "/node_modules/.bin/eslint"
 	local prettier_bin_path = path .. "/node_modules/.bin/prettier"
-
-	if not utils.file_exists(bin_path) then
-		if utils.file_exists(prettier_bin_path) then
-			return require("formatter.defaults.prettier")(parser)
-		end
-
-		return nil
+	if utils.file_exists(prettier_bin_path) then
+		return require("formatter.defaults.prettier")(parser)
 	end
 
-	return {
-		exe = bin_path,
-		args = {
-			"--stdin-filename",
-			util.escape_path(util.get_current_buffer_file_path()),
-			"--fix",
-			"--cache",
-		},
-		stdin = false,
-		try_node_modules = true,
-	}
+	local util = require("formatter.util")
+	local eslint_bin_path = path .. "/node_modules/.bin/eslint"
+	if utils.file_exists(eslint_bin_path) then
+		return {
+			exe = eslint_bin_path,
+			args = {
+				"--stdin-filename",
+				util.escape_path(util.get_current_buffer_file_path()),
+				"--fix",
+				"--cache",
+			},
+			stdin = false,
+			try_node_modules = true,
+		}
+	end
+
+	return nil
 end
 
 return {
