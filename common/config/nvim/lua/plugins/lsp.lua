@@ -302,7 +302,6 @@ return {
 										includeInlayEnumMemberValueHints = true,
 									},
 								},
-								cmd = { "typescript-language-server", "--stdio" },
 								filetypes = {
 									"vue",
 									"javascript",
@@ -318,15 +317,6 @@ return {
 								config.init_options.tsserver.logVerbosity = "verbose"
 								config.cmd = { "typescript-language-server", "--stdio", "--log-level", "4" }
 							end
-						elseif server_name == "volar" then
-							config = {
-								filetypes = { "vue" },
-								init_options = {
-									vue = {
-										hybridMode = false,
-									},
-								},
-							}
 						end
 
 						require("lspconfig")[server_name].setup(config)
