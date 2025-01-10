@@ -45,8 +45,8 @@ end
 local function on_read()
     local current_buf = vim.api.nvim_get_current_buf()
     local filename = vim.api.nvim_buf_get_name(current_buf)
-    local is_file_pgp = utils.execute_for_status(string.format("file %s | grep PGP", filename))
-    local is_file_gpg = utils.execute_for_status(string.format("file %s | grep GPG", filename))
+    local is_file_pgp = utils.execute_for_status(string.format("file \"%s\" | grep PGP", filename))
+    local is_file_gpg = utils.execute_for_status(string.format("file \"%s\" | grep GPG", filename))
 
     if not is_exit_code_good(is_file_pgp) and not is_exit_code_good(is_file_gpg) then
         return
@@ -62,7 +62,7 @@ local function on_read()
 
         decrypted_text = utils.execute(
             string.format(
-                "gpg -d --pinentry-mode loopback --passphrase \"%s\" %s 2>/dev/null || echo \"__INVALID_PASS__\"",
+                "gpg -d --pinentry-mode loopback --passphrase \"%s\" \"%s\" 2>/dev/null || echo \"__INVALID_PASS__\"",
                 pass,
                 filename
             )
