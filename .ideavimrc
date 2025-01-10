@@ -89,6 +89,7 @@ noremap <C-p> <A-p>
 
 nnoremap gd :action GotoDeclaration<CR>
 nnoremap gi :action GotoImplementation<CR>
+nnoremap <leader>gr :action GotoDeclaration<CR>
 nnoremap <leader>f :action FindInPath<CR>
 nnoremap <leader>vrf :action RenameFile<CR>
 nnoremap <leader>vre :action RenameElement<CR>
