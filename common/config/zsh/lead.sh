@@ -11,6 +11,7 @@ case "${unameOut}" in
     *)          machine="UNKNOWN:${unameOut}"
 esac
 
+VIM_PATH="$(command -v nvim || command -v vim)"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
@@ -18,9 +19,10 @@ export NVIM_CONFIG="$HOME/.config/nvim"
 export HOMEBREW_NO_AUTO_UPDATE=1
 export VI_MODE_SET_CURSOR=true
 export GPG_TTY=$(tty)
-export EDITOR="nvim"
+export EDITOR="$VIM_PATH"
+export VISUAL="$VIM_PATH"
 export TERM=xterm-256color
-export MANPAGER="nvim +Man\!"
+export MANPAGER="$VIM_PATH +Man\!"
 
 HISTSIZE=10000000
 SAVEHIST=10000000
