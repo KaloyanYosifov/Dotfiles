@@ -133,6 +133,8 @@ return {
 
 					rust = require("formatter.filetypes.rust").rustfmt,
 
+					go = require("formatter.filetypes.go").gofmt,
+
 					["*"] = require("formatter.filetypes.any").remove_trailing_whitespace,
 				},
 			})
@@ -262,6 +264,7 @@ return {
 				"ts_ls",
 				"volar",
 				"bashls",
+                "gopls",
 			}
 
 			if utils.command_exists("composer") then
