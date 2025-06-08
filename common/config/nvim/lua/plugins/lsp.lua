@@ -32,7 +32,7 @@ local function open_lsp_location_in_new_tab(_, result, ctx, _)
 		vim.cmd("tabnew")
 	end
 
-	vim.lsp.util.jump_to_location(result, "utf-8", true)
+	vim.lsp.util.show_document(result, "utf-8", { focus = true })
 end
 
 local function js_eco_system_formatter(parser)
@@ -276,7 +276,6 @@ return {
 				hint = "⚑",
 				info = "»",
 			})
-			local mason_registry = require("mason-registry")
 
 			for _, server_name in ipairs(lsps_to_install) do
 				local config = {}
