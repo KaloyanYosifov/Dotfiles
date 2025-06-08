@@ -50,7 +50,7 @@ brew install avr-binutils avr-gcc avrdude
 brew install imagemagick --with-webp
 
 brew install --cask docker
-brew install insomnia \
+brew install postman \
     alacritty \
     notion \
     slack \
