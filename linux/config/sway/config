@@ -88,6 +88,12 @@ input "type:keyboard" {
   repeat_rate 50
   xkb_layout "us, de, bg(phonetic)"
 }
+
+input "5426:152:Razer_Razer_DeathAdder_Essential" {
+  pointer_accel 0.2
+  natural_scroll enabled
+}
+
 #
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
