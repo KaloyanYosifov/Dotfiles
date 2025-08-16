@@ -13,7 +13,7 @@ rm -rf gtklock || true
 rm -rf gtk-session-lock || true
 
 # Install gtk-session-lock
-git clone https://github.com/Cu3PO42/gtk-session-lock.git \
+git clone --branch v0.2.0 https://github.com/Cu3PO42/gtk-session-lock.git \
     && cd gtk-session-lock \
     && meson setup build \
     && ninja -C build \
@@ -23,7 +23,7 @@ git clone https://github.com/Cu3PO42/gtk-session-lock.git \
     && cd ..
 
 # Install gtklock
-git clone https://github.com/jovanlanik/gtklock.git \
+git clone --branch v4.0.0 https://github.com/jovanlanik/gtklock.git \
     && cd gtklock \
     && meson setup builddir \
     && ninja -C builddir \
