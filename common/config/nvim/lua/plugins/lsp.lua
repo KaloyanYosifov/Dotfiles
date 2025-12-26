@@ -12,6 +12,7 @@ local lsps_to_install = {
 	"vue_ls",
 	"bashls",
 	"gopls",
+    "helm_ls",
 }
 
 if utils.command_exists("composer") then
