@@ -15,6 +15,7 @@
 	required = true
 [core]
 	editor = nvim
+	excludesfile = ~/.config/gitconfig/ignorer
 
 [include]
     path = ~/.config/gitconfig/init
