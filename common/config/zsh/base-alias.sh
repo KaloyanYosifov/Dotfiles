@@ -69,6 +69,7 @@ alias nope="git reset --hard"
 if [ $machine = "Mac" ]; then
     alias dappv="sudo spctl --master-disable"
     alias eappv="sudo spctl --master-enable"
+    alias enableApp="xattr -rd com.apple.quarantine"
 fi
 
 # use tldr if we have it and run man command
