@@ -12,7 +12,7 @@ local lsps_to_install = {
 	"vue_ls",
 	"bashls",
 	"gopls",
-    "helm_ls",
+	"helm_ls",
 }
 
 if utils.command_exists("composer") then
@@ -161,11 +161,9 @@ return {
 	{
 		"hrsh7th/nvim-cmp",
 		dependencies = {
-			{ "L3MON4D3/LuaSnip" },
 			{ "hrsh7th/nvim-cmp" },
 			{ "hrsh7th/cmp-buffer" },
 			{ "hrsh7th/cmp-path" },
-			{ "saadparwaiz1/cmp_luasnip" },
 			{ "hrsh7th/cmp-nvim-lsp" },
 			{ "hrsh7th/cmp-nvim-lua" },
 		},
