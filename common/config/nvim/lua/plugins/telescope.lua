@@ -21,25 +21,35 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		version = "0.1.8",
-		dependencies = { "nvim-lua/plenary.nvim" },
-		init = function()
-			local builtin = require("telescope.builtin")
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			{
+				"nvim-telescope/telescope-fzf-native.nvim",
+				build = "make",
+			},
+			{
+				"nvim-telescope/telescope-frecency.nvim",
+				dependencies = { "kkharji/sqlite.lua" },
+			},
+		},
+		keys = {
+			{ "<leader>pf", "<cmd>Telescope find_files<cr>", desc = "Find files" },
+			{
+				"<C-p>",
+				function()
+					project_files()
+				end,
+				desc = "Project files",
+			},
+			{ "<leader>f", "<cmd>Telescope live_grep<cr>", desc = "Live grep" },
+			{ "<leader>vh", "<cmd>Telescope help_tags<cr>", desc = "Help tags" },
+			{ "<leader>ml", "<cmd>Telescope marks<cr>", desc = "Marks" },
+		},
+		config = function()
+			local telescope = require("telescope")
 
-			vim.keymap.set("n", "<leader>pf", builtin.find_files, {})
-			vim.keymap.set("n", "<C-p>", project_files, {})
-			vim.keymap.set("n", "<leader>f", builtin.live_grep, {})
-			vim.keymap.set("n", "<leader>vh", builtin.help_tags, {})
-			vim.keymap.set("n", "<leader>ml", builtin.marks, {})
-
-			-- Commented out for now, since I am only using telescope for file finder
-			-- hence it's not a problem for me to just remap the bindings
-			-- support opening files in a new tab, but any other actions will not
-			-- local actions_state = require("telescope.actions.state")
-			-- local select_key_to_edit_key = actions_state.select_key_to_edit_key
-			-- actions_state.select_key_to_edit_key = function(type)
-			-- 	local key = select_key_to_edit_key(type)
-			-- 	return key == "edit" and "tabedit" or key
-			-- end
+			telescope.load_extension("fzf")
+			telescope.load_extension("frecency")
 		end,
 		opts = {
 			defaults = {
@@ -61,6 +71,7 @@ return {
 					"%.lock",
 					"^public/",
 					"^target/",
+					"^dist/",
 					"%-lock.json",
 					"^node_modules/",
 				},
@@ -71,6 +82,19 @@ return {
 						["<C-t>"] = "select_default",
 						["<CR>"] = "select_tab",
 					},
+				},
+			},
+			extensions = {
+				fzf = {
+					fuzzy = true,
+					override_generic_sorter = true,
+					override_file_sorter = true,
+					case_mode = "smart_case",
+				},
+				frecency = {
+					show_scores = false,
+					show_unindexed = true,
+					ignore_patterns = { "*.git/*", "*/tmp/*", "*/node_modules/*" },
 				},
 			},
 		},
