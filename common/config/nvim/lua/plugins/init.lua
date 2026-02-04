@@ -1,7 +1,17 @@
 return {
 	-- functionality
-	"tpope/vim-surround",
-	"tpope/vim-commentary",
+	"numToStr/Comment.nvim",
+
+	{
+		"kylechui/nvim-surround",
+		version = "3.1.8",
+		event = "VeryLazy",
+		config = function()
+			require("nvim-surround").setup({
+				-- Configuration here, or leave empty to use defaults
+			})
+		end,
+	},
 
 	-- focus
 	{
