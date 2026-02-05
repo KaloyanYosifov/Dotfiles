@@ -23,17 +23,12 @@ return {
 	-- git
 	{ "rhysd/git-messenger.vim" },
 	{
-		"f-person/git-blame.nvim",
-		init = function()
-			vim.keymap.set("n", "<leader>gb", ":GitBlameToggle<CR>")
-		end,
-		config = function()
-			require("gitblame").setup({
-				enabled = false,
-				schedule_event = "CursorHold",
-				clear_event = "CursorHoldI",
-			})
-		end,
+		"lewis6991/gitsigns.nvim",
+		version = "v2.x",
+		event = "BufReadPre",
+		keys = {
+			{ "<leader>gb", ":Gitsigns blame<CR>", desc = "Gitsigns blame" },
+		},
 	},
 
 	-- custom

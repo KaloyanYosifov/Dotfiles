@@ -84,6 +84,7 @@ return {
 	-- Formatter
 	{
 		"stevearc/conform.nvim",
+		version = "v9.x",
 		opts = {
 			log_level = vim.log.levels.ERROR,
 			formatters_by_ft = {
@@ -157,7 +158,7 @@ return {
 	-- LSP
 	{
 		"neovim/nvim-lspconfig",
-		version = "v1.1.0",
+		version = "v2.x",
 		cmd = { "LspInfo", "LspInstall", "LspStart" },
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
