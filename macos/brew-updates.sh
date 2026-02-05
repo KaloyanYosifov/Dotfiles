@@ -86,6 +86,9 @@ brew install pidof lua rg copyq irssi fzf abseil act adns \
     watchman webp wget wimlib wireshark woff2 x264 x265 lf font-jetbrains-mono font-jetbrains-mono-nerd-font \
     zathura mpv glow newsboat nowplaying-cli switchaudio-osx lulu
 
+# formatters and linters
+brew install yamlfmt jsonnetfmt isort ruff stylua
+
 # Install mupdf and zathura plugin in another command, so we do not break the first one
 brew install mupdf zathura-pdf-mupdf || echo "Zathura plugins could not be installed :("
 
