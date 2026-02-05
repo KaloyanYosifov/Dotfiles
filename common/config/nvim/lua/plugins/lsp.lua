@@ -47,13 +47,11 @@ local function js_eco_system_formatter()
 
 	local eslint_bin_path = path .. "/node_modules/.bin/eslint"
 	if utils.file_exists(eslint_bin_path) then
-		vim.print("test")
 		return {
 			command = eslint_bin_path,
 			args = {
 				"--fix",
 				"--cache",
-				"--stdin-filename",
 				"$FILENAME",
 			},
 			stdin = false,
@@ -103,7 +101,7 @@ return {
 			},
 			format_on_save = {
 				-- These options will be passed to conform.format()
-				timeout_ms = 1000,
+				timeout_ms = 10000,
 				lsp_format = "fallback",
 			},
 			formatters = {
