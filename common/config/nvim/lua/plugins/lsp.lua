@@ -13,6 +13,7 @@ local lsps_to_install = {
 	"bashls",
 	"gopls",
 	"helm_ls",
+    "pylsp",
 }
 
 if utils.command_exists("composer") then

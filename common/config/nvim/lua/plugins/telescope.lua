@@ -45,8 +45,10 @@ return {
 			{ "<leader>vh", "<cmd>Telescope help_tags<cr>", desc = "Help tags" },
 			{ "<leader>ml", "<cmd>Telescope marks<cr>", desc = "Marks" },
 		},
-		config = function()
+		config = function(_, opts)
 			local telescope = require("telescope")
+
+			telescope.setup(opts)
 
 			telescope.load_extension("fzf")
 			telescope.load_extension("frecency")
