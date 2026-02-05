@@ -90,7 +90,7 @@ return {
 			log_level = vim.log.levels.ERROR,
 			formatters_by_ft = {
 				lua = { "stylua" },
-				python = { "isort", "black" },
+				python = { "isort", "ruff" },
 				rust = { "rustfmt", lsp_format = "fallback" },
 				php = { "pint", "php-cs-fixer", stop_after_first = true },
 				yaml = { "yamlfmt", "yamlfix", stop_after_first = true },
