@@ -13,7 +13,7 @@ local lsps_to_install = {
 	"bashls",
 	"gopls",
 	"helm_ls",
-    "pylsp",
+	"pylsp",
 }
 
 if utils.command_exists("composer") then
@@ -37,7 +37,7 @@ local function open_lsp_location_in_new_tab(_, result, ctx, _)
 	vim.lsp.util.show_document(result, "utf-8", { focus = true })
 end
 
-local function js_eco_system_formatter(parser)
+local function js_eco_system_formatter()
 	local package_json = require("lspconfig").util.root_pattern("package.json")
 	local path = package_json(vim.fn.getcwd())
 
@@ -45,29 +45,25 @@ local function js_eco_system_formatter(parser)
 		return nil
 	end
 
-	local prettier_bin_path = path .. "/node_modules/.bin/prettier"
-	if utils.file_exists(prettier_bin_path) then
-		return require("formatter.defaults.prettier")(parser)
-	end
-
-	local util = require("formatter.util")
 	local eslint_bin_path = path .. "/node_modules/.bin/eslint"
 	if utils.file_exists(eslint_bin_path) then
+		vim.print("test")
 		return {
-			exe = eslint_bin_path,
+			command = eslint_bin_path,
 			args = {
-				"--stdin-filename",
-				util.escape_path(util.get_current_buffer_file_path()),
 				"--fix",
 				"--cache",
+				"--stdin-filename",
+				"$FILENAME",
 			},
 			stdin = false,
-			try_node_modules = true,
 		}
 	end
 
 	return nil
 end
+
+local js_formatters = { "custom_js", "prettierd", "prettier", stop_after_first = true }
 
 return {
 	{
@@ -89,74 +85,34 @@ return {
 	},
 	-- Formatter
 	{
-		"mhartington/formatter.nvim",
-		init = function()
-			local augroup_name = "__lsp_formatter__"
-			vim.api.nvim_create_augroup(augroup_name, { clear = true })
-			vim.api.nvim_create_autocmd("BufWritePost", {
-				group = augroup_name,
-				command = ":FormatWriteLock",
-			})
-		end,
-		config = function()
-			require("formatter").setup({
-				logging = true,
-
-				log_level = vim.log.levels.ERROR,
-
-				filetype = {
-					lua = {
-						require("formatter.filetypes.lua").stylua,
-					},
-
-					php = {
-						function()
-							local composer_root = require("lspconfig").util.root_pattern("composer.json")
-							local path = composer_root(vim.fn.getcwd())
-
-							if path == nil then
-								return nil
-							end
-
-							local executables = { "pint", "php-cs-fixer" }
-							local bin_path = path .. "/vendor/bin/"
-
-							for _, executable in ipairs(executables) do
-								local exe = bin_path .. executable
-
-								if utils.file_exists(exe) then
-									local opts = {
-										exe = exe,
-										stdin = false,
-										ignore_exitcode = false,
-									}
-
-									if executable == "php-cs-fixer" then
-										opts.args = { "fix" }
-									end
-
-									return opts
-								end
-							end
-
-							return nil
-						end,
-					},
-
-					javascript = js_eco_system_formatter,
-					typescript = js_eco_system_formatter,
-					typescriptreact = js_eco_system_formatter,
-					javascriptreact = js_eco_system_formatter,
-					vue = js_eco_system_formatter,
-
-					rust = require("formatter.filetypes.rust").rustfmt,
-
-					go = require("formatter.filetypes.go").gofmt,
-
-					["*"] = require("formatter.filetypes.any").remove_trailing_whitespace,
+		"stevearc/conform.nvim",
+		opts = {
+			log_level = vim.log.levels.ERROR,
+			formatters_by_ft = {
+				lua = { "stylua" },
+				python = { "isort", "black" },
+				rust = { "rustfmt", lsp_format = "fallback" },
+				php = { "pint", "php-cs-fixer", stop_after_first = true },
+				yaml = { "yamlfmt", "yamlfix", stop_after_first = true },
+				json = { "jsonnetfmt" },
+				javascript = js_formatters,
+				typescript = js_formatters,
+				typescriptreact = js_formatters,
+				javascriptreact = js_formatters,
+				vue = js_formatters,
+			},
+			format_on_save = {
+				-- These options will be passed to conform.format()
+				timeout_ms = 1000,
+				lsp_format = "fallback",
+			},
+			formatters = {
+				custom_js = js_eco_system_formatter,
+				yamlfmt = {
+					prepend_args = { "-formatter", "retain_line_breaks_single=true" },
 				},
-			})
-		end,
+			},
+		},
 	},
 	-- Autocompletion
 	{
