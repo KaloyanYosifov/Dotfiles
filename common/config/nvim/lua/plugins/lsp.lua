@@ -75,6 +75,7 @@ return {
 		lazy = false,
 		config = true,
 	},
+
 	-- Formatter
 	{
 		"stevearc/conform.nvim",
@@ -153,19 +154,19 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		version = "v2.x",
-		cmd = { "LspInfo", "LspInstall", "LspStart" },
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
 			{ "hrsh7th/cmp-nvim-lsp" },
 			{
 				"mason-org/mason-lspconfig.nvim",
+				version = "v2.x",
 				opts = {
 					automatic_installation = true,
 					ensure_installed = lsps_to_install,
 				},
 			},
 		},
-		init = function()
+		config = function()
 			if debug_mode then
 				vim.lsp.set_log_level("debug")
 			end
@@ -184,8 +185,6 @@ return {
 					},
 				},
 			})
-		end,
-		config = function()
 			vim.api.nvim_create_autocmd("LspAttach", {
 				callback = function(event)
 					local opts = { buffer = event.buf }
@@ -209,10 +208,10 @@ return {
 						vim.lsp.buf.hover()
 					end, opts)
 					vim.keymap.set("n", "[d", function()
-						vim.diagnostic.goto_next()
+						vim.diagnostic.jump({ count = 1, float = true })
 					end, opts)
 					vim.keymap.set("n", "]d", function()
-						vim.diagnostic.goto_prev()
+						vim.diagnostic.jump({ count = -1, float = true })
 					end, opts)
 					vim.keymap.set("n", "<leader>cac", function()
 						vim.lsp.buf.code_action()
@@ -228,49 +227,7 @@ return {
 
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			for _, server_name in ipairs(lsps_to_install) do
-				local config = {
-					capabilities = capabilities,
-				}
-
-				if server_name == "ts_ls" then
-					local vue_language_server_path = vim.fn.expand("$MASON/packages/vue-language-server")
-						.. "/node_modules/@vue/language-server"
-
-					config = {
-						capabilities = capabilities,
-						init_options = {
-							plugins = {
-								{
-									name = "@vue/typescript-plugin",
-									location = vue_language_server_path,
-									languages = { "vue" },
-								},
-							},
-							preferences = {
-								includeInlayParameterNameHints = "literals",
-								includeInlayVariableTypeHints = true,
-								includeInlayEnumMemberValueHints = true,
-							},
-						},
-						filetypes = {
-							"vue",
-							"javascript",
-							"javascriptreact",
-							"javascript.jsx",
-							"typescript",
-							"typescriptreact",
-							"typescript.tsx",
-						},
-					}
-
-					if debug_mode then
-						config.init_options.tsserver.logVerbosity = "verbose"
-						config.cmd = { "typescript-language-server", "--stdio", "--log-level", "4" }
-					end
-				end
-
-				vim.lsp.config(server_name, config)
-				vim.lsp.enable(server_name)
+				vim.lsp.config(server_name, { capabilities = capabilities })
 			end
 
 			vim.lsp.handlers["textDocument/definition"] = open_lsp_location_in_new_tab
