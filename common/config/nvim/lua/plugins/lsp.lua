@@ -71,13 +71,7 @@ return {
 	},
 
 	{
-		"VonHeikemen/lsp-zero.nvim",
-		branch = "v4.x",
-		lazy = false,
-		config = false,
-	},
-	{
-		"williamboman/mason.nvim",
+		"mason-org/mason.nvim",
 		lazy = false,
 		config = true,
 	},
@@ -163,9 +157,8 @@ return {
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
 			{ "hrsh7th/cmp-nvim-lsp" },
-			{ "williamboman/mason.nvim" },
 			{
-				"williamboman/mason-lspconfig.nvim",
+				"mason-org/mason-lspconfig.nvim",
 				opts = {
 					automatic_installation = true,
 					ensure_installed = lsps_to_install,
@@ -179,79 +172,73 @@ return {
 
 			vim.diagnostic.config({
 				virtual_text = true,
+				underline = true,
+				severiy_sort = true,
+				update_in_insert = false,
+				signs = {
+					text = {
+						[vim.diagnostic.severity.ERROR] = "✘",
+						[vim.diagnostic.severity.WARN] = "▲",
+						[vim.diagnostic.severity.INFO] = "»",
+						[vim.diagnostic.severity.HINT] = "⚑",
+					},
+				},
 			})
 		end,
 		config = function()
-			local lsp_zero = require("lsp-zero")
+			vim.api.nvim_create_autocmd("LspAttach", {
+				callback = function(event)
+					local opts = { buffer = event.buf }
 
-			-- lsp_attach is where you enable features that only work
-			-- if there is a language server active in the file
-			local lsp_attach = function(_, bufnr)
-				local opts = { buffer = bufnr, remap = false }
-
-				-- vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
-
-				vim.keymap.set("n", "<leader>vd", function()
-					vim.diagnostic.open_float()
-				end, opts)
-				vim.keymap.set("n", "gd", function()
-					vim.lsp.buf.definition()
-				end, opts)
-				vim.keymap.set("n", "gi", function()
-					vim.lsp.buf.implementation()
-				end, opts)
-				vim.keymap.set("n", "gD", function()
-					vim.lsp.buf.declaration()
-				end, opts)
-				vim.keymap.set("n", "<leader>gr", function()
-					telescope_builtin.lsp_references()
-				end, opts)
-				vim.keymap.set("n", "<leader>k", function()
-					vim.lsp.buf.hover()
-				end, opts)
-				vim.keymap.set("n", "[d", function()
-					vim.diagnostic.goto_next()
-				end, opts)
-				vim.keymap.set("n", "]d", function()
-					vim.diagnostic.goto_prev()
-				end, opts)
-				vim.keymap.set("n", "<leader>cac", function()
-					vim.lsp.buf.code_action()
-				end, opts)
-				vim.keymap.set("n", "<leader>vre", function()
-					vim.lsp.buf.rename()
-				end, opts)
-				vim.keymap.set("i", "<C-h>", function()
-					vim.lsp.buf.signature_help()
-				end, opts)
-			end
-
-			lsp_zero.extend_lspconfig({
-				sign_text = true,
-				lsp_attach = lsp_attach,
-				capabilities = require("cmp_nvim_lsp").default_capabilities(),
-			})
-			lsp_zero.set_sign_icons({
-				error = "✘",
-				warn = "▲",
-				hint = "⚑",
-				info = "»",
+					vim.keymap.set("n", "<leader>vd", function()
+						vim.diagnostic.open_float()
+					end, opts)
+					vim.keymap.set("n", "gd", function()
+						vim.lsp.buf.definition()
+					end, opts)
+					vim.keymap.set("n", "gi", function()
+						vim.lsp.buf.implementation()
+					end, opts)
+					vim.keymap.set("n", "gD", function()
+						vim.lsp.buf.declaration()
+					end, opts)
+					vim.keymap.set("n", "<leader>gr", function()
+						telescope_builtin.lsp_references()
+					end, opts)
+					vim.keymap.set("n", "<leader>k", function()
+						vim.lsp.buf.hover()
+					end, opts)
+					vim.keymap.set("n", "[d", function()
+						vim.diagnostic.goto_next()
+					end, opts)
+					vim.keymap.set("n", "]d", function()
+						vim.diagnostic.goto_prev()
+					end, opts)
+					vim.keymap.set("n", "<leader>cac", function()
+						vim.lsp.buf.code_action()
+					end, opts)
+					vim.keymap.set("n", "<leader>vre", function()
+						vim.lsp.buf.rename()
+					end, opts)
+					vim.keymap.set("i", "<C-h>", function()
+						vim.lsp.buf.signature_help()
+					end, opts)
+				end,
 			})
 
+			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			for _, server_name in ipairs(lsps_to_install) do
-				local config = {}
+				local config = {
+					capabilities = capabilities,
+				}
 
 				if server_name == "ts_ls" then
 					local vue_language_server_path = vim.fn.expand("$MASON/packages/vue-language-server")
 						.. "/node_modules/@vue/language-server"
-					local tsserver_exec_path = vim.fn.expand("$MASON/packages/typescript-language-server")
-						.. "/node_modules/typescript/lib/tsserver.js"
 
 					config = {
+						capabilities = capabilities,
 						init_options = {
-							tsserver = {
-								path = tsserver_exec_path,
-							},
 							plugins = {
 								{
 									name = "@vue/typescript-plugin",
@@ -282,7 +269,8 @@ return {
 					end
 				end
 
-				require("lspconfig")[server_name].setup(config)
+				vim.lsp.config(server_name, config)
+				vim.lsp.enable(server_name)
 			end
 
 			vim.lsp.handlers["textDocument/definition"] = open_lsp_location_in_new_tab
