@@ -87,7 +87,7 @@ brew install pidof lua rg copyq irssi fzf abseil act adns \
     zathura mpv glow newsboat nowplaying-cli switchaudio-osx lulu terraform terragrunt
 
 # formatters and linters
-brew install yamlfmt jsonnetfmt isort ruff stylua sqruff
+brew install yamlfmt jsonnetfmt isort ruff stylua sqruff taplo
 
 # Install mupdf and zathura plugin in another command, so we do not break the first one
 brew install mupdf zathura-pdf-mupdf || echo "Zathura plugins could not be installed :("

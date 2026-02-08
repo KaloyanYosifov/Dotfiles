@@ -1,47 +1,9 @@
 [general]
 live_config_reload = true
+import = ["~/.config/alacritty/theme.toml", "~/.config/alacritty/font.toml"]
 
 [colors]
 draw_bold_text_with_bright_colors = true
-
-[colors.primary]
-background = '#f8f8f8'
-foreground = '#2a2b33'
-
-[colors.normal]
-black   = '#000000'
-red     = '#de3d35'
-green   = '#3e953a'
-yellow  = '#d2b67b'
-blue    = '#2f5af3'
-magenta = '#a00095'
-cyan    = '#3e953a'
-white   = '#bbbbbb'
-
-[colors.bright]
-black   = '#000000'
-red     = '#de3d35'
-green   = '#3e953a'
-yellow  = '#d2b67b'
-blue    = '#2f5af3'
-magenta = '#a00095'
-cyan    = '#3e953a'
-white   = '#ffffff'
-
-[font]
-size = 12
-
-[font.bold]
-family = "JetBrainsMono Nerd Font Mono"
-style = "Bold"
-
-[font.italic]
-family = "JetBrainsMono Nerd Font Mono"
-style = "Italic"
-
-[font.normal]
-family = "JetBrainsMono Nerd Font Mono"
-style = "Regular"
 
 [font.offset]
 x = 0

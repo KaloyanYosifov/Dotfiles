@@ -95,6 +95,7 @@ return {
 				sh = { "shellcheck" },
 				bash = { "shellcheck" },
 				zsh = { "shellcheck" },
+				toml = { "taplo" },
 				javascript = js_formatters,
 				typescript = js_formatters,
 				typescriptreact = js_formatters,
