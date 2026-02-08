@@ -8,6 +8,7 @@ return {
 		},
 		keys = {
 			{ "<leader>aic", "<cmd>CodeCompanionChat Toggle<cr>", desc = "Toggle AI Companion Chat" },
+			{ "<leader>aia", "<cmd>CodeCompanionActions<cr>", desc = "Toggle AI Companion Actions" },
 		},
 
 		opts = {
