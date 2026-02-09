@@ -194,10 +194,14 @@ return {
 						vim.diagnostic.open_float()
 					end, opts)
 					vim.keymap.set("n", "gd", function()
-						vim.lsp.buf.definition()
+						telescope_builtin.lsp_definitions({
+							jump_type = "tab drop",
+						})
 					end, opts)
 					vim.keymap.set("n", "gi", function()
-						vim.lsp.buf.implementation()
+						telescope_builtin.lsp_implementations({
+							jump_type = "tab drop",
+						})
 					end, opts)
 					vim.keymap.set("n", "gD", function()
 						vim.lsp.buf.declaration()
