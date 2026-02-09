@@ -27,10 +27,6 @@ return {
 				"nvim-telescope/telescope-fzf-native.nvim",
 				build = "make",
 			},
-			{
-				"nvim-telescope/telescope-frecency.nvim",
-				dependencies = { "kkharji/sqlite.lua" },
-			},
 		},
 		keys = {
 			{ "<leader>pf", "<cmd>Telescope find_files<cr>", desc = "Find files" },
@@ -99,7 +95,18 @@ return {
 			telescope.setup(opts)
 
 			telescope.load_extension("fzf")
-			telescope.load_extension("frecency")
+		end,
+	},
+
+	{
+		"nvim-telescope/telescope-frecency.nvim",
+		version = "1.x",
+		dependencies = {
+			"nvim-telescope/telescope.nvim",
+			"kkharji/sqlite.lua",
+		},
+		config = function()
+			require("telescope").load_extension("frecency")
 		end,
 	},
 
