@@ -20,6 +20,7 @@ config = {
 			includeInlayVariableTypeHints = true,
 			includeInlayEnumMemberValueHints = true,
 			preferTypeOnlyAutoImports = true,
+			importModuleSpecifierPreference = "non-relative",
 		},
 	},
 	filetypes = {
