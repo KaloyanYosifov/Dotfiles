@@ -1,6 +1,16 @@
 return {
 	{
 		"nvim-tree/nvim-tree.lua",
+		version = "v1.x",
+		keys = {
+			{
+				"<leader>nd",
+				function()
+					vim.cmd("NvimTreeToggle")
+					require("focus").resize()
+				end,
+			},
+		},
 		opts = {
 			update_focused_file = {
 				enable = true,
@@ -17,11 +27,5 @@ return {
 				vim.keymap.set("n", "e", api.node.open.tab, opts("Open"))
 			end,
 		},
-		init = function()
-			vim.keymap.set("n", "<leader>nd", function()
-				vim.cmd("NvimTreeToggle")
-				require("focus").resize("autoresize")
-			end)
-		end,
 	},
 }
