@@ -45,14 +45,6 @@ return {
 			{ "<leader>vh", "<cmd>Telescope help_tags<cr>", desc = "Help tags" },
 			{ "<leader>ml", "<cmd>Telescope marks<cr>", desc = "Marks" },
 		},
-		config = function(_, opts)
-			local telescope = require("telescope")
-
-			telescope.setup(opts)
-
-			telescope.load_extension("fzf")
-			telescope.load_extension("frecency")
-		end,
 		opts = {
 			defaults = {
 				path_display = { "truncate" },
@@ -85,6 +77,7 @@ return {
 						["<CR>"] = "select_tab",
 					},
 				},
+				layout_strategy = "vertical",
 			},
 			extensions = {
 				fzf = {
@@ -100,6 +93,14 @@ return {
 				},
 			},
 		},
+		config = function(_, opts)
+			local telescope = require("telescope")
+
+			telescope.setup(opts)
+
+			telescope.load_extension("fzf")
+			telescope.load_extension("frecency")
+		end,
 	},
 
 	-- Error executing lua: vim/shared.lua:0: s: expected string, got function
