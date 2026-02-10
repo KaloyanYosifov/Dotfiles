@@ -32,9 +32,7 @@ return {
 			{ "<leader>pf", "<cmd>Telescope find_files<cr>", desc = "Find files" },
 			{
 				"<C-p>",
-				function()
-					project_files()
-				end,
+				project_files,
 				desc = "Project files",
 			},
 			{ "<leader>f", "<cmd>Telescope live_grep<cr>", desc = "Live grep" },

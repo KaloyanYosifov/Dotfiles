@@ -14,6 +14,7 @@ local lsps_to_install = {
 	"gopls",
 	"helm_ls",
 	"pylsp",
+	"cssls",
 }
 
 if utils.command_exists("composer") then
@@ -96,6 +97,8 @@ return {
 				bash = { "shellcheck" },
 				zsh = { "shellcheck" },
 				toml = { "taplo" },
+				scss = { "stylelint" },
+				css = { "stylelint" },
 				javascript = js_formatters,
 				typescript = js_formatters,
 				typescriptreact = js_formatters,
@@ -150,6 +153,24 @@ return {
 		end,
 	},
 
+	-- Dedicated LSP
+	-- {
+	-- 	{
+	-- 		"gbprod/phpactor.nvim",
+	-- 		ft = "php",
+	-- 		dependencies = {
+	-- 			"nvim-lua/plenary.nvim",
+	-- 			"folke/noice.nvim",
+	-- 		},
+	-- 		opts = {
+	-- 			lspconfig = {
+	-- 				enabled = false,
+	-- 			},
+	-- 			-- you're options goes here
+	-- 		},
+	-- 	},
+	-- },
+
 	-- LSP
 	{
 		"neovim/nvim-lspconfig",
@@ -163,6 +184,17 @@ return {
 				opts = {
 					automatic_installation = true,
 					ensure_installed = lsps_to_install,
+				},
+			},
+			-- extended capabilities
+			{
+				"antosha417/nvim-lsp-file-operations",
+				dependencies = {
+					"nvim-lua/plenary.nvim",
+					"nvim-tree/nvim-tree.lua",
+				},
+				opts = {
+					timeout_ms = 10000,
 				},
 			},
 		},
@@ -193,14 +225,10 @@ return {
 						vim.diagnostic.open_float()
 					end, opts)
 					vim.keymap.set("n", "gd", function()
-						telescope_builtin.lsp_definitions({
-							jump_type = "tab drop",
-						})
+						telescope_builtin.lsp_definitions()
 					end, opts)
 					vim.keymap.set("n", "gi", function()
-						telescope_builtin.lsp_implementations({
-							jump_type = "tab drop",
-						})
+						telescope_builtin.lsp_implementations()
 					end, opts)
 					vim.keymap.set("n", "gD", function()
 						vim.lsp.buf.declaration()
@@ -229,7 +257,13 @@ return {
 				end,
 			})
 
-			local capabilities = require("cmp_nvim_lsp").default_capabilities()
+			local capabilities = vim.tbl_extend(
+				"force",
+				vim.lsp.protocol.make_client_capabilities(),
+				require("cmp_nvim_lsp").default_capabilities(),
+				require("lsp-file-operations").default_capabilities()
+			)
+
 			for _, server_name in ipairs(lsps_to_install) do
 				vim.lsp.config(server_name, { capabilities = capabilities })
 			end

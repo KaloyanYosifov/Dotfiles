@@ -56,3 +56,5 @@ vim.g.loaded_netrwPlugin = 1
 
 -- speed up startup
 vim.loader.enable()
+
+vim.opt.switchbuf = { "useopen", "usetab", "newtab" }
