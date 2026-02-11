@@ -44,6 +44,8 @@ vim.opt.writebackup = false
 vim.opt.compatible = false
 vim.opt.swapfile = false
 
+vim.opt.switchbuf = { "useopen", "usetab", "newtab" }
+
 -- Make sure to setup `mapleader` and `maplocalleader` before
 -- loading lazy.nvim so that mappings are correct.
 -- This is also a good place to setup other settings (vim.opt)
@@ -56,5 +58,3 @@ vim.g.loaded_netrwPlugin = 1
 
 -- speed up startup
 vim.loader.enable()
-
-vim.opt.switchbuf = { "useopen", "usetab", "newtab" }
