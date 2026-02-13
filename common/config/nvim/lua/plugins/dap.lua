@@ -1,11 +1,11 @@
 local utils = require("my-config.utils")
 local data_path = vim.fn.stdpath("data")
-local non_mason_debuggers = {
-	php = {
-		url = "https://github.com/xdebug/vscode-php-debug/releases/download/v1.35.0/php-debug-1.35.0.vsix",
-		path = data_path .. "/php-debugger",
-	},
-}
+-- local non_mason_debuggers = {
+-- 	php = {
+-- 		url = "https://github.com/xdebug/vscode-php-debug/releases/download/v1.35.0/php-debug-1.35.0.vsix",
+-- 		path = data_path .. "/php-debugger",
+-- 	},
+-- }
 
 return {
 	{
@@ -13,7 +13,19 @@ return {
 		dependencies = {
 			{ "jay-babu/mason-nvim-dap.nvim" },
 		},
-		init = function()
+		opts = {
+			automatic_installation = true,
+			ensure_installed = { "php", "delve" },
+		},
+		keys = {
+			{ "<leader>db", ":lua require('dap').toggle_breakpoint()<cr>", desc = "Debug: Toggle breakpoint" },
+			{ "<leader>dc", ":lua require('dap').continue()<cr>", desc = "Debug: Continue debug or start" },
+			{ "<leader>di", ":lua require('dap').step_into()<cr>", desc = "Debug: Step into" },
+			{ "<leader>do", ":lua require('dap').step_over()<cr>", desc = "Debug: Step Over" },
+		},
+		config = function(_, opts)
+			require("mason-nvim-dap").setup(opts)
+
 			local dap = require("dap")
 			local dap_configuration_paths = { "./.nvim-dap/nvim-dap.lua", "./.nvim-dap.lua", "./.nvim/nvim-dap.lua" }
 
@@ -101,37 +113,22 @@ return {
 				end
 				keymap_restore = {}
 			end
-
-			-- Mappings
-			vim.keymap.set("n", "<leader>rb", ":lua require('dap').toggle_breakpoint()<cr>")
-			vim.keymap.set("n", "<leader>dc", ":lua require('dap').continue()<cr>")
-			vim.keymap.set("n", "<leader>di", ":lua require('dap').step_into()<cr>")
-			vim.keymap.set("n", "<leader>do", ":lua require('dap').step_over()<cr>")
-		end,
-
-		config = function()
-			local dap_adapters_to_install = {}
-
-			require("mason-nvim-dap").setup({
-				automatic_installation = true,
-				ensure_installed = dap_adapters_to_install,
-			})
-
-			-- Finish up
-			-- for key, config in pairs(non_mason_debuggers) do
-
-			-- end
 		end,
 	},
 
 	{
 		"rcarriga/nvim-dap-ui",
 		dependencies = { "nvim-neotest/nvim-nio" },
-		init = function()
-			vim.keymap.set("n", "<leader>dk", function()
-				require("dapui").toggle()
-			end)
-		end,
+		lazy = true,
+		keys = {
+			{
+				"<leader>dt",
+				function()
+					require("dapui").toggle()
+				end,
+				desc = "Debug: Toggle breakpoint",
+			},
+		},
 		opts = {},
 	},
 

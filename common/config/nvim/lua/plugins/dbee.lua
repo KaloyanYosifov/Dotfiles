@@ -6,15 +6,19 @@ return {
 		dependencies = {
 			"MunifTanjim/nui.nvim",
 		},
-		pts = {},
+		opts = {},
+		keys = {
+			{ "<leader>db", ":lua require('dbee').toggle()<cr>", { desc = "Database: toggle" } },
+		},
 		build = function()
 			require("dbee").install()
 		end,
-		init = function()
-			local dbee = require("dbee")
-
-			-- Keymaps
-			vim.keymap.set("n", "<leader>db", dbee.toggle)
+		config = function()
+			require("dbee").setup({
+				sources = {
+					require("dbee.sources").EnvSource:new("DBEE_CONNECTIONS"),
+				},
+			})
 
 			vim.api.nvim_create_autocmd({ "FileType" }, {
 				desc = "On buffer enter with file type sql",
@@ -27,13 +31,6 @@ return {
 						vim.api.nvim_command(command)
 					end, { desc = "[D]bee [e]xecute query under cursor" })
 				end,
-			})
-		end,
-		config = function()
-			require("dbee").setup({
-				sources = {
-					require("dbee.sources").EnvSource:new("DBEE_CONNECTIONS"),
-				},
 			})
 		end,
 	},
