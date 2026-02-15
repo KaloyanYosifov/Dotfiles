@@ -27,15 +27,38 @@ local function open_lsp_location_in_new_tab(_, result, ctx, _)
 		return
 	end
 
+	-- Normalize to single location (most common case)
 	if vim.islist(result) then
 		result = result[1]
 	end
 
-	if not utils.is_buffer_uri_already_open(result.uri or result.targetUri) then
-		vim.cmd("tabnew")
+	local uri = result.uri or result.targetUri
+	if not uri then
+		return
 	end
 
-	vim.lsp.util.show_document(result, "utf-8", { focus = true })
+	local filename = vim.uri_to_fname(uri)
+
+	-- Check if buffer is loaded and visible in any window
+	local bufnr = vim.fn.bufnr(filename)
+	local win_id = bufnr > 0 and vim.fn.bufwinid(bufnr) or -1
+
+	if win_id > 0 then
+		-- Buffer is open somewhere → switch to its tab and window
+		vim.fn.win_gotoid(win_id)
+		-- Optional: ensure focus (usually not needed after win_gotoid)
+		vim.api.nvim_set_current_buf(bufnr)
+	else
+		-- Not open anywhere → force new tab
+		vim.cmd("tabnew")
+		vim.lsp.util.show_document(result, "utf-8", { focus = true })
+	end
+
+	-- If multiple locations, populate quickfix (optional, but nice)
+	if vim.islist(result) and #result > 1 then
+		vim.fn.setqflist(vim.lsp.util.locations_to_items(result, "utf-8"))
+		vim.cmd("copen")
+	end
 end
 
 local function js_eco_system_formatter()
@@ -214,16 +237,27 @@ return {
 						vim.diagnostic.open_float()
 					end, opts)
 					vim.keymap.set("n", "gd", function()
-						telescope_builtin.lsp_definitions()
+						telescope_builtin.lsp_definitions({
+							jump_type = "tab drop",
+							reuse_win = true,
+						})
 					end, opts)
 					vim.keymap.set("n", "gi", function()
-						telescope_builtin.lsp_implementations()
+						telescope_builtin.lsp_implementations({
+							jump_type = "tab drop",
+							reuse_win = true,
+						})
 					end, opts)
 					vim.keymap.set("n", "gD", function()
-						vim.lsp.buf.declaration()
+						vim.lsp.buf.declaration({
+							reuse_win = true,
+						})
 					end, opts)
 					vim.keymap.set("n", "<leader>gr", function()
-						telescope_builtin.lsp_references()
+						telescope_builtin.lsp_references({
+							jump_type = "tab drop",
+							reuse_win = true,
+						})
 					end, opts)
 					vim.keymap.set("n", "<leader>k", function()
 						vim.lsp.buf.hover()
