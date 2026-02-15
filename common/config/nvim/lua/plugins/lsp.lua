@@ -121,9 +121,6 @@ return {
 	{
 		"hrsh7th/nvim-cmp",
 		dependencies = {
-			{ "hrsh7th/nvim-cmp" },
-			{ "hrsh7th/cmp-buffer" },
-			{ "hrsh7th/cmp-path" },
 			{ "hrsh7th/cmp-nvim-lsp" },
 			{ "hrsh7th/cmp-nvim-lua" },
 		},
@@ -134,6 +131,7 @@ return {
 			cmp.setup({
 				sources = {
 					{ name = "nvim_lsp" },
+					{ name = "nvim_lua" },
 					{ name = "lazydev", group_index = 0 },
 				},
 				mapping = cmp.mapping.preset.insert({

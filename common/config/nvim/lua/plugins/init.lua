@@ -29,6 +29,15 @@ return {
 		keys = {
 			{ "<leader>gb", ":Gitsigns blame<CR>", desc = "Gitsigns blame" },
 		},
+		opts = {
+			signs = {
+				add = { text = "+" },
+				change = { text = "~" },
+				delete = { text = "-" },
+				topdelete = { text = "_" },
+				changedelete = { text = "~" },
+			},
+		},
 	},
 
 	-- custom
