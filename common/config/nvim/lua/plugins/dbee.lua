@@ -8,7 +8,7 @@ return {
 		},
 		opts = {},
 		keys = {
-			{ "<leader>db", ":lua require('dbee').toggle()<cr>", { desc = "Database: toggle" } },
+			{ "<leader>dd", ":lua require('dbee').toggle()<cr>", { desc = "Database: toggle" } },
 		},
 		build = function()
 			require("dbee").install()
