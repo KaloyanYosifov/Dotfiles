@@ -8,7 +8,7 @@ local lsps_to_install = {
 	"jsonls",
 	"yamlls",
 	"tailwindcss",
-	"ts_ls",
+	"vtsls",
 	"vue_ls",
 	"bashls",
 	"gopls",
