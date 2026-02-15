@@ -108,6 +108,16 @@ return {
 		end,
 	},
 
+	{
+		"nvim-telescope/telescope-ui-select.nvim",
+		dependencies = {
+			"nvim-telescope/telescope.nvim",
+		},
+		config = function()
+			require("telescope").load_extension("ui-select")
+		end,
+	},
+
 	-- Error executing lua: vim/shared.lua:0: s: expected string, got function
 	-- {
 	-- 	"nvim-telescope/telescope-ui-select.nvim",

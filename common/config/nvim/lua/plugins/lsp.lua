@@ -105,9 +105,10 @@ return {
 				javascriptreact = js_formatters,
 				vue = js_formatters,
 			},
-			format_on_save = {
+			format_after_save = {
 				timeout_ms = 10000,
 				lsp_format = "fallback",
+				async = true,
 			},
 			formatters = {
 				custom_js = js_eco_system_formatter,
@@ -184,17 +185,7 @@ return {
 					ensure_installed = lsps_to_install,
 				},
 			},
-			-- extended capabilities
-			{
-				"antosha417/nvim-lsp-file-operations",
-				dependencies = {
-					"nvim-lua/plenary.nvim",
-					"nvim-tree/nvim-tree.lua",
-				},
-				opts = {
-					timeout_ms = 10000,
-				},
-			},
+			{ "folke/snacks.nvim" },
 		},
 		config = function()
 			if debug_mode then
@@ -249,6 +240,9 @@ return {
 					vim.keymap.set("n", "<leader>vre", function()
 						vim.lsp.buf.rename()
 					end, opts)
+					vim.keymap.set("n", "<leader>vrf", function()
+						require("snacks").rename.rename_file()
+					end, opts)
 					vim.keymap.set("i", "<C-h>", function()
 						vim.lsp.buf.signature_help()
 					end, opts)
@@ -258,8 +252,7 @@ return {
 			local capabilities = vim.tbl_extend(
 				"force",
 				vim.lsp.protocol.make_client_capabilities(),
-				require("cmp_nvim_lsp").default_capabilities(),
-				require("lsp-file-operations").default_capabilities()
+				require("cmp_nvim_lsp").default_capabilities()
 			)
 
 			for _, server_name in ipairs(lsps_to_install) do

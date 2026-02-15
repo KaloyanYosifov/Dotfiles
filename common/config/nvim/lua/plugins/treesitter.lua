@@ -17,6 +17,14 @@ return {
 				"lua",
 				"rust",
 				"dockerfile",
+				"terraform",
+				"scss",
+				"toml",
+				"json",
+				"json5",
+				"yaml",
+				"python",
+				"go",
 			},
 
 			-- Install parsers synchronously (only applied to `ensure_installed`)

@@ -1,9 +1,4 @@
 return {
-	{
-		"lukas-reineke/indent-blankline.nvim",
-		main = "ibl",
-		opts = {},
-	},
 	"nvim-tree/nvim-web-devicons",
 	{
 		"navarasu/onedark.nvim",
@@ -32,17 +27,6 @@ return {
 				lualine_x = { "encoding", "filetype" },
 				lualine_y = { "searchcount" },
 				lualine_z = { "location" },
-			},
-		},
-	},
-
-	--- UI
-	{
-		"stevearc/dressing.nvim",
-		event = "VeryLazy",
-		opts = {
-			select = {
-				enabled = false,
 			},
 		},
 	},
