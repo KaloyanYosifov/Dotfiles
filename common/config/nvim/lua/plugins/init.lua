@@ -16,7 +16,6 @@ return {
 	-- focus
 	{
 		"nvim-focus/focus.nvim",
-		version = "v1.0.0",
 		opts = {},
 	},
 
@@ -50,7 +49,6 @@ return {
 	},
 
 	-- other
-	"gpanders/editorconfig.nvim",
 	{ "windwp/nvim-autopairs", opts = {} },
 	{
 		"windwp/nvim-ts-autotag",

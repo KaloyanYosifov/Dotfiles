@@ -12,8 +12,12 @@ vim.opt.smartindent = true
 
 vim.opt.wrap = false
 
+-- remove compat for vi and remove swap files
+vim.opt.swapfile = false
+vim.opt.compatible = false
 vim.opt.swapfile = false
 vim.opt.backup = false
+vim.opt.writebackup = false
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
 
@@ -37,14 +41,9 @@ vim.opt.shortmess:append({ c = true })
 
 vim.opt.cmdheight = 2
 
-vim.opt.backup = false
-vim.opt.writebackup = false
-
--- remove compat for vi and remove swap files
-vim.opt.compatible = false
-vim.opt.swapfile = false
-
 vim.opt.switchbuf = { "useopen", "usetab", "newtab" }
+
+vim.g.editorconfig = true
 
 -- Make sure to setup `mapleader` and `maplocalleader` before
 -- loading lazy.nvim so that mappings are correct.
