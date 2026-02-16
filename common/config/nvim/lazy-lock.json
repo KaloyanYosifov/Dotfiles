@@ -48,5 +48,6 @@
   "todo-comments.nvim": { "branch": "main", "commit": "31e3c38ce9b29781e4422fc0322eb0a21f4e8668" },
   "toggleterm.nvim": { "branch": "master", "commit": "fe530f475cde67e91a63673467ab139c6ac78883" },
   "undotree": { "branch": "master", "commit": "d8f99084d98c32f651860eb0baaf89759f91debc" },
-  "vimwiki": { "branch": "dev", "commit": "72792615e739d0eb54a9c8f7e0a46a6e2407c9e8" }
+  "vimwiki": { "branch": "dev", "commit": "72792615e739d0eb54a9c8f7e0a46a6e2407c9e8" },
+  "window-picker": { "branch": "main", "commit": "6382540b2ae5de6c793d4aa2e3fe6dbb518505ec" }
 }
