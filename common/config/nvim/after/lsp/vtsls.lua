@@ -59,6 +59,20 @@ local config = {
 			preferences = {
 				importModuleSpecifier = "non-relative",
 			},
+			implicitProjectConfig = {
+				checkJs = true,
+				strictNullChecks = true,
+				strictFunctionTypes = true,
+				strict = true,
+			},
+			inlayHints = {
+				parameterNames = { enabled = "all" },
+				parameterTypes = { enabled = true },
+				variableTypes = { enabled = true },
+				enumMemberValues = { enabled = true },
+				functionLikeReturnTypes = { enabled = true },
+				propertyDeclarationTypes = { enabled = true },
+			},
 		},
 	},
 

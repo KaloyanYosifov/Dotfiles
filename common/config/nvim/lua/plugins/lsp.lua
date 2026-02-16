@@ -155,8 +155,6 @@ return {
 			cmp.setup({
 				sources = {
 					{ name = "nvim_lsp" },
-					{ name = "nvim_lua" },
-					{ name = "lazydev", group_index = 0 },
 				},
 				mapping = cmp.mapping.preset.insert({
 					["<C-k>"] = cmp.mapping.select_prev_item(cmp_select),
@@ -170,6 +168,14 @@ return {
 					expand = function(args)
 						vim.snippet.expand(args.body)
 					end,
+				},
+			})
+
+			cmp.setup.filetype({ "lua" }, {
+				enabled = true,
+				sources = {
+					{ name = "nvim_lua" },
+					{ name = "lazydev", group_index = 0 },
 				},
 			})
 		end,

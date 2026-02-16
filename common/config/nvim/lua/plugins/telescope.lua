@@ -68,7 +68,7 @@ return {
 						["<C-j>"] = "move_selection_next",
 						["<C-k>"] = "move_selection_previous",
 						["<C-t>"] = "select_default",
-						["<CR>"] = "select_tab",
+						["<CR>"] = "select_tab_drop",
 					},
 				},
 				layout_strategy = "vertical",

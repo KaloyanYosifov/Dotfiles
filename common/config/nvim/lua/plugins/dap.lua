@@ -22,6 +22,28 @@ return {
 			{ "<leader>dc", ":lua require('dap').continue()<cr>", desc = "Debug: Continue debug or start" },
 			{ "<leader>di", ":lua require('dap').step_into()<cr>", desc = "Debug: Step into" },
 			{ "<leader>do", ":lua require('dap').step_over()<cr>", desc = "Debug: Step Over" },
+			{
+				"<leader>dr",
+				function()
+					require("dap").repl.open()
+					-- schedule a command to give a breather for the buffer to open
+					-- then focus on that dap repl window
+					vim.schedule(function()
+						for _, win in ipairs(vim.api.nvim_list_wins()) do
+							local buf = vim.api.nvim_win_get_buf(win)
+
+							if vim.bo[buf].filetype == "dap-repl" then
+								vim.api.nvim_set_current_win(win)
+								vim.cmd("startinsert!")
+
+								return
+							end
+						end
+					end)
+				end,
+				desc = "Debug: REPL",
+			},
+			{ "<leader>dk", ":lua require('dap.ui.widgets').hover()<cr>", desc = "Debug: REPL" },
 		},
 		config = function(_, opts)
 			require("mason-nvim-dap").setup(opts)
