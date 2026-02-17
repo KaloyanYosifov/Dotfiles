@@ -137,7 +137,7 @@ function M.notify(text, ttl)
 end
 
 function M.download_and_store(url, path)
-    local http = {}
+	local http = {}
 	local body, code = http.request(url)
 
 	if not body then
@@ -147,6 +147,26 @@ function M.download_and_store(url, path)
 	local f = assert(io.open(path, "wb"))
 	f:write(body)
 	f:close()
+end
+
+function M.is_empty_table(t)
+	if t == nil then
+		return true
+	end
+	return next(t) == nil
+end
+
+function M.normalize(config, existing)
+	local conf = existing
+	if M.is_empty_table(config) then
+		return conf
+	end
+
+	for k, v in pairs(config) do
+		conf[k] = v
+	end
+
+	return conf
 end
 
 return M

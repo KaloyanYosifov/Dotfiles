@@ -38,6 +38,7 @@ return {
 			{ "<leader>f", "<cmd>Telescope live_grep<cr>", desc = "Live grep" },
 			{ "<leader>vh", "<cmd>Telescope help_tags<cr>", desc = "Help tags" },
 			{ "<leader>ml", "<cmd>Telescope marks<cr>", desc = "Marks" },
+			{ "<leader>pt", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
 		},
 		opts = {
 			defaults = {
@@ -56,11 +57,10 @@ return {
 				},
 				file_ignore_patterns = {
 					"^.git/",
+					"%-lock.json",
 					"%.lock",
-					"^public/",
 					"^target/",
 					"^dist/",
-					"%-lock.json",
 					"^node_modules/",
 				},
 				mappings = {
@@ -68,10 +68,36 @@ return {
 						["<C-j>"] = "move_selection_next",
 						["<C-k>"] = "move_selection_previous",
 						["<C-t>"] = "select_default",
-						["<CR>"] = "select_tab_drop",
 					},
 				},
 				layout_strategy = "vertical",
+			},
+			pickers = {
+				buffers = {
+					mappings = {
+						i = {
+							["<CR>"] = "select_tab_drop",
+						},
+					},
+					ignore_current_buffer = true,
+					show_all_buffers = true,
+					sort_last_used = true,
+				},
+				find_files = {
+					mappings = {
+						i = { ["<CR>"] = "select_tab_drop" },
+					},
+				},
+				grep_string = {
+					mappings = {
+						i = { ["<CR>"] = "select_tab_drop" },
+					},
+				},
+				live_grep = {
+					mappings = {
+						i = { ["<CR>"] = "select_tab_drop" },
+					},
+				},
 			},
 			extensions = {
 				fzf = {
