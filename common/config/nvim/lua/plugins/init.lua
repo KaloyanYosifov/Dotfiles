@@ -48,6 +48,17 @@ return {
 		opts = {},
 	},
 
+	{
+		"my-config/tabs",
+		dev = true,
+		virtual = true,
+		main = "my-config/tabs",
+		keys = {
+			{ "<leader>pt", ":lua require('my-config/tabs').go_to_previous()<cr>", desc = "Telescope: List tabs" },
+		},
+		opts = {},
+	},
+
 	-- other
 	{ "windwp/nvim-autopairs", opts = {} },
 	{

@@ -38,7 +38,6 @@ return {
 			{ "<leader>f", "<cmd>Telescope live_grep<cr>", desc = "Live grep" },
 			{ "<leader>vh", "<cmd>Telescope help_tags<cr>", desc = "Help tags" },
 			{ "<leader>ml", "<cmd>Telescope marks<cr>", desc = "Marks" },
-			{ "<leader>pt", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
 		},
 		opts = {
 			defaults = {
@@ -140,26 +139,30 @@ return {
 			"nvim-telescope/telescope.nvim",
 		},
 		config = function()
-			require("telescope").load_extension("ui-select")
+			local telescope = require("telescope")
+			telescope.setup({
+				extensions = {
+					["ui-select"] = {
+						require("telescope.themes").get_dropdown({}),
+					},
+				},
+			})
+			telescope.load_extension("ui-select")
 		end,
 	},
 
-	-- Error executing lua: vim/shared.lua:0: s: expected string, got function
-	-- {
-	-- 	"nvim-telescope/telescope-ui-select.nvim",
-	-- 	dependencies = {
-	--      "nvim-telescope/telescope.nvim"
-	-- 	},
-	-- 	config = function()
-	-- 		local telescope = require("telescope")
-	-- 		telescope.setup({
-	-- 			extensions = {
-	-- 				["ui-select"] = {
-	-- 					require("telescope.themes").get_dropdown({}),
-	-- 				},
-	-- 			},
-	-- 		})
-	-- 		telescope.load_extension("ui-select")
-	-- 	end,
-	-- },
+	{
+		"my-config/telescope-tabs",
+		dev = true,
+		virtual = true,
+		main = "my-config/telescope-tabs",
+		dependencies = {
+			"nvim-telescope/telescope.nvim",
+			"folke/snacks.nvim",
+		},
+		keys = {
+			{ "<leader>st", ":lua require('my-config/telescope-tabs').list_tabs()<cr>", desc = "Telescope: List tabs" },
+		},
+		opts = {},
+	},
 }
