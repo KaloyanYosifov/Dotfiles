@@ -25,6 +25,7 @@ return {
 				"yaml",
 				"python",
 				"go",
+				"blade",
 			},
 
 			-- Install parsers synchronously (only applied to `ensure_installed`)
@@ -49,6 +50,12 @@ return {
 		build = ":TSUpdate",
 		cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
 		config = function(_, opts)
+			vim.filetype.add({
+				pattern = {
+					[".*%.blade%.php"] = "blade",
+				},
+			})
+
 			require("nvim-treesitter.configs").setup(opts)
 		end,
 	},

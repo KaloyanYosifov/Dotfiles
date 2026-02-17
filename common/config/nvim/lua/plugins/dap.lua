@@ -1,21 +1,10 @@
 local utils = require("my-config.utils")
-local data_path = vim.fn.stdpath("data")
--- local non_mason_debuggers = {
--- 	php = {
--- 		url = "https://github.com/xdebug/vscode-php-debug/releases/download/v1.35.0/php-debug-1.35.0.vsix",
--- 		path = data_path .. "/php-debugger",
--- 	},
--- }
 
 return {
 	{
 		"mfussenegger/nvim-dap",
 		dependencies = {
 			{ "jay-babu/mason-nvim-dap.nvim" },
-		},
-		opts = {
-			automatic_installation = true,
-			ensure_installed = { "php", "delve" },
 		},
 		keys = {
 			{ "<leader>db", ":lua require('dap').toggle_breakpoint()<cr>", desc = "Debug: Toggle breakpoint" },
@@ -45,8 +34,11 @@ return {
 			},
 			{ "<leader>dk", ":lua require('dap.ui.widgets').hover()<cr>", desc = "Debug: REPL" },
 		},
-		config = function(_, opts)
-			require("mason-nvim-dap").setup(opts)
+		config = function()
+			require("mason-nvim-dap").setup({
+				automatic_installation = true,
+				ensure_installed = { "php", "delve" },
+			})
 
 			local dap = require("dap")
 			local dap_configuration_paths = { "./.nvim-dap/nvim-dap.lua", "./.nvim-dap.lua", "./.nvim/nvim-dap.lua" }

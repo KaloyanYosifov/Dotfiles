@@ -15,6 +15,9 @@ local lsps_to_install = {
 	"helm_ls",
 	"pylsp",
 	"cssls",
+	-- Currently too slow with go to definition
+	-- wait for that fix
+	--"laravel_ls",
 }
 
 if utils.command_exists("composer") then

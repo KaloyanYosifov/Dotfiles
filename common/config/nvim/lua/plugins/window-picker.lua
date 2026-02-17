@@ -6,7 +6,7 @@ return {
 		version = "2.*",
 		keys = {
 			{
-				"<leader>pw",
+				"<leader>w",
 				function()
 					local picked_id = require("window-picker").pick_window()
 					if picked_id then

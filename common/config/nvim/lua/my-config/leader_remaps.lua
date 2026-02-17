@@ -9,7 +9,8 @@ vim.keymap.set("n", "<leader>co", ":%bd|e#<cr>")
 vim.keymap.set("n", "<leader><space>", ":nohlsearch<cr>")
 
 vim.keymap.set("n", "<leader>vs", ":vs<cr>")
-vim.keymap.set("n", "<leader>w", "<C-w><C-w>")
+-- commented out in favour of the window-picker.lua plugin
+-- vim.keymap.set("n", "<leader>w", "<C-w><C-w>")
 
 -- Copy to main clipboard
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
