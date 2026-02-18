@@ -116,7 +116,9 @@ return {
 				rust = { "rustfmt", lsp_format = "fallback" },
 				php = { "pint", "php-cs-fixer", stop_after_first = true },
 				yaml = { "yamlfmt", "yamlfix", stop_after_first = true },
+				-- go-jsonnet
 				json = { "jsonnetfmt" },
+				json5 = { "jsonnetfmt" },
 				sql = { "sqruff", "sqlfluff", stop_after_first = true },
 				terraform = { "terraform_fmt" },
 				hcl = { "terragrunt_hclfmt" },
