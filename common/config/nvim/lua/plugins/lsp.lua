@@ -21,6 +21,7 @@ local lsps_to_install = {
 }
 
 if utils.command_exists("composer") then
+	table.insert(lsps_to_install, "intelephense")
 	table.insert(lsps_to_install, "phpactor")
 end
 
