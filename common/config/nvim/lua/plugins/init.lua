@@ -20,7 +20,14 @@ return {
 	},
 
 	-- git
-	{ "rhysd/git-messenger.vim" },
+	{
+		"sindrets/diffview.nvim",
+		keys = {
+			{ "<leader>gdf", ":DiffviewFileHistory %<CR>", desc = "Git: DiffView close" },
+			{ "<leader>gdc", ":DiffviewClose<CR>", desc = "Git: DiffView close" },
+		},
+		opts = {},
+	},
 	{
 		"lewis6991/gitsigns.nvim",
 		version = "v2.x",
