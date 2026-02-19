@@ -153,10 +153,11 @@ return {
 		"hrsh7th/nvim-cmp",
 		dependencies = {
 			{ "hrsh7th/cmp-nvim-lsp" },
-			{ "hrsh7th/cmp-nvim-lua" },
+			{ "hrsh7th/cmp-nvim-lua", ft = { "lua" }, lszye = true },
 			{ "hrsh7th/cmp-nvim-lsp-signature-help" },
 			{ "hrsh7th/cmp-cmdline" },
-			{ "pontusk/cmp-sass-variables" },
+			{ "pontusk/cmp-sass-variables", ft = { "css", "scss" }, lazy = true },
+			{ "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql" }, lazy = true },
 
 			{ "windwp/nvim-autopairs" },
 			{ "lukas-reineke/cmp-under-comparator" },
@@ -228,6 +229,13 @@ return {
 				enabled = true,
 				sources = {
 					{ name = "sass-variables" },
+				},
+			})
+
+			cmp.setup.filetype({ "sql", "mysql", "plsql" }, {
+				enabled = true,
+				sources = {
+					{ name = "vim-dadbod-completion" },
 				},
 			})
 

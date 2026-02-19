@@ -2,6 +2,8 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		lazy = vim.fn.argc(-1) == 0,
+		-- @see https://github.com/nvim-treesitter/nvim-treesitter/issues/8424#issuecomment-3744851561
+		branch = "master",
 		opts = {
 			-- A list of parser names, or "all"
 			ensure_installed = {
