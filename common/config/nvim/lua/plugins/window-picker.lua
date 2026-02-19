@@ -19,6 +19,12 @@ return {
 		opts = {
 			hint = "floating-big-letter",
 			show_prompt = false,
+			filter_rules = {
+				bo = {
+					filetype = { "NvimTree", "notify", "snacks_notif" },
+					buftype = {},
+				},
+			},
 		},
 	},
 }

@@ -169,4 +169,31 @@ function M.normalize(config, existing)
 	return conf
 end
 
+--- @class utils.focus_window_on_filetype_opts
+--- @field insert_mode? boolean
+--- @param ft string
+--- @param opts? utils.focus_window_on_filetype_opts
+--- @return nil
+function M.focus_window_on_filetype(ft, opts)
+	opts = opts or {}
+
+	-- schedule a command to give a breather for the buffer to open
+	-- then focus on the window we want
+	vim.schedule(function()
+		for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+			local buf = vim.api.nvim_win_get_buf(win)
+
+			if vim.bo[buf].filetype == ft then
+				vim.api.nvim_set_current_win(win)
+
+				if opts.insert_mode then
+					vim.cmd("startinsert!")
+				end
+
+				return
+			end
+		end
+	end)
+end
+
 return M

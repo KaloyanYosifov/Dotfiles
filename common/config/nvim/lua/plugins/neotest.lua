@@ -13,13 +13,18 @@ return {
 		"rouge8/neotest-rust",
 		"nvim-neotest/neotest-jest",
 	},
-	init = function()
-		local neotest = require("neotest")
+	keys = {
+		{ "<leader>rt", ":lua require('neotest').run.run()<cr>", desc = "Test: Run" },
+		{
+			"<leader>rs",
+			function()
+				require("neotest").output_panel.toggle()
 
-		vim.keymap.set("n", "<leader>rt", neotest.run.run, {})
-		vim.keymap.set("n", "<leader>rr", neotest.run.run_last, {})
-		vim.keymap.set("n", "<leader>rs", neotest.output_panel.toggle, {})
-	end,
+				utils.focus_window_on_filetype("neotest-output-panel")
+			end,
+			desc = "Test: Toggle panel",
+		},
+	},
 	config = function()
 		require("neotest").setup({
 			adapters = {

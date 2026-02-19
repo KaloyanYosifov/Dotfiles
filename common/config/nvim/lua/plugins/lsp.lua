@@ -15,6 +15,7 @@ local lsps_to_install = {
 	"helm_ls",
 	"pylsp",
 	"cssls",
+	"terraformls",
 	-- Currently too slow with go to definition
 	-- wait for that fix
 	--"laravel_ls",

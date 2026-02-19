@@ -10,25 +10,14 @@ return {
 			{ "<leader>db", ":lua require('dap').toggle_breakpoint()<cr>", desc = "Debug: Toggle breakpoint" },
 			{ "<leader>dc", ":lua require('dap').continue()<cr>", desc = "Debug: Continue debug or start" },
 			{ "<leader>di", ":lua require('dap').step_into()<cr>", desc = "Debug: Step into" },
-			{ "<leader>do", ":lua require('dap').step_over()<cr>", desc = "Debug: Step Over" },
+			{ "<leader>do", ":lua require('dap').step_out()<cr>", desc = "Debug: Step OUt" },
+			{ "<leader>dso", ":lua require('dap').step_over()<cr>", desc = "Debug: Step Over" },
 			{
 				"<leader>dr",
 				function()
-					require("dap").repl.open()
-					-- schedule a command to give a breather for the buffer to open
-					-- then focus on that dap repl window
-					vim.schedule(function()
-						for _, win in ipairs(vim.api.nvim_list_wins()) do
-							local buf = vim.api.nvim_win_get_buf(win)
+					require("dap").repl.toggle()
 
-							if vim.bo[buf].filetype == "dap-repl" then
-								vim.api.nvim_set_current_win(win)
-								vim.cmd("startinsert!")
-
-								return
-							end
-						end
-					end)
+					utils.focus_window_on_filetype("dap-repl", { insert_mode = true })
 				end,
 				desc = "Debug: REPL",
 			},
