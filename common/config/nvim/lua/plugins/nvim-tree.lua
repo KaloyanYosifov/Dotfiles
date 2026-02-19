@@ -4,13 +4,16 @@ return {
 		version = "v1.x",
 		dependencies = {
 			{ "folke/snacks.nvim" },
+			{ "nvim-focus/focus.nvim" },
 		},
 		keys = {
 			{
 				"<leader>nd",
 				function()
 					vim.cmd("NvimTreeToggle")
-					require("focus").resize()
+					vim.schedule(function()
+						require("focus").resize()
+					end)
 				end,
 			},
 		},

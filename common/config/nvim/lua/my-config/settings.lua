@@ -5,12 +5,15 @@ vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
+vim.opt.breakindent = true
+vim.opt.breakindentopt = { "shift:4", "sbr" }
 vim.opt.encoding = "UTF-8"
 vim.opt.backspace = "indent,eol,start"
 
 vim.opt.smartindent = true
 
 vim.opt.wrap = false
+vim.opt.startofline = true
 
 -- remove compat for vi and remove swap files
 vim.opt.swapfile = false

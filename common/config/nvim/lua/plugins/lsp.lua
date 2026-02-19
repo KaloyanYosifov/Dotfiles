@@ -155,19 +155,37 @@ return {
 			{ "hrsh7th/cmp-nvim-lsp" },
 			{ "hrsh7th/cmp-nvim-lua" },
 			{ "hrsh7th/cmp-nvim-lsp-signature-help" },
+			{ "hrsh7th/cmp-cmdline" },
+			{ "pontusk/cmp-sass-variables" },
+
+			{ "windwp/nvim-autopairs" },
+			{ "lukas-reineke/cmp-under-comparator" },
 		},
 		config = function()
 			local cmp = require("cmp")
-			local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
 			cmp.setup({
+				enabled = function()
+					local context = require("cmp.config.context")
+					local disabled = false
+					disabled = disabled or (vim.api.nvim_get_option_value("buftype", { buf = 0 }) == "prompt")
+					disabled = disabled or (vim.fn.reg_recording() ~= "")
+					disabled = disabled or (vim.fn.reg_executing() ~= "")
+					disabled = disabled or context.in_treesitter_capture("comment")
+					disabled = disabled or context.in_syntax_group("Comment")
+					if vim.api.nvim_get_mode().mode == "c" then
+						return true
+					else
+						return not disabled
+					end
+				end,
 				sources = {
 					{ name = "nvim_lsp" },
 					{ name = "nvim_lsp_signature_help" },
 				},
 				mapping = cmp.mapping.preset.insert({
-					["<C-k>"] = cmp.mapping.select_prev_item(cmp_select),
-					["<C-j>"] = cmp.mapping.select_next_item(cmp_select),
+					["<C-k>"] = cmp.mapping.select_prev_item(),
+					["<C-j>"] = cmp.mapping.select_next_item(),
 					["<CR>"] = cmp.mapping.confirm({ select = true }),
 					["<Tab>"] = cmp.mapping.confirm({ select = true }),
 					["<C-Space>"] = cmp.mapping.complete(),
@@ -178,6 +196,24 @@ return {
 						vim.snippet.expand(args.body)
 					end,
 				},
+				sorting = {
+					priority_weight = 3,
+					comparators = {
+						cmp.config.compare.offset,
+						cmp.config.compare.exact,
+						cmp.config.compare.score,
+						require("cmp-under-comparator").under,
+						cmp.config.compare.kind,
+						cmp.config.compare.sort_text,
+						cmp.config.compare.length,
+						cmp.config.compare.order,
+						cmp.config.compare.recently_used,
+					},
+				},
+				confirm_opts = {
+					behavior = cmp.ConfirmBehavior.Replace,
+					select = false,
+				},
 			})
 
 			cmp.setup.filetype({ "lua" }, {
@@ -187,6 +223,47 @@ return {
 					{ name = "lazydev", group_index = 0 },
 				},
 			})
+
+			cmp.setup.filetype({ "css", "scss" }, {
+				enabled = true,
+				sources = {
+					{ name = "sass-variables" },
+				},
+			})
+
+			cmp.setup.cmdline({ "/", "?" }, {
+				mapping = cmp.mapping.preset.cmdline({
+					["<C-j>"] = { c = cmp.mapping.select_next_item() },
+					["<C-k>"] = { c = cmp.mapping.select_prev_item() },
+				}),
+				sources = {
+					{ name = "buffer" },
+				},
+			})
+
+			cmp.setup.cmdline(":", {
+				mapping = cmp.mapping.preset.cmdline({
+					["<C-j>"] = { c = cmp.mapping.select_next_item() },
+					["<C-k>"] = { c = cmp.mapping.select_prev_item() },
+				}),
+				sources = cmp.config.sources({
+					{ name = "cmdline" },
+				}),
+			})
+
+			cmp.event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
+
+			-- FOR SCSS variables
+			vim.g.sass_variables_file = "_variables.scss"
+
+			-- -- map in command mode to autocomplete
+			-- vim.keymap.set("c", "<C-k>", function()
+			-- 	cmp.mapping.select_prev_item(cmp_select)
+			-- end, { expr = true, noremap = true })
+			--
+			-- vim.keymap.set("c", "<C-j>", function()
+			-- 	cmp.mapping.select_next_item(cmp_select)
+			-- end, { expr = true, noremap = true })
 		end,
 	},
 

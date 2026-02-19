@@ -16,7 +16,33 @@ return {
 	-- focus
 	{
 		"nvim-focus/focus.nvim",
-		opts = {},
+		event = { "BufReadPost", "BufNewFile" },
+		lazy = true,
+		opts = {
+			enable = true,
+			commands = true,
+			split = {
+				bufnew = false,
+				tmux = false,
+			},
+			autoresize = {
+				enable = true,
+			},
+			ui = {
+				number = false,
+				relativenumber = false,
+				hybridnumber = false,
+				absolutenumber_unfocussed = false,
+
+				cursorline = false,
+				cursorcolumn = false,
+				colorcolumn = {
+					enable = false,
+				},
+				signcolumn = false,
+				winhighlight = false,
+			},
+		},
 	},
 
 	-- git
@@ -67,7 +93,29 @@ return {
 	},
 
 	-- other
-	{ "windwp/nvim-autopairs", opts = {} },
+	{
+		"windwp/nvim-autopairs",
+		event = { "InsertEnter", "BufReadPre", "CmdlineEnter" },
+		opts = {
+			check_ts = true,
+			ts_config = {
+				lua = { "string", "source" },
+				javascript = { "string", "template_string" },
+			},
+			disable_filetype = { "TelescopePrompt", "spectre_panel", "guihua", "guihua_rust", "clap_input" },
+			fast_wrap = {
+				map = "<M-e>",
+				chars = { "{", "[", "(", '"', "'" },
+				pattern = string.gsub([[ [%'%"%)%>%]%)%}%,] ]], "%s+", ""),
+				offset = 0, -- Offset from pattern match
+				end_key = "$",
+				keys = "qwertyuiopzxcvbnmasdfghjkl",
+				check_comma = true,
+				highlight = "PmenuSel",
+				highlight_grey = "LineNr",
+			},
+		},
+	},
 	{
 		"windwp/nvim-ts-autotag",
 		event = "InsertEnter",

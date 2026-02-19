@@ -21,12 +21,3 @@ vim.keymap.set("n", "<leader>Pa", [["+P]])
 -- on main rc file
 vim.keymap.set("n", "<leader>sv", ":lua require('my-config.reloader').my_config_reload_config()<cr>")
 vim.keymap.set("n", "<leader>ev", ":tabedit $MYVIMRC<cr>")
-
--- Remap c-n and c-p in command mode to follow the structure as in telescope and other autocomplete menus
-vim.keymap.set("c", "<C-j>", function()
-	return vim.api.nvim_replace_termcodes("<C-n>", true, true, true)
-end, { expr = true, noremap = true })
-
-vim.keymap.set("c", "<C-k>", function()
-	return vim.api.nvim_replace_termcodes("<C-p>", true, true, true)
-end, { expr = true, noremap = true })
