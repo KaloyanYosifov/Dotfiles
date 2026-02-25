@@ -4,7 +4,7 @@ return {
 		version = "v2.30.x",
 		keys = {
 			{
-				"<leader>sn",
+				"<leader>sp",
 				":lua require('snacks').scratch()<CR>",
 				desc = "Toggle Scratch Buffer",
 			},
