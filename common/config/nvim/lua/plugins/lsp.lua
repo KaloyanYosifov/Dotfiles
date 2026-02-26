@@ -117,9 +117,7 @@ return {
 				rust = { "rustfmt", lsp_format = "fallback" },
 				php = { "pint", "php-cs-fixer", stop_after_first = true },
 				yaml = { "yamlfmt", "yamlfix", stop_after_first = true },
-				-- go-jsonnet
-				json = { "jsonnetfmt" },
-				json5 = { "jsonnetfmt" },
+				json = { "jq" },
 				sql = { "sqruff", "sqlfluff", stop_after_first = true },
 				terraform = { "terraform_fmt" },
 				hcl = { "terragrunt_hclfmt" },
@@ -375,6 +373,15 @@ return {
 						vim.lsp.buf.rename()
 					end, opts)
 					vim.keymap.set("n", "<leader>vrf", function()
+						local path = vim.api.nvim_buf_get_name(0)
+
+						if vim.bo.filetype == "php" or path:match("%.php$") then
+							vim.cmd("PhpactorMoveFile")
+
+							return
+						end
+
+						-- else run snacks
 						require("snacks").rename.rename_file()
 					end, opts)
 					vim.keymap.set("i", "<C-h>", function()
