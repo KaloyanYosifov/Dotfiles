@@ -115,7 +115,7 @@ return {
 				lua = { "stylua" },
 				python = { "isort", "ruff" },
 				rust = { "rustfmt", lsp_format = "fallback" },
-				php = { "pint", "php-cs-fixer", stop_after_first = true },
+				php = { "pint", "php_cs_fixer", stop_after_first = true },
 				yaml = { "yamlfmt", "yamlfix", stop_after_first = true },
 				json = { "jq" },
 				sql = { "sqruff", "sqlfluff", stop_after_first = true },
