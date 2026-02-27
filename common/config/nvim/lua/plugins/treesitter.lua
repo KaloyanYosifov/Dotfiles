@@ -29,6 +29,7 @@ return {
 				"python",
 				"go",
 				"blade",
+				"markdown",
 			},
 
 			-- Install parsers synchronously (only applied to `ensure_installed`)
