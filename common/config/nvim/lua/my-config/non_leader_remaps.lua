@@ -28,5 +28,5 @@ vim.keymap.set("n", "gY", function()
 		return
 	end
 
-	utils.copy_path_picker(abs_path)
+	utils.copy_path_picker(abs_path, vim.fn.line("."))
 end, { desc = "Copy path picker", noremap = true, silent = true })

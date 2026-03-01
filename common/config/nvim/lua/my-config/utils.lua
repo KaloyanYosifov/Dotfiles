@@ -170,8 +170,12 @@ function M.normalize(config, existing)
 end
 
 --- @param path string Absolute path to pick from
-function M.copy_path_picker(path)
+--- @param line? integer Optional line number to append
+function M.copy_path_picker(path, line)
 	local choices = { "Relative path", "Absolute path", "Filename only" }
+	if line then
+		table.insert(choices, "Relative path with line number")
+	end
 	vim.ui.select(choices, { prompt = "Copy path:" }, function(choice)
 		if not choice then
 			return
@@ -184,6 +188,8 @@ function M.copy_path_picker(path)
 			result = path
 		elseif choice == "Filename only" then
 			result = vim.fn.fnamemodify(path, ":t")
+		elseif choice == "Relative path with line number" then
+			result = vim.fn.fnamemodify(path, ":.") .. ":" .. line
 		end
 
 		vim.fn.setreg("+", result)
