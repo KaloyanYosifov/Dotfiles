@@ -1,3 +1,5 @@
+local utils = require("my-config.utils")
+
 return {
 	{
 		"nvim-tree/nvim-tree.lua",
@@ -31,9 +33,20 @@ return {
 					api.node.open.tab(nil, { quit_on_open = true })
 				end
 
+				local function copy_path_picker()
+					local node = api.tree.get_node_under_cursor()
+
+					if not node or not node.absolute_path then
+						return
+					end
+
+					utils.copy_path_picker(node.absolute_path)
+				end
+
 				api.config.mappings.default_on_attach(bufnr)
 				vim.keymap.set("n", "<CR>", open_tab_and_close, opts("Open"))
 				vim.keymap.set("n", "e", open_tab_and_close, opts("Open"))
+				vim.keymap.set("n", "gY", copy_path_picker, opts("Copy path picker"))
 			end,
 		},
 		config = function(_, opts)

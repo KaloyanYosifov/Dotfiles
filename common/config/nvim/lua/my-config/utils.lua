@@ -169,6 +169,29 @@ function M.normalize(config, existing)
 	return conf
 end
 
+--- @param path string Absolute path to pick from
+function M.copy_path_picker(path)
+	local choices = { "Relative path", "Absolute path", "Filename only" }
+	vim.ui.select(choices, { prompt = "Copy path:" }, function(choice)
+		if not choice then
+			return
+		end
+
+		local result
+		if choice == "Relative path" then
+			result = vim.fn.fnamemodify(path, ":.")
+		elseif choice == "Absolute path" then
+			result = path
+		elseif choice == "Filename only" then
+			result = vim.fn.fnamemodify(path, ":t")
+		end
+
+		vim.fn.setreg("+", result)
+		vim.fn.setreg('"', result)
+		vim.notify("Copied: " .. result)
+	end)
+end
+
 --- @class utils.focus_window_on_filetype_opts
 --- @field insert_mode? boolean
 --- @param ft string
