@@ -85,6 +85,7 @@ return {
 		"my-config/tabs",
 		dev = true,
 		virtual = true,
+		lazy = false,
 		main = "my-config/tabs",
 		keys = {
 			{ "<leader>pt", ":lua require('my-config/tabs').go_to_previous()<cr>", desc = "Telescope: List tabs" },
