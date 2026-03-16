@@ -9,7 +9,6 @@ brew update
 brew upgrade
 
 # Add repos
-brew tap homebrew/cask-fonts
 brew tap zegervdv/zathura
 
 # Save Homebrew’s installed location.
@@ -28,7 +27,7 @@ brew install moreutils
 # Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed.
 brew install findutils
 # Install GNU `sed`, overwriting the built-in `sed`.
-brew install gnu-sed --with-default-names
+brew install gnu-sed
 
 # Install `wget` with IRI support.
 brew install wget
@@ -36,27 +35,14 @@ brew install wget
 # Install GnuPG to enable PGP-signing commits.
 brew install gnupg
 
-# Install more recent versions of some macOS tools.
-brew install vim --with-override-system-vi
-
-# Install font tools.
-brew tap bramstein/webfonttools
-
 # install for arduino
 brew tap osx-cross/avr
 brew install avr-binutils avr-gcc avrdude
 
 # Install other useful binaries.
-brew install imagemagick --with-webp
+brew install imagemagick
 
-brew install --cask docker
-brew install postman \
-    alacritty \
-    notion \
-    slack \
-    docker \
-    mullvad \
-    bitwarden
+brew install docker alacritty mullvad-vpn bitwarden localsend
 
 # install yabai, sketchybar and skhd
 brew install koekeishiya/formulae/yabai \
@@ -65,13 +51,13 @@ brew install koekeishiya/formulae/yabai \
 
 brew install --cask sf-symbols font-sf-mono font-sf-pro
 
-brew install pidof lua rg copyq irssi fzf abseil act adns \
-    aom apr apr-util argon2 aspell assimp augeas autoconf automake aws-elasticbeanstalk \
-    awscli bdw-gc berkeley-db bfg binutils blueutil boost c-ares ca-certificates cairo \
+brew install go lua rg copyq irssi fzf \
+    argon2 augeas autoconf automake \
+    awscli bdw-gc berkeley-db binutils boost \
     cjson cmake cmocka composer coreutils cscope curl dbus dex2jar dialog \
     dns2tcp dnsmasq docutils dos2unix double-conversion edencommon fb303 fbthrift ffmpeg findutils \
     fizz flac fmt folly fontconfig freetds freetype frei0r fribidi gcc \
-    gd gdbm gettext gflags ghostscript giflib git git-crypt git-flow-avh git-lfs \
+    gd gdbm gettext gflags giflib git git-crypt git-lfs \
     glib glog gmp gnu-getopt gnupg gnutls graphite2 harfbuzz hexedit htop \
     hwloc icu4c imath jemalloc jpeg jpeg-turbo jpeg-xl jq kubernetes-cli lame \
     libarchive libassuan libavif libb2 libdnet libev libevent libffi libfido2 libgcrypt \
@@ -79,13 +65,12 @@ brew install pidof lua rg copyq irssi fzf abseil act adns \
     libogg libpng libpq libproxy libpthread-stubs libraqm librist libsamplerate libslirp libsmi \
     libsndfile libsodium libsoxr libssh2 libtasn1 libtiff libtool libunistring libusb libuv \
     libvidstab libvmaf libvorbis libvpx libvterm libyaml libzip llvm luv lz4 \
-    macvim md4c minikube mpfr msgpack mysql-client nasm neovim nginx npth \
+    md4c minikube mpfr msgpack mysql-client nasm nvim nginx npth \
     openblas openexr openjdk openjpeg openldap openssh openssl php pigz pinentry \
-    pkg-config pv qt rav1e re2 readline redis six sqlite sqlmap \
-    srt theora tmux tree tree-sitter unixodbc utf8proc volta wangle watch \
-    watchman webp wget wimlib wireshark woff2 x264 x265 lf font-jetbrains-mono font-jetbrains-mono-nerd-font \
-    zathura mpv glow newsboat nowplaying-cli switchaudio-osx lulu terraform terragrunt
-
+    pkg-config sqlite tmux tree tree-sitter unixodbc volta \
+    webp wget wimlib woff2 x264 x265 font-jetbrains-mono font-jetbrains-mono-nerd-font \
+    mpv glow newsboat switchaudio-osx lulu terraform terragrunt glab llama.cpp spotify
+ 
 # formatters and linters
 brew install yamlfmt jsonnetfmt isort ruff stylua sqruff taplo
 
