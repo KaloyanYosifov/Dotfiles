@@ -1,9 +1,10 @@
 local icons = require("icons")
 local colors = require("colors")
 local settings = require("settings")
+local mullvad_bin = "/usr/local/bin/mullvad"
 
 -- Only enable widget if mullvad command exists
-local mullvad_exists = os.execute("command -v mullvad >/dev/null 2>&1") == 0
+local mullvad_exists = os.execute("command -v " .. mullvad_bin .. " >/dev/null 2>&1")
 if not mullvad_exists then
     return
 end
@@ -29,11 +30,11 @@ local mullvad = sbar.add("item", "widgets.mullvad", {
         max_chars = 15,
         string = "off",
     },
-    click_script = "mullvad toggle",
+    click_script = mullvad_bin .. " toggle",
 })
 
 local function update_mullvad_status()
-    sbar.exec("mullvad status", function(result)
+    sbar.exec(mullvad_bin .. " status", function(result)
         -- Get the first line: "Connected" or "Disconnected"
         local state = result:match("(.-)\n")
         state = state:gsub("%s+", "")
