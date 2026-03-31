@@ -1,5 +1,15 @@
 config-version = 2
 
+# Run Sketchybar together with AeroSpace
+# sketchybar has a built-in detection of already running process,
+# so it won't be run twice on AeroSpace restart
+after-startup-command = ['exec-and-forget sketchybar']
+
+# Notify Sketchybar about workspace change
+exec-on-workspace-change = ['/bin/bash', '-c',
+    'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE'
+]
+
 start-at-login = true
 
 # Normalizations (flatten single-child containers, alternate orientation for nested)
@@ -15,9 +25,7 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 default-root-container-layout = 'tiles'
 default-root-container-orientation = 'auto'
 
-accordion-padding = 30
-
-persistent-workspaces = ["1", "2", "3"]
+accordion-padding = 0
 
 [key-mapping]
     preset = 'qwerty'
@@ -49,27 +57,27 @@ alt-shift-l = 'exec-and-forget ~/.config/aerospace/move-with-monitor.sh right'
 # Balance window sizes
 alt-shift-0 = 'balance-sizes'
 
-# Switch workspace
-alt-1 = 'workspace 1'
-alt-2 = 'workspace 2'
-alt-3 = 'workspace 3'
-alt-4 = 'workspace 4'
-alt-5 = 'workspace 5'
-alt-6 = 'workspace 6'
-alt-7 = 'workspace 7'
-alt-8 = 'workspace 8'
-alt-9 = 'workspace 9'
+# Switch workspace (moves empty workspace to current monitor first)
+alt-1 = 'exec-and-forget ~/.config/aerospace/switch-workspace.sh 1'
+alt-2 = 'exec-and-forget ~/.config/aerospace/switch-workspace.sh 2'
+alt-3 = 'exec-and-forget ~/.config/aerospace/switch-workspace.sh 3'
+alt-4 = 'exec-and-forget ~/.config/aerospace/switch-workspace.sh 4'
+alt-5 = 'exec-and-forget ~/.config/aerospace/switch-workspace.sh 5'
+alt-6 = 'exec-and-forget ~/.config/aerospace/switch-workspace.sh 6'
+alt-7 = 'exec-and-forget ~/.config/aerospace/switch-workspace.sh 7'
+alt-8 = 'exec-and-forget ~/.config/aerospace/switch-workspace.sh 8'
+alt-9 = 'exec-and-forget ~/.config/aerospace/switch-workspace.sh 9'
 
-# Move window to workspace and follow
-alt-shift-1 = ['move-node-to-workspace 1', 'workspace 1']
-alt-shift-2 = ['move-node-to-workspace 2', 'workspace 2']
-alt-shift-3 = ['move-node-to-workspace 3', 'workspace 3']
-alt-shift-4 = ['move-node-to-workspace 4', 'workspace 4']
-alt-shift-5 = ['move-node-to-workspace 5', 'workspace 5']
-alt-shift-6 = ['move-node-to-workspace 6', 'workspace 6']
-alt-shift-7 = ['move-node-to-workspace 7', 'workspace 7']
-alt-shift-8 = ['move-node-to-workspace 8', 'workspace 8']
-alt-shift-9 = ['move-node-to-workspace 9', 'workspace 9']
+# Move window to workspace and follow (moves empty workspace to current monitor first)
+alt-shift-1 = 'exec-and-forget ~/.config/aerospace/move-to-workspace.sh 1'
+alt-shift-2 = 'exec-and-forget ~/.config/aerospace/move-to-workspace.sh 2'
+alt-shift-3 = 'exec-and-forget ~/.config/aerospace/move-to-workspace.sh 3'
+alt-shift-4 = 'exec-and-forget ~/.config/aerospace/move-to-workspace.sh 4'
+alt-shift-5 = 'exec-and-forget ~/.config/aerospace/move-to-workspace.sh 5'
+alt-shift-6 = 'exec-and-forget ~/.config/aerospace/move-to-workspace.sh 6'
+alt-shift-7 = 'exec-and-forget ~/.config/aerospace/move-to-workspace.sh 7'
+alt-shift-8 = 'exec-and-forget ~/.config/aerospace/move-to-workspace.sh 8'
+alt-shift-9 = 'exec-and-forget ~/.config/aerospace/move-to-workspace.sh 9'
 
 # Toggle fullscreen
 alt-f = 'fullscreen'
