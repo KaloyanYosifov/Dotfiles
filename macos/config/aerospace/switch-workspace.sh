@@ -8,8 +8,6 @@ echo $windows
 if [ "$windows" -eq 0 ] 2>/dev/null; then
   monitor=$(aerospace list-monitors --focused --format '%{monitor-name}')
   aerospace move-workspace-to-monitor --workspace "$workspace" "$monitor"
-
-  exit 0
 fi
 
 aerospace workspace "$workspace"
