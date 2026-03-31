@@ -174,6 +174,10 @@ defaults write com.apple.dock enable-spring-load-actions-on-all-items -bool true
 # Show indicator lights for open applications in the Dock
 defaults write com.apple.dock show-process-indicators -bool true
 
+# Hide apple menu bar by default
+defaults write NSGlobalDomain _HIHideMenuBar -bool true
+defaults write NSGlobalDomain AppleMenuBarVisibleInFullscreen -bool false
+
 # Wipe all (default) app icons from the Dock
 # This is only really useful when setting up a new Mac, or if you don’t use
 # the Dock to launch apps.
@@ -379,9 +383,15 @@ defaults write com.apple.ActivityMonitor ShowCategory -int 0
 defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
 defaults write com.apple.ActivityMonitor SortDirection -int 0
 
+# Disable displays have their own spaces
+defaults write com.apple.spaces spans-displays -bool true
+
 # fix tmux in iterm
 osascript -e 'tell application "System Events" to keystroke "r" using command down'
 
+
+echo "Killing affected applications..."
+sleep 5
 ###############################################################################
 # Kill affected applications                                                  #
 ###############################################################################
@@ -403,7 +413,6 @@ for app in "Activity Monitor" \
 	"SizeUp" \
 	"Spectacle" \
 	"SystemUIServer" \
-	"Terminal" \
 	"Transmission" \
 	"Tweetbot" \
 	"Twitter" \

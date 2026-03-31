@@ -10,4 +10,3 @@ if [ "$windows" -eq 0 ] 2>/dev/null; then
 fi
 
 aerospace move-node-to-workspace "$workspace"
-aerospace workspace "$workspace"
