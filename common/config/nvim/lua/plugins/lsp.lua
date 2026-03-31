@@ -91,7 +91,7 @@ local function js_eco_system_formatter()
 	return nil
 end
 
-local js_formatters = { "custom_js", "prettierd", "prettier", stop_after_first = true }
+local js_formatters = { "prettierd", "prettier", "custom_js", stop_after_first = true }
 
 return {
 	{
