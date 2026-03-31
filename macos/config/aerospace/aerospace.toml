@@ -95,8 +95,8 @@ outer.right      = 8
 # Toggle split orientation (horizontal ↔ vertical)
     alt-w = 'layout tiles horizontal vertical'
 
-    ctrl-shift-n = 'focus dfs-next'
-    ctrl-shift-p = 'focus dfs-prev'
+    ctrl-shift-n = 'focus --boundaries workspace --boundaries-action wrap-around-the-workspace dfs-next'
+    ctrl-shift-p = 'focus --boundaries workspace --boundaries-action wrap-around-the-workspace dfs-prev'
 
     alt-r = 'mode resize'
 
