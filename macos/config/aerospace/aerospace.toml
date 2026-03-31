@@ -83,12 +83,11 @@ outer.right      = 8
     alt-f = 'fullscreen'
 
     ctrl-shift-h = ['join-with left', 'layout h_accordion']
-    ctrl-shift-j = ['join-with down', 'layout h_accordion']
-    ctrl-shift-k = ['join-with up', 'layout h_accordion']
+    ctrl-shift-j = ['join-with down', 'layout v_accordion']
+    ctrl-shift-k = ['join-with up', 'layout v_accordion']
     ctrl-shift-l = ['join-with right', 'layout h_accordion']
 
-# Reload config (replaces: skhd -r && sketchybar --reload && yabai restart)
-    alt-shift-c = 'reload-config'
+    alt-shift-c = ['reload-config', 'exec-and-forget sketchybar --reload']
 
 # Close window
     alt-q = 'close'
