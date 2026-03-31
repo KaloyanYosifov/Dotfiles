@@ -35,7 +35,7 @@ inner.horizontal = 10
 inner.vertical   = 10
 outer.left       = 8
 outer.bottom     = 8
-outer.top        = 48  # 40px sketchybar + 8px padding
+outer.top        = [{ monitor."Built-in Retina Display" = 20 }, 48]  # 40px sketchybar + 8px padding (20 on macbook)
 outer.right      = 8
 
 [mode.main.binding]

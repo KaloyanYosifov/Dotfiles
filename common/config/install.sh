@@ -61,6 +61,25 @@ function install_tmux {
     ln -s $SCRIPT_DIR/tmux $TMUX_PATH
 
     echo "Tmux config installed"
+
+    TPM_PATH=$HOME/.tmux/plugins/tpm
+    if [ ! -d $TPM_PATH ]; then
+        echo "Installing TPM (Tmux Plugin Manager)"
+        git clone https://github.com/tmux-plugins/tpm $TPM_PATH
+        echo "TPM installed"
+    else
+        echo "TPM already installed"
+    fi
+
+    PLUGINS_PATH=$HOME/.tmux/plugins
+    for plugin in tmux-resurrect tmux-continuum; do
+        if [ ! -d $PLUGINS_PATH/$plugin ]; then
+            echo "Installing $plugin"
+            git clone https://github.com/tmux-plugins/$plugin $PLUGINS_PATH/$plugin
+        else
+            echo "$plugin already installed"
+        fi
+    done
 }
 
 function install_zsh_config {
