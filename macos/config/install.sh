@@ -32,6 +32,5 @@ function install {
     log "$package config installed"
 }
 
-install yabai
-install skhd
+install aerospace
 install sketchybar

@@ -36,13 +36,8 @@ if [[ $install_additional == "y" ]] || [[ $install_additional == "yes" ]]; then
     # $PARENT_DIR/common/install-haskell.sh
 fi
 
-# Configure yabai
-echo "Configuring yabai..."
-echo "$(whoami) ALL=(root) NOPASSWD: sha256:$(shasum -a 256 $(which yabai) | cut -d " " -f 1) $(which yabai) --load-sa" | sudo tee /private/etc/sudoers.d/yabai
-yabai --start-service
-
-# Configure skhd
-skhd --start-service
+# Configure AeroSpace (starts at login via start-at-login = true in config)
+open -a AeroSpace
 
 # Configure sketchybar
 curl -L https://github.com/kvndrsslr/sketchybar-app-font/releases/download/v2.0.28/sketchybar-app-font.ttf -o $HOME/Library/Fonts/sketchybar-app-font.ttf

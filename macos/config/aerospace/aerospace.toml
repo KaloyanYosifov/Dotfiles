@@ -1,0 +1,124 @@
+config-version = 2
+
+start-at-login = true
+
+# Normalizations (flatten single-child containers, alternate orientation for nested)
+enable-normalization-flatten-containers = true
+enable-normalization-opposite-orientation-for-nested-containers = true
+
+automatically-unhide-macos-hidden-apps = false
+
+# Move mouse to focused monitor center when switching monitors
+on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+
+# BSP-equivalent: auto-split tiling
+default-root-container-layout = 'tiles'
+default-root-container-orientation = 'auto'
+
+accordion-padding = 30
+
+persistent-workspaces = ["1", "2", "3"]
+
+[key-mapping]
+    preset = 'qwerty'
+
+[gaps]
+inner.horizontal = 10
+inner.vertical   = 10
+outer.left       = 8
+outer.bottom     = 8
+outer.top        = 48  # 40px sketchybar + 8px padding
+outer.right      = 8
+
+[mode.main.binding]
+# Launch terminal
+alt-enter = 'exec-and-forget /opt/homebrew/bin/alacritty'
+
+# Focus window
+alt-h = 'focus left'
+alt-j = 'focus down'
+alt-k = 'focus up'
+alt-l = 'focus right'
+
+# Move window (stays within workspace; use move-node-to-monitor for cross-display)
+alt-shift-h = 'move left'
+alt-shift-j = 'move down'
+alt-shift-k = 'move up'
+alt-shift-l = 'move right'
+
+# Balance window sizes
+alt-shift-0 = 'balance-sizes'
+
+# Switch workspace
+alt-1 = 'workspace 1'
+alt-2 = 'workspace 2'
+alt-3 = 'workspace 3'
+alt-4 = 'workspace 4'
+alt-5 = 'workspace 5'
+alt-6 = 'workspace 6'
+alt-7 = 'workspace 7'
+alt-8 = 'workspace 8'
+alt-9 = 'workspace 9'
+
+# Move window to workspace and follow
+alt-shift-1 = ['move-node-to-workspace 1', 'workspace 1']
+alt-shift-2 = ['move-node-to-workspace 2', 'workspace 2']
+alt-shift-3 = ['move-node-to-workspace 3', 'workspace 3']
+alt-shift-4 = ['move-node-to-workspace 4', 'workspace 4']
+alt-shift-5 = ['move-node-to-workspace 5', 'workspace 5']
+alt-shift-6 = ['move-node-to-workspace 6', 'workspace 6']
+alt-shift-7 = ['move-node-to-workspace 7', 'workspace 7']
+alt-shift-8 = ['move-node-to-workspace 8', 'workspace 8']
+alt-shift-9 = ['move-node-to-workspace 9', 'workspace 9']
+
+# Toggle fullscreen
+alt-f = 'fullscreen'
+# ctrl-shift-h = 'join-with left'
+# ctrl-shift-j = 'join-with down'
+# ctrl-shift-k = 'join-with up'
+# ctrl-shift-l = 'join-with right'
+
+# Reload config (replaces: skhd -r && sketchybar --reload && yabai restart)
+alt-shift-c = 'reload-config'
+
+# Close window
+alt-q = 'close'
+
+[mode.service.binding]
+# Join focused window into accordion with adjacent window (replaces yabai stacking)
+
+# Navigate within accordion (replaces stack.next / stack.prev)
+ctrl-shift-n = 'focus dfs-next'
+ctrl-shift-p = 'focus dfs-prev'
+
+# Toggle split orientation (horizontal ↔ vertical)
+alt-w = 'layout tiles horizontal vertical'
+
+# Toggle float / tile
+alt-t = 'layout floating tiling'
+
+
+# Floating window rules
+[[on-window-detected]]
+if.app-name-regex-substring = 'LuLu|Calculator|Software Update|Dictionary|VLC|System Preferences|System Settings|Photo Booth|Archive Utility|App Store|Activity Monitor|Calendar|CopyQ'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'Finder'
+if.window-title-regex-substring = 'Co(py|nnect)|Move|Info|Pref'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'System Information'
+if.window-title-regex-substring = 'About This Mac'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'Inkscape'
+if.window-title-regex-substring = 'Select file to save to'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'PhpStorm'
+if.window-title-regex-substring = 'Evaluate|Select Classes To Import|Settings|Copy Class|Choose methods? to implement|Rename|Add File to Git|Create New PHP Test for .*'
+run = 'layout floating'

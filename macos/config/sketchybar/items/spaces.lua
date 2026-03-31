@@ -84,8 +84,10 @@ for i = 1, 10, 1 do
       space_popup:set({ background = { image = "space." .. env.SID } })
       space:set({ popup = { drawing = "toggle" } })
     else
-      local op = (env.BUTTON == "right") and "--destroy" or "--focus"
-      sbar.exec("yabai -m space " .. op .. " " .. env.SID)
+      -- right-click destroy is not supported in AeroSpace (workspaces are persistent)
+      if env.BUTTON ~= "right" then
+        sbar.exec("aerospace workspace " .. env.SID)
+      end
     end
   end)
 

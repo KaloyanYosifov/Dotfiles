@@ -24,8 +24,8 @@ brew tap zegervdv/zathura
 # Arduino/AVR tools
 brew tap osx-cross/avr
 
-# yabai window manager and related tools
-brew tap koekeishiya/formulae
+# AeroSpace window manager
+brew tap nikitabobko/tap
 
 # ==============================================================================
 # CORE UTILITIES
@@ -82,9 +82,8 @@ brew install --cask spotify
 # ==============================================================================
 # WINDOW MANAGER & BAR
 # ==============================================================================
-brew install koekeishiya/formulae/yabai \
-    koekeishiya/formulae/skhd \
-    FelixKratz/formulae/sketchybar
+brew install --cask nikitabobko/tap/aerospace
+brew install FelixKratz/formulae/sketchybar
 
 # ==============================================================================
 # SYSTEM UTILITIES & TOOLS
