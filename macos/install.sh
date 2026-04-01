@@ -38,7 +38,12 @@ fi
 
 # Configure rtk
 
+echo "Installing rtk config"
 rtk init -g --agent cursor
+mkdir -p ~/.config/rtk && cat > ~/.config/rtk/config.toml << 'EOF'
+[telemetry]
+enabled = false
+EOF
 
 # Configure AeroSpace (starts at login via start-at-login = true in config)
 open -a AeroSpace
