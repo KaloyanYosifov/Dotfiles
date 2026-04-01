@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-SCRIPT_DIR=$( cd -- $( dirname -- ${BASH_SOURCE[0]} ) &> /dev/null && pwd )
+SCRIPT_DIR=$( cd -- $( dirname -- "${BASH_SOURCE[0]}" ) &> /dev/null && pwd )
 PARENT_DIR=$SCRIPT_DIR/..
 
 echo "Installing MACOS configurations"
@@ -15,32 +15,36 @@ fi
 sudo softwareupdate --install-rosetta
 
 echo "Installing programs from brew"
-$SCRIPT_DIR/brew-updates.sh
+"$SCRIPT_DIR"/brew-updates.sh
 
 # Install common configurations
-$SCRIPT_DIR/config/install.sh
-$PARENT_DIR/common/config/install.sh
-$PARENT_DIR/common/link-custom-binaries.sh
-$PARENT_DIR/common/install-common-binaries.sh
-$PARENT_DIR/common/initialize-vimwiki.sh
+"$SCRIPT_DIR"/config/install.sh
+"$PARENT_DIR"/common/config/install.sh
+"$PARENT_DIR"/common/link-custom-binaries.sh
+"$PARENT_DIR"/common/install-common-binaries.sh
+"$PARENT_DIR"/common/initialize-vimwiki.sh
 
 echo "Do you want to install additional configuration? y/n"
 read install_additional
 
 if [[ $install_additional == "y" ]] || [[ $install_additional == "yes" ]]; then
     echo "Installing additional configuration"
-    $PARENT_DIR/common/install-ideavim.sh
-    $PARENT_DIR/common/install-rust.sh
+    "$PARENT_DIR"/common/install-ideavim.sh
+    "$PARENT_DIR"/common/install-rust.sh
 
     # Not so into Haskell for now
     # $PARENT_DIR/common/install-haskell.sh
 fi
 
+# Configure rtk
+
+rtk init -g --agent cursor
+
 # Configure AeroSpace (starts at login via start-at-login = true in config)
 open -a AeroSpace
 
 # Configure sketchybar
-curl -L https://github.com/kvndrsslr/sketchybar-app-font/releases/download/v2.0.28/sketchybar-app-font.ttf -o $HOME/Library/Fonts/sketchybar-app-font.ttf
+curl -L https://github.com/kvndrsslr/sketchybar-app-font/releases/download/v2.0.28/sketchybar-app-font.ttf -o "$HOME"/Library/Fonts/sketchybar-app-font.ttf
 git clone https://github.com/FelixKratz/SbarLua.git /tmp/SbarLua && cd /tmp/SbarLua/ && make install && rm -rf /tmp/SbarLua/
 brew services start sketchybar
 
