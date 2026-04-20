@@ -21,7 +21,10 @@ try:
     d = json.load(sys.stdin)
     iu = d.get('individualUsage', {})
     plan_pct = iu.get('plan', {}).get('apiPercentUsed', 0) or 0
-    od_pct = iu.get('onDemand', {}).get('apiPercentUsed', 0) or 0
+    od = iu.get('onDemand', {}) or {}
+    od_used = od.get('used', 0) or 0
+    od_limit = od.get('limit', 0) or 0
+    od_pct = (od_used / od_limit * 100) if od_limit > 0 else 0
     print(plan_pct, od_pct)
 except:
     print(0, 0)
