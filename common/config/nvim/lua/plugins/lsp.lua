@@ -142,7 +142,10 @@ return {
 			formatters = {
 				custom_js = js_eco_system_formatter,
 				yamlfmt = {
-					prepend_args = { "-formatter", "type=basic,retain_line_breaks_single=true,drop_merge_tag=true" },
+					prepend_args = {
+						"-formatter",
+						"type=basic,retain_line_breaks_single=true,drop_merge_tag=true,indentless_arrays=true",
+					},
 				},
 			},
 		},

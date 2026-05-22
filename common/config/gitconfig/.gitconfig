@@ -19,7 +19,7 @@
 
 [include]
     path = ~/.config/gitconfig/init
-[merge]
-	ff = false
+; [merge]
+; 	ff = false
 [pull]
 	rebase = true
