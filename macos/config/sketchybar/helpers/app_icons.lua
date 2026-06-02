@@ -57,7 +57,6 @@ return {
 	["Copilot"] = ":copilot:",
 	["CotEditor"] = ":coteditor:",
 	["Creative Cloud"] = ":creative_cloud:",
-	["Cursor"] = ":cursor:",
 	["Cypress"] = ":cypress:",
 	["DataGrip"] = ":datagrip:",
 	["DataSpell"] = ":dataspell:",
