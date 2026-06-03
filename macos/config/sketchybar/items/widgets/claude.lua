@@ -22,7 +22,7 @@ local claude_session = sbar.add("item", "widgets.claude.session", {
       size = 9.0,
     },
     color = colors.grey,
-    string = "–%",
+    string = "- –%",
   },
   y_offset = 4,
   update_freq = 60,
@@ -47,7 +47,7 @@ local claude_week = sbar.add("item", "widgets.claude.week", {
       size = 9.0,
     },
     color = colors.grey,
-    string = "–%",
+    string = "- –%",
   },
   y_offset = -4,
 })
@@ -87,7 +87,7 @@ local function update()
     claude_session:set({
       icon = { color = session_color },
       label = {
-        string = string.format("%g%%", session_pct),
+        string = string.format("- %g%%", session_pct),
         color = session_color,
       },
     })
@@ -96,7 +96,7 @@ local function update()
     claude_week:set({
       icon = { color = week_color },
       label = {
-        string = string.format("%g%%", week_pct),
+        string = string.format("- %g%%", week_pct),
         color = week_color,
       },
     })
