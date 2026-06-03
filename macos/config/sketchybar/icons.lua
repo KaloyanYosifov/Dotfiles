@@ -40,6 +40,10 @@ local icons = {
 			forward = "􀊌",
 			play_pause = "􀊈",
 		},
+		claude = {
+			session = "5h",
+			week = "7d",
+		},
 	},
 
 	-- Alternative NerdFont icons
@@ -81,6 +85,10 @@ local icons = {
 			back = "",
 			forward = "",
 			play_pause = "",
+		},
+		claude = {
+			session = "5h",
+			week = "7d",
 		},
 	},
 }
