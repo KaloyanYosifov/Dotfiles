@@ -104,3 +104,6 @@ local function update()
 end
 
 claude_session:subscribe({ "routine", "system_woke" }, update)
+
+-- Populate immediately instead of waiting for the first routine tick.
+update()

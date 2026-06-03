@@ -15,6 +15,10 @@
 #     "org_id": "00f5a584-fd53-4a78-beb8-c8def0029744"
 #   }
 
+# sketchybar runs under launchd with a minimal PATH; make sure brew-installed
+# python3/curl are reachable.
+export PATH="/opt/homebrew/bin:/opt/homebrew/opt/curl/bin:/usr/local/bin:/usr/bin:/bin:$PATH"
+
 CONFIG_FILE="$HOME/.claude_session.json"
 
 if [ ! -f "$CONFIG_FILE" ]; then
