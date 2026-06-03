@@ -4,6 +4,11 @@
 #
 # claude.ai sits behind Cloudflare, which blocks curl's default "curl/x"
 # User-Agent (HTTP 403). Sending a browser User-Agent gets plain curl through.
+#
+# macOS system curl uses LibreSSL/SecureTransport, whose TLS fingerprint
+# Cloudflare challenges. The Homebrew curl (OpenSSL) passes, so prefer it when
+# present (brew install curl) and fall back to system curl otherwise.
+#
 # Config lives in ~/.claude_session.json:
 #   {
 #     "cookie": "sessionKey=...; lastActiveOrg=00f5a584-...",
@@ -34,7 +39,13 @@ if [ -z "$COOKIE" ] || [ -z "$ORG_ID" ]; then
   exit 0
 fi
 
-curl -sf "https://claude.ai/api/organizations/$ORG_ID/usage" \
+# Prefer Homebrew's OpenSSL curl; fall back to system curl.
+CURL="curl"
+if [ -x /opt/homebrew/opt/curl/bin/curl ]; then
+  CURL="/opt/homebrew/opt/curl/bin/curl"
+fi
+
+"$CURL" -sf "https://claude.ai/api/organizations/$ORG_ID/usage" \
   -H 'anthropic-client-platform: web_claude_ai' \
   -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36' \
   -b "$COOKIE" | \
