@@ -22,7 +22,7 @@ local claude_session = sbar.add("item", "widgets.claude.session", {
       size = 9.0,
     },
     color = colors.grey,
-    string = "- –% · –m",
+    string = "- –%",
   },
   y_offset = 4,
   update_freq = 60,
@@ -65,6 +65,21 @@ sbar.add("bracket", "widgets.claude.bracket", {
   background = { color = colors.bg1 },
 })
 
+-- five_hour reset countdown, sitting to the LEFT of the usage box, vertically
+-- centred and outside the bracket background.
+local claude_reset = sbar.add("item", "widgets.claude.reset", {
+  position = "right",
+  label = {
+    font = {
+      family = settings.font.numbers,
+      style = settings.font.style_map["Bold"],
+      size = 9.0,
+    },
+    color = colors.white,
+    string = "–m",
+  },
+})
+
 sbar.add("item", { position = "right", width = settings.group_paddings })
 
 local function pct_color(pct)
@@ -86,11 +101,13 @@ local function update()
     local session_reset = tonumber(session_min)
     local week_pct = tonumber(week_str)
 
+    claude_reset:set({ label = { string = string.format("%dm", session_reset) } })
+
     local session_color = pct_color(session_pct)
     claude_session:set({
       icon = { color = session_color },
       label = {
-        string = string.format("- %g%% · %dm", session_pct, session_reset),
+        string = string.format("- %g%%", session_pct),
         color = session_color,
       },
     })
