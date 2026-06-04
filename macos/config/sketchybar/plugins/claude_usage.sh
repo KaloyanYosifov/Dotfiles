@@ -1,6 +1,7 @@
 #!/bin/bash
-# Fetches Claude API usage and prints: <five_hour_pct> <seven_day_pct>
-# Both numbers are already percentages (0-100).
+# Fetches Claude API usage and prints:
+#   <five_hour_pct> <five_hour_mins_to_reset> <seven_day_pct> <seven_day_mins_to_reset>
+# The percentages are already 0-100; the minutes count down to resets_at.
 #
 # claude.ai sits behind Cloudflare, which blocks curl's default "curl/x"
 # User-Agent (HTTP 403). Sending a browser User-Agent gets plain curl through.
@@ -22,7 +23,7 @@ export PATH="/opt/homebrew/bin:/opt/homebrew/opt/curl/bin:/usr/local/bin:/usr/bi
 CONFIG_FILE="$HOME/.claude_session.json"
 
 if [ ! -f "$CONFIG_FILE" ]; then
-  echo "0 0"
+  echo "0 0 0 0"
   exit 0
 fi
 
@@ -39,7 +40,7 @@ except Exception:
 " 2>/dev/null)"
 
 if [ -z "$COOKIE" ] || [ -z "$ORG_ID" ]; then
-  echo "0 0"
+  echo "0 0 0 0"
   exit 0
 fi
 
@@ -55,11 +56,25 @@ fi
   -b "$COOKIE" | \
 python3 -c "
 import json, sys
+from datetime import datetime, timezone
+
+def mins_left(o):
+    r = (o or {}).get('resets_at')
+    if not r:
+        return 0
+    try:
+        dt = datetime.fromisoformat(r)
+        return max(0, int((dt - datetime.now(timezone.utc)).total_seconds() // 60))
+    except Exception:
+        return 0
+
 try:
     d = json.load(sys.stdin)
-    five = (d.get('five_hour') or {}).get('utilization', 0) or 0
-    week = (d.get('seven_day') or {}).get('utilization', 0) or 0
-    print(five, week)
+    fh = d.get('five_hour') or {}
+    sd = d.get('seven_day') or {}
+    five = fh.get('utilization', 0) or 0
+    week = sd.get('utilization', 0) or 0
+    print(five, mins_left(fh), week, mins_left(sd))
 except:
-    print(0, 0)
-" 2>/dev/null || echo "0 0"
+    print(0, 0, 0, 0)
+" 2>/dev/null || echo '0 0 0 0'

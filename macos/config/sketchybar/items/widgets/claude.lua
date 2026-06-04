@@ -22,7 +22,7 @@ local claude_session = sbar.add("item", "widgets.claude.session", {
       size = 9.0,
     },
     color = colors.grey,
-    string = "- –%",
+    string = "- –% · –m",
   },
   y_offset = 4,
   update_freq = 60,
@@ -77,17 +77,20 @@ end
 
 local function update()
   sbar.exec("$CONFIG_DIR/plugins/claude_usage.sh", function(result)
-    local session_str, week_str = result:match("([%d%.]+)%s+([%d%.]+)")
+    -- script prints: five_pct five_min week_pct week_min (week_min unused)
+    local session_str, session_min, week_str =
+      result:match("([%d%.]+)%s+([%d%.]+)%s+([%d%.]+)")
     if not session_str then return end
 
     local session_pct = tonumber(session_str)
+    local session_reset = tonumber(session_min)
     local week_pct = tonumber(week_str)
 
     local session_color = pct_color(session_pct)
     claude_session:set({
       icon = { color = session_color },
       label = {
-        string = string.format("- %g%%", session_pct),
+        string = string.format("- %g%% · %dm", session_pct, session_reset),
         color = session_color,
       },
     })
