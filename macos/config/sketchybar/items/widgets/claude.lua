@@ -66,7 +66,7 @@ local claude_reset = sbar.add("item", "widgets.claude.reset", {
     font = {
       family = settings.font.numbers,
       style = settings.font.style_map["Bold"],
-      size = 16.0,
+      size = 12.0,
     },
     color = colors.white,
     string = "–m",
