@@ -57,27 +57,29 @@ local claude_padding = sbar.add("item", "widgets.claude.padding", {
   label = { drawing = false },
 })
 
-sbar.add("bracket", "widgets.claude.bracket", {
-  claude_padding.name,
-  claude_session.name,
-  claude_week.name,
-}, {
-  background = { color = colors.bg1 },
-})
-
--- five_hour reset countdown, sitting to the LEFT of the usage box, vertically
--- centred and outside the bracket background.
+-- five_hour reset countdown: INSIDE the box, to the LEFT of the usage column,
+-- vertically centred (no y_offset). Added after the usage items so it sits to
+-- their left, and included in the bracket so the box background wraps it.
 local claude_reset = sbar.add("item", "widgets.claude.reset", {
   position = "right",
   label = {
     font = {
       family = settings.font.numbers,
       style = settings.font.style_map["Bold"],
-      size = 9.0,
+      size = 16.0,
     },
     color = colors.white,
     string = "–m",
   },
+})
+
+sbar.add("bracket", "widgets.claude.bracket", {
+  claude_reset.name,
+  claude_padding.name,
+  claude_session.name,
+  claude_week.name,
+}, {
+  background = { color = colors.bg1 },
 })
 
 sbar.add("item", { position = "right", width = settings.group_paddings })
