@@ -62,6 +62,7 @@ local claude_padding = sbar.add("item", "widgets.claude.padding", {
 -- their left, and included in the bracket so the box background wraps it.
 local claude_reset = sbar.add("item", "widgets.claude.reset", {
   position = "right",
+  padding_right = -8,
   label = {
     font = {
       family = settings.font.numbers,
