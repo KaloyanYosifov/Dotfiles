@@ -45,7 +45,7 @@ outer.right = 8
 
 [mode.main.binding]
 # Launch terminal
-alt-enter = 'exec-and-forget /opt/homebrew/bin/alacritty'
+alt-enter = 'exec-and-forget open -na /opt/homebrew/bin/alacritty'
 
 # Focus window
 alt-h = 'focus --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors left'
