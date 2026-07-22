@@ -114,6 +114,14 @@ brew install go lua php
 # Package managers
 brew install cmake composer
 
+# Editor tooling
+# - tree-sitter (libtree-sitter): the runtime library neovim links against
+#   (also pulled in transitively by neovim).
+# - tree-sitter-cli: standalone binary the nvim-treesitter `main` branch shells
+#   out to for compiling parsers. It's self-contained and does NOT provide the
+#   library, so both are needed.
+brew install tree-sitter tree-sitter-cli
+
 # Version control
 brew install git git-crypt git-lfs
 

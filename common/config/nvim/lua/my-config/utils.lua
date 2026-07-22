@@ -103,8 +103,7 @@ function M.is_buffer_uri_already_open(uri)
 end
 
 function M.get_sql_at_current_cursor()
-	local ts_utils = require("nvim-treesitter.ts_utils")
-	local current_node = ts_utils.get_node_at_cursor()
+	local current_node = vim.treesitter.get_node()
 
 	local last_statement = nil
 	while current_node do
