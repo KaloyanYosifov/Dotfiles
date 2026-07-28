@@ -115,7 +115,7 @@ esc = 'mode main'
 
 # Floating window rules
 [[on-window-detected]]
-if.app-name-regex-substring = 'LuLu|Calculator|Software Update|Dictionary|VLC|System Preferences|System Settings|Photo Booth|Archive Utility|App Store|Activity Monitor|Calendar|CopyQ'
+if.app-name-regex-substring = 'LuLu|Calculator|Software Update|Dictionary|VLC|System Preferences|System Settings|Photo Booth|Archive Utility|App Store|Activity Monitor|Calendar|CopyQ|Screen Sharing|VNC'
 run = 'layout floating'
 
 [[on-window-detected]]
