@@ -261,6 +261,9 @@ defaults write com.apple.mail DisableInlineAttachmentViewing -bool true
 # Disable automatic spell checking
 defaults write com.apple.mail SpellCheckingBehavior -string "NoSpellCheckingEnabled"
 
+# Disable Liquid glass
+defaults write -g com.apple.SwiftUI.DisableSolarium -bool YES
+
 ###############################################################################
 # Spotlight                                                                   #
 ###############################################################################
