@@ -23,23 +23,6 @@ function M.command_path(command, default)
 	return M.execute(string.format(commandExec, command, default))
 end
 
--- Credit: https://gist.github.com/jaredallard/ddb152179831dd23b230
-function M.split_string(str, delimiter)
-	local from = 1
-	local result = {}
-	local delim_from, delim_to = string.find(str, delimiter, from)
-
-	while delim_from do
-		table.insert(result, string.sub(str, from, delim_from - 1))
-		from = delim_to + 1
-		delim_from, delim_to = string.find(str, delimiter, from)
-	end
-
-	table.insert(result, string.sub(str, from))
-
-	return result
-end
-
 function M.ask_password(prompt)
 	prompt = prompt and prompt or "Enter Password: "
 
@@ -55,13 +38,15 @@ function M.ask_password(prompt)
 end
 
 function M.clear_undo_history(buf)
-	local undolevels = vim.api.nvim_buf_get_option(buf, "undolevels")
+	local undolevels = vim.bo[buf].undolevels
 
-	vim.api.nvim_buf_set_option(buf, "undolevels", -1)
+	vim.bo[buf].undolevels = -1
 
-	vim.cmd('exe "normal a \\<BS>\\<Esc>"')
+	vim.api.nvim_buf_call(buf, function()
+		vim.cmd('exe "normal a \\<BS>\\<Esc>"')
+	end)
 
-	vim.api.nvim_buf_set_option(buf, "undolevels", undolevels)
+	vim.bo[buf].undolevels = undolevels
 end
 
 function M.file_exists(file)
@@ -129,23 +114,6 @@ end
 
 function M.get_env(name, default)
 	return os.getenv(name) or default
-end
-
-function M.notify(text, ttl)
-	require("fidget").notify(text, nil, { ttl })
-end
-
-function M.download_and_store(url, path)
-	local http = {}
-	local body, code = http.request(url)
-
-	if not body then
-		error(code)
-	end
-
-	local f = assert(io.open(path, "wb"))
-	f:write(body)
-	f:close()
 end
 
 function M.is_empty_table(t)

@@ -23,3 +23,7 @@
 ; 	ff = false
 [pull]
 	rebase = true
+[safe]
+	directory = /Users/kaloyan.yosifov/work-projects/scayle/aws-multi-tenant-infrastructure-live
+	directory = /Users/kaloyan.yosifov/work-projects/scayle/docker-base-images
+	directory = /Users/kaloyan.yosifov/work-projects/scayle/docker-base-images

@@ -5,17 +5,33 @@ return {
 			"nvim-lua/plenary.nvim",
 			"nvim-telescope/telescope.nvim",
 		},
-		init = function()
-			local mark = require("harpoon.mark")
-			local ui = require("harpoon.ui")
-
+		keys = {
+			{
+				"<leader>ha",
+				function()
+					require("harpoon.mark").toggle_file()
+				end,
+				desc = "Harpoon: Toggle file",
+			},
+			{ "<leader>hh", "<cmd>Telescope harpoon marks<cr>", desc = "Harpoon: Marks" },
+			{
+				"<leader>hn",
+				function()
+					require("harpoon.ui").nav_next()
+				end,
+				desc = "Harpoon: Next mark",
+			},
+			{
+				"<leader>hb",
+				function()
+					require("harpoon.ui").nav_prev()
+				end,
+				desc = "Harpoon: Previous mark",
+			},
+		},
+		config = function(_, opts)
+			require("harpoon").setup(opts)
 			require("telescope").load_extension("harpoon")
-
-			vim.keymap.set("n", "<leader>ha", mark.toggle_file)
-			vim.keymap.set("n", "<leader>hh", ":Telescope harpoon marks<cr>")
-
-			vim.keymap.set("n", "<leader>hn", ui.nav_next)
-			vim.keymap.set("n", "<leader>hb", ui.nav_prev)
 		end,
 		opts = {},
 	},

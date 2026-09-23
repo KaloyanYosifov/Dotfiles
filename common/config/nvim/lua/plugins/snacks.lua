@@ -2,9 +2,6 @@ return {
 	{
 		"folke/snacks.nvim",
 		version = "v2.30.x",
-		dependencies = {
-			{ "phpactor/phpactor" },
-		},
 		keys = {
 			{
 				"<leader>sp",
@@ -35,6 +32,8 @@ return {
 					if old_path:match("%.php$") then
 						-- We delay the command slightly to ensure the file is physically moved
 						vim.schedule(function()
+							-- phpactor only loads on ft=php, and a rename from nvim-tree can happen before any PHP buffer is open
+							require("lazy").load({ plugins = { "phpactor" } })
 							vim.cmd("PhpactorMoveFile " .. old_path .. " " .. new_path)
 
 							vim.notify("Phpactor: Refactoring " .. vim.fn.fnamemodify(new_path, ":t"))

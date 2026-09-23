@@ -1,5 +1,4 @@
 local utils = require("my-config.utils")
-local telescope_builtin = require("telescope.builtin")
 local debug_mode = utils.get_env("NVIM_LSP_DEBUG", "0") == "1"
 
 local lsps_to_install = {
@@ -25,46 +24,6 @@ local lsps_to_install = {
 if utils.command_exists("composer") then
 	table.insert(lsps_to_install, "intelephense")
 	table.insert(lsps_to_install, "phpactor")
-end
-
-local function open_lsp_location_in_new_tab(_, result, ctx, _)
-	if not result or vim.tbl_isempty(result) then
-		print("No location found for " .. ctx.method)
-		return
-	end
-
-	-- Normalize to single location (most common case)
-	if vim.islist(result) then
-		result = result[1]
-	end
-
-	local uri = result.uri or result.targetUri
-	if not uri then
-		return
-	end
-
-	local filename = vim.uri_to_fname(uri)
-
-	-- Check if buffer is loaded and visible in any window
-	local bufnr = vim.fn.bufnr(filename)
-	local win_id = bufnr > 0 and vim.fn.bufwinid(bufnr) or -1
-
-	if win_id > 0 then
-		-- Buffer is open somewhere → switch to its tab and window
-		vim.fn.win_gotoid(win_id)
-		-- Optional: ensure focus (usually not needed after win_gotoid)
-		vim.api.nvim_set_current_buf(bufnr)
-	else
-		-- Not open anywhere → force new tab
-		vim.cmd("tabnew")
-		vim.lsp.util.show_document(result, "utf-8", { focus = true })
-	end
-
-	-- If multiple locations, populate quickfix (optional, but nice)
-	if vim.islist(result) and #result > 1 then
-		vim.fn.setqflist(vim.lsp.util.locations_to_items(result, "utf-8"))
-		vim.cmd("copen")
-	end
 end
 
 local function js_eco_system_formatter()
@@ -152,129 +111,92 @@ return {
 	},
 	-- Autocompletion
 	{
-		"hrsh7th/nvim-cmp",
+		"saghen/blink.cmp",
+		version = "1.*",
+		event = { "InsertEnter", "CmdlineEnter" },
 		dependencies = {
-			{ "hrsh7th/cmp-nvim-lsp" },
-			{ "hrsh7th/cmp-nvim-lua", ft = { "lua" }, lszye = true },
-			{ "hrsh7th/cmp-nvim-lsp-signature-help" },
-			{ "hrsh7th/cmp-cmdline" },
-			{ "pontusk/cmp-sass-variables", ft = { "css", "scss" }, lazy = true },
 			{ "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql" }, lazy = true },
-
-			{ "windwp/nvim-autopairs" },
-			{ "lukas-reineke/cmp-under-comparator" },
 		},
-		config = function()
-			local cmp = require("cmp")
+		---@module "blink.cmp"
+		---@type blink.cmp.Config
+		opts = {
+			enabled = function()
+				if vim.api.nvim_get_mode().mode == "c" then
+					return true
+				end
 
-			cmp.setup({
-				enabled = function()
-					local context = require("cmp.config.context")
-					local disabled = false
-					disabled = disabled or (vim.api.nvim_get_option_value("buftype", { buf = 0 }) == "prompt")
-					disabled = disabled or (vim.fn.reg_recording() ~= "")
-					disabled = disabled or (vim.fn.reg_executing() ~= "")
-					disabled = disabled or context.in_treesitter_capture("comment")
-					disabled = disabled or context.in_syntax_group("Comment")
-					if vim.api.nvim_get_mode().mode == "c" then
-						return true
-					else
-						return not disabled
+				if vim.bo.buftype == "prompt" or vim.fn.reg_recording() ~= "" or vim.fn.reg_executing() ~= "" then
+					return false
+				end
+
+				for _, capture in ipairs(vim.treesitter.get_captures_at_cursor(0)) do
+					if capture:find("comment") then
+						return false
 					end
-				end,
-				sources = {
-					{ name = "nvim_lsp" },
-					{ name = "nvim_lsp_signature_help" },
+				end
+
+				local cursor = vim.api.nvim_win_get_cursor(0)
+				local syntax_id = vim.fn.synIDtrans(vim.fn.synID(cursor[1], cursor[2], 1))
+
+				return vim.fn.synIDattr(syntax_id, "name") ~= "Comment"
+			end,
+			keymap = {
+				preset = "none",
+				["<C-k>"] = { "select_prev", "fallback" },
+				["<C-j>"] = { "select_next", "fallback" },
+				["<C-p>"] = { "select_prev", "fallback" },
+				["<C-n>"] = { "select_next", "fallback" },
+				["<CR>"] = { "accept", "fallback" },
+				["<Tab>"] = { "accept", "fallback" },
+				["<C-y>"] = { "accept", "fallback" },
+				["<C-e>"] = { "hide", "fallback" },
+				["<C-Space>"] = { "show", "show_documentation", "hide_documentation" },
+			},
+			completion = {
+				list = {
+					selection = { preselect = true, auto_insert = false },
 				},
-				mapping = cmp.mapping.preset.insert({
-					["<C-k>"] = cmp.mapping.select_prev_item(),
-					["<C-j>"] = cmp.mapping.select_next_item(),
-					["<CR>"] = cmp.mapping.confirm({ select = true }),
-					["<Tab>"] = cmp.mapping.confirm({ select = true }),
-					["<C-Space>"] = cmp.mapping.complete(),
-					["<S-Tab>"] = nil,
-				}),
-				snippet = {
-					expand = function(args)
-						vim.snippet.expand(args.body)
-					end,
+				accept = {
+					auto_brackets = { enabled = true },
 				},
-				sorting = {
-					priority_weight = 3,
-					comparators = {
-						cmp.config.compare.offset,
-						cmp.config.compare.exact,
-						cmp.config.compare.score,
-						require("cmp-under-comparator").under,
-						cmp.config.compare.kind,
-						cmp.config.compare.sort_text,
-						cmp.config.compare.length,
-						cmp.config.compare.order,
-						cmp.config.compare.recently_used,
+				documentation = {
+					auto_show = true,
+				},
+			},
+			signature = {
+				enabled = true,
+			},
+			sources = {
+				default = { "lsp" },
+				per_filetype = {
+					lua = { inherit_defaults = true, "lazydev" },
+					sql = { "dadbod" },
+					mysql = { "dadbod" },
+					plsql = { "dadbod" },
+				},
+				providers = {
+					lazydev = {
+						name = "LazyDev",
+						module = "lazydev.integrations.blink",
+						score_offset = 100,
+					},
+					dadbod = {
+						name = "Dadbod",
+						module = "vim_dadbod_completion.blink",
 					},
 				},
-				confirm_opts = {
-					behavior = cmp.ConfirmBehavior.Replace,
-					select = false,
+			},
+			cmdline = {
+				keymap = {
+					preset = "cmdline",
+					["<C-j>"] = { "select_next", "fallback" },
+					["<C-k>"] = { "select_prev", "fallback" },
 				},
-			})
-
-			cmp.setup.filetype({ "lua" }, {
-				enabled = true,
-				sources = {
-					{ name = "nvim_lua" },
-					{ name = "lazydev", group_index = 0 },
+				completion = {
+					menu = { auto_show = true },
 				},
-			})
-
-			cmp.setup.filetype({ "css", "scss" }, {
-				enabled = true,
-				sources = {
-					{ name = "sass-variables" },
-				},
-			})
-
-			cmp.setup.filetype({ "sql", "mysql", "plsql" }, {
-				enabled = true,
-				sources = {
-					{ name = "vim-dadbod-completion" },
-				},
-			})
-
-			cmp.setup.cmdline({ "/", "?" }, {
-				mapping = cmp.mapping.preset.cmdline({
-					["<C-j>"] = { c = cmp.mapping.select_next_item() },
-					["<C-k>"] = { c = cmp.mapping.select_prev_item() },
-				}),
-				sources = {
-					{ name = "buffer" },
-				},
-			})
-
-			cmp.setup.cmdline(":", {
-				mapping = cmp.mapping.preset.cmdline({
-					["<C-j>"] = { c = cmp.mapping.select_next_item() },
-					["<C-k>"] = { c = cmp.mapping.select_prev_item() },
-				}),
-				sources = cmp.config.sources({
-					{ name = "cmdline" },
-				}),
-			})
-
-			cmp.event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
-
-			-- FOR SCSS variables
-			vim.g.sass_variables_file = "_variables.scss"
-
-			-- -- map in command mode to autocomplete
-			-- vim.keymap.set("c", "<C-k>", function()
-			-- 	cmp.mapping.select_prev_item(cmp_select)
-			-- end, { expr = true, noremap = true })
-			--
-			-- vim.keymap.set("c", "<C-j>", function()
-			-- 	cmp.mapping.select_next_item(cmp_select)
-			-- end, { expr = true, noremap = true })
-		end,
+			},
+		},
 	},
 
 	-- Dedicated LSP
@@ -301,7 +223,7 @@ return {
 		version = "v2.x",
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
-			{ "hrsh7th/cmp-nvim-lsp" },
+			{ "saghen/blink.cmp" },
 			{
 				"mason-org/mason-lspconfig.nvim",
 				version = "v2.x",
@@ -320,7 +242,7 @@ return {
 			vim.diagnostic.config({
 				virtual_text = true,
 				underline = true,
-				severiy_sort = true,
+				severity_sort = true,
 				update_in_insert = false,
 				signs = {
 					text = {
@@ -339,13 +261,13 @@ return {
 						vim.diagnostic.open_float()
 					end, opts)
 					vim.keymap.set("n", "gd", function()
-						telescope_builtin.lsp_definitions({
+						require("telescope.builtin").lsp_definitions({
 							jump_type = "tab drop",
 							reuse_win = true,
 						})
 					end, opts)
 					vim.keymap.set("n", "gi", function()
-						telescope_builtin.lsp_implementations({
+						require("telescope.builtin").lsp_implementations({
 							jump_type = "tab drop",
 							reuse_win = true,
 						})
@@ -356,7 +278,7 @@ return {
 						})
 					end, opts)
 					vim.keymap.set("n", "<leader>gr", function()
-						telescope_builtin.lsp_references({
+						require("telescope.builtin").lsp_references({
 							jump_type = "tab drop",
 							reuse_win = true,
 						})
@@ -365,10 +287,10 @@ return {
 						vim.lsp.buf.hover()
 					end, opts)
 					vim.keymap.set("n", "[d", function()
-						vim.diagnostic.jump({ count = 1, float = true })
+						vim.diagnostic.jump({ count = -1, float = true })
 					end, opts)
 					vim.keymap.set("n", "]d", function()
-						vim.diagnostic.jump({ count = -1, float = true })
+						vim.diagnostic.jump({ count = 1, float = true })
 					end, opts)
 					vim.keymap.set("n", "<leader>cac", function()
 						vim.lsp.buf.code_action()
@@ -394,21 +316,7 @@ return {
 				end,
 			})
 
-			local capabilities = vim.tbl_extend(
-				"force",
-				vim.lsp.protocol.make_client_capabilities(),
-				require("cmp_nvim_lsp").default_capabilities()
-			)
-
-			for _, server_name in ipairs(lsps_to_install) do
-				vim.lsp.config(server_name, { capabilities = capabilities })
-			end
-
-			vim.lsp.handlers["textDocument/definition"] = open_lsp_location_in_new_tab
-			vim.lsp.handlers["textDocument/references"] = open_lsp_location_in_new_tab
-			vim.lsp.handlers["textDocument/implementation"] = open_lsp_location_in_new_tab
-			vim.lsp.handlers["textDocument/declaration"] = open_lsp_location_in_new_tab
-			vim.lsp.handlers["textDocument/typeDefinition"] = open_lsp_location_in_new_tab
+			vim.lsp.config("*", { capabilities = require("blink.cmp").get_lsp_capabilities() })
 
 			-- Temp fix to ignore cancel request from rust-analyzer
 			-- @see https://github.com/neovim/neovim/issues/30985

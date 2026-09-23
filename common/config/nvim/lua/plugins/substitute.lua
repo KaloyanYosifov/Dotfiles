@@ -1,6 +1,7 @@
 return {
 	{
 		"gbprod/substitute.nvim",
+		lazy = true,
 		init = function()
 			-- remove all keymaps starting with gr
 			-- I do not use them unless for substitue plugin
@@ -10,9 +11,15 @@ return {
 				end
 			end
 
-			vim.keymap.set("n", "gr", require("substitute").operator, { noremap = true })
-			vim.keymap.set("n", "grr", require("substitute").line, { noremap = true })
-			vim.keymap.set("x", "gr", require("substitute").visual, { noremap = true })
+			vim.keymap.set("n", "gr", function()
+				require("substitute").operator()
+			end, { noremap = true })
+			vim.keymap.set("n", "grr", function()
+				require("substitute").line()
+			end, { noremap = true })
+			vim.keymap.set("x", "gr", function()
+				require("substitute").visual()
+			end, { noremap = true })
 		end,
 		opts = {},
 	},

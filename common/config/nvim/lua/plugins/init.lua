@@ -1,7 +1,5 @@
 return {
 	-- functionality
-	"numToStr/Comment.nvim",
-
 	{
 		"kylechui/nvim-surround",
 		version = "3.1.8",
@@ -88,7 +86,7 @@ return {
 		lazy = false,
 		main = "my-config/tabs",
 		keys = {
-			{ "<leader>pt", ":lua require('my-config/tabs').go_to_previous()<cr>", desc = "Telescope: List tabs" },
+			{ "<leader>pt", ":lua require('my-config/tabs').go_to_previous()<cr>", desc = "Tabs: Go to previous tab" },
 		},
 		opts = {},
 	},

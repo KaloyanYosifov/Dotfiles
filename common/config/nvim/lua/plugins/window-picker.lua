@@ -13,7 +13,7 @@ return {
 						vim.api.nvim_set_current_win(picked_id)
 					end
 				end,
-				{ desc = "Window picker: pick window" },
+				desc = "Window picker: pick window",
 			},
 		},
 		opts = {

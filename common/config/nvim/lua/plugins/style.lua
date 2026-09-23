@@ -24,7 +24,7 @@ return {
 						path = 4,
 					},
 				},
-				lualine_x = { "encoding", "filetype" },
+				lualine_x = { "lsp_status", "encoding", "filetype" },
 				lualine_y = { "searchcount" },
 				lualine_z = { "location" },
 			},

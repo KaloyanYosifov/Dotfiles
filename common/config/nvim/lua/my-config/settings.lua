@@ -7,25 +7,17 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.breakindent = true
 vim.opt.breakindentopt = { "shift:4", "sbr" }
-vim.opt.encoding = "UTF-8"
-vim.opt.backspace = "indent,eol,start"
 
 vim.opt.smartindent = true
 
 vim.opt.wrap = false
 vim.opt.startofline = true
 
--- remove compat for vi and remove swap files
-vim.opt.swapfile = false
-vim.opt.compatible = false
 vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.writebackup = false
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
-
-vim.opt.hlsearch = true
-vim.opt.incsearch = true
 
 vim.opt.termguicolors = true
 
@@ -37,7 +29,6 @@ vim.opt.updatetime = 300
 
 vim.opt.colorcolumn = "120"
 
-vim.opt.hidden = true
 vim.opt.autowriteall = true
 
 vim.opt.shortmess:append({ c = true })
@@ -57,6 +48,3 @@ vim.g.maplocalleader = "\\"
 -- disable netrw
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
-
--- speed up startup
-vim.loader.enable()
