@@ -5,6 +5,7 @@ return {
 		"mfussenegger/nvim-dap",
 		dependencies = {
 			{ "jay-babu/mason-nvim-dap.nvim" },
+			{ "theHamsta/nvim-dap-virtual-text" },
 		},
 		keys = {
 			{ "<leader>db", ":lua require('dap').toggle_breakpoint()<cr>", desc = "Debug: Toggle breakpoint" },
@@ -108,6 +109,7 @@ return {
 
 	{
 		"theHamsta/nvim-dap-virtual-text",
+		lazy = true,
 		opts = {},
 	},
 }

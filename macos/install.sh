@@ -395,6 +395,9 @@ defaults write com.apple.ActivityMonitor ShowCategory -int 0
 defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
 defaults write com.apple.ActivityMonitor SortDirection -int 0
 
+# Smooth font
+defaults -currentHost write -g AppleFontSmoothing -int 0
+
 # Disable displays have their own spaces
 defaults write com.apple.spaces spans-displays -bool true
 

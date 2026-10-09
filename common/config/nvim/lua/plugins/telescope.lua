@@ -118,12 +118,14 @@ return {
 			telescope.setup(opts)
 
 			telescope.load_extension("fzf")
+			require("lazy").load({ plugins = { "telescope-frecency.nvim" } })
 		end,
 	},
 
 	{
 		"nvim-telescope/telescope-frecency.nvim",
 		version = "1.x",
+		lazy = true,
 		dependencies = {
 			"nvim-telescope/telescope.nvim",
 			"kkharji/sqlite.lua",
@@ -135,9 +137,18 @@ return {
 
 	{
 		"nvim-telescope/telescope-ui-select.nvim",
+		lazy = true,
 		dependencies = {
 			"nvim-telescope/telescope.nvim",
 		},
+		init = function()
+			-- Load Telescope on the first vim.ui.select call instead of at startup
+			vim.ui.select = function(...)
+				require("lazy").load({ plugins = { "telescope-ui-select.nvim" } })
+
+				return vim.ui.select(...)
+			end
+		end,
 		config = function()
 			local telescope = require("telescope")
 			telescope.setup({

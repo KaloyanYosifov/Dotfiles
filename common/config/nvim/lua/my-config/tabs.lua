@@ -34,6 +34,13 @@ M.setup = function()
 		local current_tab = vim.api.nvim_get_current_tabpage()
 		local current_path = vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf())
 
+		-- A new tab fires TabEnter and then TabNewEntered. Only the first is a tab change,
+		-- the second just knows the file the new tab opened.
+		if current_tab == previous_tab then
+			previous_path = current_path
+			return
+		end
+
 		table.insert(tab_stack, { tab = previous_tab, path = previous_path })
 
 		previous_tab = current_tab
